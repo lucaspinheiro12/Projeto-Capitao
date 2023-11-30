@@ -1,0 +1,12 @@
+.container{
+background-color: red;
+width: 100px;
+height: auto;
+}
+.container-img img{
+max-width: 100px;
+min-width: 100px;
+}
+.container-text{
+font-size: 15px;
+}
