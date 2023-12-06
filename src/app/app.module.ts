@@ -10,6 +10,8 @@ import { BoxProductComponent } from './components/box-product/box-product.compon
 import { RequestConciseComponent } from './components/request-concise/request-concise.component';
 import { ProductsBoxRightComponent } from './components/products-box-right/products-box-right.component';
 import { ComponentBoxComponent } from './components/component-box/component-box.component';
+import { LeftMenuComponent } from './left-menu/left-menu.component';
+import { RightMenuComponent } from './components/right-menu/right-menu.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { ComponentBoxComponent } from './components/component-box/component-box.
     BoxProductComponent,
     RequestConciseComponent,
     ProductsBoxRightComponent,
-    ComponentBoxComponent 
+    ComponentBoxComponent,
+    LeftMenuComponent,
+    RightMenuComponent 
   ],
   imports: [
     BrowserModule,
