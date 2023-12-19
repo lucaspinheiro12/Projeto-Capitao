@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class SubHeaderMenu {
 
+  selectedItem: string | null = null;
+
+  selectItem(item: string): void {
+      this.selectedItem = item;
+  }
+
+  isSelected(item: string): boolean {
+      return this.selectedItem === item;
+  }
 }
