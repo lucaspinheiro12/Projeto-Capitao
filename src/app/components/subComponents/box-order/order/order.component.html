@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="container-product">
+        <p class="name">capricho</p>
+        <p class="price">$ 99.99</p>
+    </div>
+    <div  class="container-quantity">
+        <button (click)="decreaseValue()" class="container-quantity__less">-</button>
+        <input [(ngModel)]="valueInput" class="container-quantity__quantity" type="text" >
+        <button (click)="increaseValue()" class="container-quantity__more">+</button>
+    </div>
+</div>

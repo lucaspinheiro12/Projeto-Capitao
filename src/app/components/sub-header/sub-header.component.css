@@ -1,25 +1,10 @@
 .container{
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
+    height: 100px;
+}
+.container-category-list{
     width: max-content;
-}
-.catecory{
-    cursor: pointer;
-    color: black;
-    text-align: center;
-    border-radius: 10px;
-    font-weight: 500;
-    width: auto;
-    margin: 8px;
-}
-
-.newCatecory{
-    font-weight: 500;
-    color: aliceblue;
-    text-align: center;
-    padding: 4px 12px 4px 12px;
-    border-radius: 10px;
-    width: auto;
-    margin: 2px 5px 5px 5px;
-    background-color: #0da2ff;
+    height: 100%;
 }

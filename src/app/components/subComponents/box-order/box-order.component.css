@@ -1,0 +1,32 @@
+.container{
+    width: 100%;
+    min-height: 550px;
+    max-height: 850px;
+}
+.container-orders{
+    height: auto;
+}
+.container-price{
+    display: flex;
+    flex-direction: column;
+    height: 20%;
+    padding-bottom: 20px;
+}
+.container-price__taxa{
+    padding: 0 3% 0 3%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.container-price__final{
+    border-radius: 20px;
+    align-self: center;
+    justify-content: center;
+    width: 80%;
+    height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    color: wheat;
+    cursor: pointer;
+}
