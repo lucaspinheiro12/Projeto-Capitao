@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './header-menu-right.html',
   styleUrls: ['./header-menu-right.css']
 })
-export class ComponentHeaderMenuRinght {
+export class HeaderMenuRinghtComponent {
 
 }

@@ -1,0 +1,9 @@
+.container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.container app-products-box-right{
+    margin: 5px;
+}

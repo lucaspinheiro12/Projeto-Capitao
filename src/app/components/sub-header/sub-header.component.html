@@ -1,10 +1,8 @@
 <div class="container">
-    <span [ngClass]="{'catecory': !isSelected('Pratos'), 'newCatecory': isSelected('Pratos')}" (click)="selectItem('Pratos')" > Pratos</span>
-    <span [ngClass]="{'catecory': !isSelected('Monte seu prato'), 'newCatecory': isSelected('Monte seu prato')}" (click)="selectItem('Monte seu prato')"> Monte seu prato</span>
-    <span [ngClass]="{'catecory': !isSelected('Cervejas e Chopp'), 'newCatecory': isSelected('Cervejas e Chopp')}" (click)="selectItem('Cervejas e Chopp')"> Cervejas e Chopp</span>
-    <span [ngClass]="{'catecory': !isSelected('Destilados dose'), 'newCatecory': isSelected('Destilados dose')}" (click)="selectItem('Destilados dose')"> Destilados dose </span>
-    <span [ngClass]="{'catecory': !isSelected('Smoothies & Sobremesa'), 'newCatecory': isSelected('Smoothies & Sobremesa')}" (click)="selectItem('Smoothies & Sobremesa')"> Smoothies & Sobremesa </span>
-    <span [ngClass]="{'catecory': !isSelected('Kalzones'), 'newCatecory': isSelected('Kalzones')}" (click)="selectItem('Kalzones')"> Kalzones </span>
-    <span [ngClass]="{'catecory': !isSelected('Bebidas em geral'), 'newCatecory': isSelected('Bebidas em geral')}" (click)="selectItem('Bebidas em geral')"> Bebidas em geral </span>
-    <span [ngClass]="{'catecory': !isSelected('Combos'), 'newCatecory': isSelected('Combos')}" (click)="selectItem('Combos')"> Combos </span>
+    <div class="container-category-list">
+        <app-category-list></app-category-list>
+    </div>
+    <div class="container-commands">
+        <app-search-command></app-search-command>
+    </div>
 </div>
