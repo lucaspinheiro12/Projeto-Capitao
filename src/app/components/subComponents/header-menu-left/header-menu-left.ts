@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './header-menu-left.html',
   styleUrls: ['./header-menu-left.css']
 })
-export class BoxProductComponent {
+export class HeaderMenuLeftComponent {
 
 }

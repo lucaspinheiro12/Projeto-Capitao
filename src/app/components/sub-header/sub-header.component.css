@@ -1,0 +1,10 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 100px;
+}
+.container-category-list{
+    width: max-content;
+    height: 100%;
+}
