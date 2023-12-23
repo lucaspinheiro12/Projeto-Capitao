@@ -1,18 +1,12 @@
 <div class="container">
-    <div  class="container-orders">
-        <app-order *ngIf="valueNull[0]" (valueZero)="removeOrder(0)"></app-order>
-        <app-order *ngIf="valueNull[1]" (valueZero)="removeOrder(1)"></app-order>
-        <app-order *ngIf="valueNull[2]"  (valueZero)="removeOrder(2)"></app-order>
-        <app-order *ngIf="valueNull[3]"  (valueZero)="removeOrder(3)"></app-order>
-        <app-order *ngIf="valueNull[5]"  (valueZero)="removeOrder(5)"></app-order>
-        <app-order *ngIf="valueNull[6]"  (valueZero)="removeOrder(6)"></app-order>
-        <app-order *ngIf="valueNull[4]"  (valueZero)="removeOrder(4)"></app-order>
+    <div  class="container-orders" *ngFor="let produtos of produtosSelecionados">
+        <app-order   [produto]="produtos"(valueZero)="removeOrder(produtos)"></app-order>  
     </div>
     <div class="container-price">
         <div class="container-price__taxa">
             <p>taxa</p>
-            <p>$23</p>
+            <p>${{calcularTaxa()}}</p>
         </div>
-        <button class="container-price__final">TOTA $122.50</button>
+        <button class="container-price__final">TOTAL $ {{calcularTotal()}}</button>
     </div>  
 </div>
