@@ -1,19 +1,28 @@
 import { Injectable,ViewContainerRef, ApplicationRef, Injector, ComponentRef  } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { OrderComponent } from '../components/subComponents/box-order/order/order.component';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class ServiceCapture {
-  
-  //remove o component <app-order> quando a quantidade dele foz 0
-  private valueNullSubject = new BehaviorSubject<boolean>(true);
-  valueNull$ = this.valueNullSubject.asObservable();
+   
+    private produtosSelecionadosSubject = new BehaviorSubject<any[]>([]);
+    produtosSelecionados$ = this.produtosSelecionadosSubject.asObservable();
+    
+    //remove o produco caso o input seja <= 0
+    atualizarProdutos(produtos: any[]) {
+      this.produtosSelecionadosSubject.next(produtos);
+    }
 
-  updateValueNull(valueNull: boolean) {
-    this.valueNullSubject.next(valueNull);
+  //adiciona produtos no carrinho
+  adicionarProduto(produto: any) {
+    const produtosSelecionados = this.produtosSelecionadosSubject.value;
+    produtosSelecionados.push(produto);
+    this.produtosSelecionadosSubject.next(produtosSelecionados);
+    console.log(produtosSelecionados)
   }
+
 
 
 }

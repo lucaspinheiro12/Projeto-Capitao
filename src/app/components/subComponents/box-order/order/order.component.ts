@@ -1,25 +1,33 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ServiceCapture } from './../../../../services/serviceCapture'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.css']
 })
-export class OrderComponent {
-  @Input() valueInput: number =1;
-
+export class OrderComponent implements OnInit {
+  @Input() produto: any;
+ // @Input() valueInput: number =1;
   @Output() valueZero = new EventEmitter<void>();
-  productName: string = 'sd';
+  
+  ngOnInit() {
+    // Garante que o valor inicial seja 1
+    if (!this.produto.quantidade || this.produto.quantidade < 1) {
+      this.produto.quantidade = 1;
+    }
+  }
 
   decreaseValue() {
-    if (this.valueInput > 0) {
-      this.valueInput--;
-      if (this.valueInput === 0) {
-        this.valueZero.emit(); // Emita o evento quando o valor chegar a 0
+    if (this.produto.quantidade > 0) {
+      this.produto.quantidade--;
+
+      if (this.produto.quantidade === 0) {
+        this.valueZero.emit();
       }
     }
   }
+
   increaseValue() {
-    this.valueInput++;
+    this.produto.quantidade++;
   }
 }
