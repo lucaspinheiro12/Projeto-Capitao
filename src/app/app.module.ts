@@ -9,7 +9,7 @@ import { MenuProductComponent } from './components/subComponents/menu-product/me
 import { CategoryListComponent } from './components/subComponents/category-list/category-list.component';
 import { HeaderMenuLeftComponent } from './components/subComponents/header-menu-left/header-menu-left';
 import { HeaderMenuRinghtComponent } from './components/subComponents/header-menu-right/header-menu-right';
-import { ProductsBoxRightComponent } from './components/subComponents/products-box-right/products-box-right.component';
+import { ProductsBoxRightComponent } from './components/subComponents/menu-product/products-box-right/products-box-right.component';
 import { SearchCommandComponent } from './components/subComponents/search-command/search-command.component';
 import { SearchNameComponent } from './components/subComponents/search-name/search-name.component';
 import { BoxOrderComponent } from './components/subComponents/box-order/box-order.component';
