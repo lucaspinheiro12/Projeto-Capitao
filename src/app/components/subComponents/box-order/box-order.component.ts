@@ -30,6 +30,18 @@ export class BoxOrderComponent implements OnInit{
     const taxa = this.produtosSelecionados.reduce((total, produto) => total + produto.preco * produto.quantidade, 0) * 0.1;
     return +taxa.toFixed(2);
   } 
+
+  finalizarPedido(): void {
+    const clienteEncontrado = this.serviceCapture.getClienteAtual();
+    if (clienteEncontrado) {
+      const produtosSelecionados = this.produtosSelecionados;
+      this.serviceCapture.adicionarProdutosAoCliente(clienteEncontrado, produtosSelecionados);
+      // Limpar os produtos selecionados ou tomar outra ação necessária
+      this.serviceCapture.atualizarProdutos([]);
+    } else {
+      console.log('Cliente não encontrado');
+    }
+  }
 }  
     
 
