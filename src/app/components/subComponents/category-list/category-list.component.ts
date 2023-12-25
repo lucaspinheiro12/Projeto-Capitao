@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { ServiceCapture } from './../../../services/serviceCapture'
 @Component({
   selector: 'app-category-list',
   templateUrl: './category-list.component.html',
@@ -7,12 +7,16 @@ import { Component } from '@angular/core';
 })
 export class CategoryListComponent {
 
-  selectedItem: string | null = null;
+  constructor(private serviceCapture: ServiceCapture) { }
+  selectedItem: string = 'Pratos';
 
-  selectItem(item: string): void {
-      this.selectedItem = item;
+  selectItem(nomeCategoria: string, tipo: number) {
+    this.selectedItem = nomeCategoria;
+     this.serviceCapture.setCategoriaSelecionadaTipo(tipo);
   }
-
+  selectItemTipo(tipoSelecionado: number) {
+    
+  }
   isSelected(item: string): boolean {
       return this.selectedItem === item;
   }
