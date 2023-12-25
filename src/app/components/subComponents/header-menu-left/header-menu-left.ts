@@ -14,9 +14,6 @@ export class HeaderMenuLeftComponent implements OnInit {
   }
   valorInput: string = '';
 
-  buscarProdutos() {
-    this.serviceCapture.getProdutoNome(this.valorInput)
-  }
 
   onValorInputChange() {
     this.serviceCapture.atualizarValorInput(this.valorInput);
