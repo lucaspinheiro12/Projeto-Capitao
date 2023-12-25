@@ -13,6 +13,10 @@ padding: 5px;
 width: 100%;
 }
 
+.container-search-img{
+    cursor: pointer;
+}
+
 .container-search-img__img{
     width: 35px;
     height: 20px;

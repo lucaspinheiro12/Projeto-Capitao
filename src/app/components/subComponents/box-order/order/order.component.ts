@@ -7,7 +7,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class OrderComponent implements OnInit {
   @Input() produto: any;
- // @Input() valueInput: number =1;
   @Output() valueZero = new EventEmitter<void>();
   
   ngOnInit() {
