@@ -1,13 +1,19 @@
 <div class="container">
     <div class="container-search">
-        <input type="text" class="container-search__input">
+        <input    [(ngModel)]="valorInput" type="text" class="container-search__input">
         <div class="container-search-img">
-            <img class="container-search-img__img" src="./../../../../assets/img/lupa.svg" alt="Search">
+            <img class="container-search-img__img" src="./../../../../assets/img/lupa.svg" alt="Search" (click)="pegaCliente()">
         </div>
     </div>
     <div class="container-result">
-        <p class="container-result__nameCommand">✧  Lucas</p>
-        <p class="container-result__codCommand">✧ 33</p>
-    </div>
+        <ng-container *ngIf="clienteEncontrado; else semResultado">
+          <p class="container-result__nameCommand">✧ {{ clienteEncontrado.nome }}</p>
+          <p class="container-result__codCommand">✧ {{ clienteEncontrado.comanda }}</p>
+        </ng-container>
+        <ng-template #semResultado>
+          <p class="container-result__nameCommand">✧ </p>
+          <p class="container-result__nameCommand">✧ </p>
+        </ng-template>
+      </div>
 </div>
 

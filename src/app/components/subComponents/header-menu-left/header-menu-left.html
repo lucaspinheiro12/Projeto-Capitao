@@ -4,7 +4,8 @@
         <p>Menu</p>
     </div>
     <div class="container-left-input">
-        <input type="text" class="container-left-input__search">
+        <input [(ngModel)]="valorInput" type="text" class="container-left-input__search"
+            (ngModelChange)="onValorInputChange()">
     </div>
     <img src="./../../../../assets/img/lupa.svg" alt="lupa" class="container-left-input__img">
-</div>    
+</div>

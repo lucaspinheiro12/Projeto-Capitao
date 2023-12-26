@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { ApiService } from 'src/app/services/api.serviceComands';
 @Component({
   selector: 'app-category-list',
   templateUrl: './category-list.component.html',
@@ -7,12 +7,14 @@ import { Component } from '@angular/core';
 })
 export class CategoryListComponent {
 
-  selectedItem: string | null = null;
+  constructor(private apiService: ApiService) { }
+  selectedItem: string = 'Pratos';
 
-  selectItem(item: string): void {
-      this.selectedItem = item;
+  selectItem(nomeCategoria: string) {
+    this.selectedItem = nomeCategoria;
+     this.apiService.setCategoriaSelecionadaTipo(this.selectedItem);
   }
-
+  
   isSelected(item: string): boolean {
       return this.selectedItem === item;
   }

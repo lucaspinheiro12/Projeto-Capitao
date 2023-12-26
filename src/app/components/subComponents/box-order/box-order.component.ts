@@ -14,7 +14,7 @@ export class BoxOrderComponent implements OnInit{
       this.produtosSelecionados = produtos;
     });
   }
-  produtosSelecionados: any[] = [];
+   produtosSelecionados: any[] = [];
 
   removeOrder(produto: any) {
     const index = this.produtosSelecionados.indexOf(produto);
@@ -23,11 +23,24 @@ export class BoxOrderComponent implements OnInit{
       this.serviceCapture.atualizarProdutos(this.produtosSelecionados);
     }
   }
-  calcularTotal(): number {
-    return this.produtosSelecionados.reduce((total, produto) => total + produto.preco * produto.quantidade, 0) + this.calcularTaxa();
+  calcularTotal(): Number { 
+    return (this.produtosSelecionados.reduce((total, produto) => total + produto.preco * produto.quantidade, 0) + this.calcularTaxa()).toFixed(2);
   }
   calcularTaxa(): number {
-    return this.produtosSelecionados.reduce((total, produto) => total + produto.preco * produto.quantidade, 0) * 0.1;
+    const taxa = this.produtosSelecionados.reduce((total, produto) => total + produto.preco * produto.quantidade, 0) * 0.1;
+    return +taxa.toFixed(2);
+  } 
+
+  finalizarPedido(): void {
+    const clienteEncontrado = this.serviceCapture.getClienteAtual();
+    if (clienteEncontrado) {
+      const produtosSelecionados = this.produtosSelecionados;
+      this.serviceCapture.adicionarProdutosAoCliente(clienteEncontrado, produtosSelecionados);
+      // Limpar os produtos selecionados ou tomar outra ação necessária
+      this.serviceCapture.atualizarProdutos([]);
+    } else {
+      console.log('Cliente não encontrado');
+    }
   }
 }  
     
