@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/services/api.serviceComands';
 import { ServiceCapture } from 'src/app/services/serviceCapture';
 
 @Component({
@@ -8,7 +9,7 @@ import { ServiceCapture } from 'src/app/services/serviceCapture';
 })
 export class HeaderMenuLeftComponent implements OnInit {
 
-  constructor(private serviceCapture: ServiceCapture) { }
+  constructor(private apiService: ApiService) { }
   ngOnInit(): void {
 
   }
@@ -16,6 +17,6 @@ export class HeaderMenuLeftComponent implements OnInit {
 
 
   onValorInputChange() {
-    this.serviceCapture.atualizarValorInput(this.valorInput);
+    this.apiService.atualizarValorInput(this.valorInput);
   }
 }
