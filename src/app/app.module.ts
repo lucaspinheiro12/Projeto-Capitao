@@ -16,6 +16,8 @@ import { BoxOrderComponent } from './components/subComponents/box-order/box-orde
 import { MainComponent } from './components/main/main.component';
 import { OrderComponent } from './components/subComponents/box-order/order/order.component'
 import { FormsModule } from '@angular/forms';
+import { ApiService } from './services/api.serviceComands';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
