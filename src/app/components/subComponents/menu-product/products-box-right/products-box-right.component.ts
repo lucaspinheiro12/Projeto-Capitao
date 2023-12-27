@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { product } from 'src/app/models/modelos';
+import { Product } from 'src/app/models/modelos';
 import { ApiService } from 'src/app/services/api.serviceComands';
 @Component({
   selector: 'app-products-box-right',
@@ -7,11 +7,11 @@ import { ApiService } from 'src/app/services/api.serviceComands';
   styleUrls: ['./products-box-right.component.css']
 })
 export class ProductsBoxRightComponent {
-  @Input () produtosBox:Array<product | any> = [];
+  @Input () produtosBox:Array<Product | any> = [];
 
   constructor(private apiService: ApiService) {}
 
-  adicionarAoCarrinho(produto : any){
+  adicionarAoCarrinho(produto : Product){
     this.apiService.adicionarOuIncrementarProduto(produto);
   }
  
