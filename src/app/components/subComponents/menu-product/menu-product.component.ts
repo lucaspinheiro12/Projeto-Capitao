@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { defaultIfEmpty, first, map } from 'rxjs';
-import { product } from 'src/app/models/modelos';
+import { Product } from 'src/app/models/modelos';
 import { ApiService } from 'src/app/services/api.serviceComands';
 
 
@@ -14,8 +14,8 @@ export class MenuProductComponent implements OnInit {
   constructor(private apiService: ApiService) {
   }
   valorInput: string = '';
-   listProduto!:  product[];
-   newArrayProd:  product[]|any;
+   listProduto!:  Product[];
+   newArrayProd:  Product[]|any;
   ngOnInit() {
     this.apiService.getProdutos().subscribe(
       {
@@ -40,7 +40,6 @@ export class MenuProductComponent implements OnInit {
     if (tipoCategoriaSelecionada !== null && this.valorInput.trim() == '' ) {
       // Se não há valor de entrada, mas há um tipo selecionado, filtrar por tipo
       this.newArrayProd = this.listProduto.filter((produto: { categoria: string  }) => produto.categoria === tipoCategoriaSelecionada);
-      console.log(this.newArrayProd)
       return this.newArrayProd;
     // Filtrar os produtos com base no tipo da categoria selecionada
     } else if (this.valorInput.trim() !== '') {

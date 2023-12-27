@@ -1,46 +1,79 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { OrderComponent } from './order/order.component';
-import { ServiceCapture } from 'src/app/services/serviceCapture';
+
+import { ApiService } from 'src/app/services/api.serviceComands';
+import { Order, Product } from 'src/app/models/modelos';
 @Component({
   selector: 'app-box-order',
   templateUrl: './box-order.component.html',
   styleUrls: ['./box-order.component.css']
 })
 export class BoxOrderComponent implements OnInit{
-  constructor(private serviceCapture: ServiceCapture) {}
+  constructor(private apiService: ApiService) {}
 
+  orders : Order[] =[];
   ngOnInit() {
-    this.serviceCapture.produtosSelecionados$.subscribe(produtos => {
-      this.produtosSelecionados = produtos;
+    this.apiService.produtosSelecionados$.subscribe(produtos => {
+      this.orders = produtos.map(produto => this.transformarParaOrder(produto));
     });
-  }
-   produtosSelecionados: any[] = [];
 
-  removeOrder(produto: any) {
-    const index = this.produtosSelecionados.indexOf(produto);
+  }
+  transformarParaOrder(produto: any): Order {
+    if (this.isOrder(produto)) {
+      // Se já for um Order, retorna o próprio objeto
+      return produto;
+    }
+  
+    // Se não for um Order, cria um novo objeto Order com base nas propriedades
+    return {
+      id: 0,
+      product: {
+        id: produto.id,
+        price: produto.price,
+        categoria: produto.categoria,
+        name: produto.name,
+      },
+      quantity: 1,
+      price: produto.price,
+    };
+  }
+  
+  isOrder(obj: any): obj is Order {
+    // Função auxiliar para verificar se um objeto é do tipo Order
+    return obj && 'id' in obj && 'product' in obj && 'quantity' in obj && 'price' in obj;
+  }
+
+  removeOrder(produto: Order) {
+    const index = this.orders.findIndex(order => order.id === produto.id);
     if (index !== -1) {
-      this.produtosSelecionados.splice(index, 1);
-      this.serviceCapture.atualizarProdutos(this.produtosSelecionados);
+      console.log('Antes da remoção:', this.orders);
+      const updatedOrders = [...this.orders.slice(0, index), ...this.orders.slice(index + 1)];
+      this.orders = updatedOrders;
+      this.apiService.atualizarProdutos([...updatedOrders]);
+      console.log('Após a remoção:', this.orders);
     }
   }
-  calcularTotal(): Number { 
-    return (this.produtosSelecionados.reduce((total, produto) => total + produto.preco * produto.quantidade, 0) + this.calcularTaxa()).toFixed(2);
+  calcularTotal(): number {
+    const result = this.orders.reduce((total, order) => total + order.price * order.quantity, 0) + this.calcularTaxa();
+    return +result.toFixed(2) ;
   }
   calcularTaxa(): number {
-    const taxa = this.produtosSelecionados.reduce((total, produto) => total + produto.preco * produto.quantidade, 0) * 0.1;
+    const taxa = this.orders.reduce(
+      (total, order) => total + order.price * 0.1 * order.quantity,
+      0
+    );
     return +taxa.toFixed(2);
-  } 
+  }
 
   finalizarPedido(): void {
-    const clienteEncontrado = this.serviceCapture.getClienteAtual();
-    if (clienteEncontrado) {
-      const produtosSelecionados = this.produtosSelecionados;
-      this.serviceCapture.adicionarProdutosAoCliente(clienteEncontrado, produtosSelecionados);
+    //const clienteEncontrado = this.apiService.getClienteAtual();
+    //if (clienteEncontrado) {
+     // const produtosSelecionados = this.produtosSelecionados;
+     // this.apiService.adicionarProdutosAoCliente(clienteEncontrado, produtosSelecionados);
       // Limpar os produtos selecionados ou tomar outra ação necessária
-      this.serviceCapture.atualizarProdutos([]);
-    } else {
+      this.apiService.atualizarProdutos([]);
+    ///} else {
       console.log('Cliente não encontrado');
-    }
+    //}
   }
 }  
     
