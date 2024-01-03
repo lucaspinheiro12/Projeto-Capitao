@@ -1,27 +1,35 @@
-import { Component } from '@angular/core';
-import { ServiceCapture } from 'src/app/services/serviceCapture';
+import { Component, OnInit } from '@angular/core';
+import { Command } from 'src/app/models/modelos';
+import { ApiService } from 'src/app/services/api.serviceComands';
+
 
 @Component({
   selector: 'app-search-command',
   templateUrl: './search-command.component.html',
   styleUrls: ['./search-command.component.css']
 })
-export class SearchCommandComponent {
-  valorInput: number = 0;
-  constructor(private serviceCapture: ServiceCapture) { }
+export class SearchCommandComponent implements OnInit {
+  valorInput: number|any;
+  constructor(private apiServer: ApiService) { }
+  ngOnInit(): void {
+    this.apiServer.commandSelecionado$.subscribe(command => {
+      if(command === ''){
+        this.commandEncontrado = '';
+        this.valorInput = '';
+      }
+      console.log(command)
+    })
+  }
 
-  clienteEncontrado: any; // Adicione essa propriedade para armazenar o cliente encontrado
+  commandEncontrado: Command | any; // Adicione essa propriedade para armazenar o cliente encontrado
 
-  pegaCliente() {
-    // Chame o serviço para obter o cliente por comanda
-    this.serviceCapture.getClientes().map(
-      (cliente) => {
-        if (cliente.comanda == this.valorInput) {
-          this.clienteEncontrado = cliente;
-          this.serviceCapture.setClienteAtual(this.clienteEncontrado);
-        } else {
-          console.log('Cliente nao encontrado');
-        }
-      });
+  
+  async pegaCommand(id:number) {
+    console.log(id)
+    try {
+      this.commandEncontrado = await this.apiServer.getCommandById(id).toPromise();
+    } catch (error) {
+      console.error('Erro ao buscar comanda:', error);
+    }
   }
 }

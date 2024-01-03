@@ -1,8 +1,8 @@
 export type Product ={
     id:number,
+    name: string,
     price:number,
     categoria:string,
-    name: string,
 }
 
 export type Order = {
@@ -11,3 +11,23 @@ export type Order = {
     quantity: number;
     price: number;
   };
+
+export type Cliente = {
+    cpf:string,
+    name:string,
+    contact:string
+}
+
+export type Command = {
+    client:Cliente,
+    entry: number,
+    id: number,
+}
+
+export type Sale = {
+    id: number,
+    order:Order [],
+    vendor: string,    
+    commands: Command, 
+}
+
