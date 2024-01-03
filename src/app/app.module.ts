@@ -16,8 +16,8 @@ import { BoxOrderComponent } from './components/subComponents/box-order/box-orde
 import { MainComponent } from './components/main/main.component';
 import { OrderComponent } from './components/subComponents/box-order/order/order.component'
 import { FormsModule } from '@angular/forms';
-import { ApiService } from './services/api.serviceComands';
 import { HttpClientModule } from '@angular/common/http';
+import { RegisterComponent } from './components-register/register/register.component';
 
 @NgModule({
   declarations: [
@@ -33,14 +33,14 @@ import { HttpClientModule } from '@angular/common/http';
     SearchNameComponent,
     BoxOrderComponent,
     MainComponent,
-    OrderComponent
+    OrderComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
-    
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

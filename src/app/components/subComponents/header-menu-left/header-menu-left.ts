@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.serviceComands';
-import { ServiceCapture } from 'src/app/services/serviceCapture';
 
 @Component({
   selector: 'app-header-menu-left',
