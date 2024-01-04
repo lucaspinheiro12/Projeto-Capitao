@@ -11,7 +11,7 @@ import { HeaderMenuLeftComponent } from './components/subComponents/header-menu-
 import { HeaderMenuRinghtComponent } from './components/subComponents/header-menu-right/header-menu-right';
 import { ProductsBoxRightComponent } from './components/subComponents/menu-product/products-box-right/products-box-right.component';
 import { SearchCommandComponent } from './components/subComponents/search-command/search-command.component';
-import { SearchNameComponent } from './components/subComponents/search-name/search-name.component';
+import { SearchNameComponent } from './components/subComponents/search-name/search-product.component';
 import { BoxOrderComponent } from './components/subComponents/box-order/box-order.component';
 import { MainComponent } from './components/main/main.component';
 import { OrderComponent } from './components/subComponents/box-order/order/order.component'
