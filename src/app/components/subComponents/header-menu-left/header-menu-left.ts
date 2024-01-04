@@ -6,16 +6,6 @@ import { ApiService } from 'src/app/services/api.serviceComands';
   templateUrl: './header-menu-left.html',
   styleUrls: ['./header-menu-left.css']
 })
-export class HeaderMenuLeftComponent implements OnInit {
+export class HeaderMenuLeftComponent {
 
-  constructor(private apiService: ApiService) { }
-  ngOnInit(): void {
-
-  }
-  valorInput: string = '';
-
-
-  onValorInputChange() {
-    this.apiService.atualizarValorInput(this.valorInput);
-  }
 }

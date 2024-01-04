@@ -17,25 +17,15 @@ export class RegisterComponent {
   entry:number | any;
   idCommand:number | any;
   
-  async addClientCommand(contact:number, name:string, CPF:string, entry:number, idCommand:number){
-    console.log(contact)
-    console.log(name)
-    console.log(CPF)
-    console.log(entry)
-    console.log(idCommand)
-
-    const teste:any = {
+   addClientCommand(contact:number, name:string, CPF:string, entry:number, idCommand:number){
+    const clientCommand:any = {
       cpf:CPF,
       name:name,
       contact:contact,
       entry:entry,
       idCommand:idCommand
-    }
-    await this.apiInsert.addClientCommand(teste)
-   /* try {
-      this.commandEncontrado = await this.apiServer.getCommandById(id).toPromise();
-    } catch (error) {
-      console.error('Erro ao buscar comanda:', error);
-    }*/
+    };
+    this.apiInsert.addClient(clientCommand).subscribe(  result => 
+      this.apiInsert.addCommand(clientCommand).subscribe( result => console.log(result)))
   }
 }
