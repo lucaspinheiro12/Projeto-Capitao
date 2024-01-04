@@ -6,8 +6,13 @@
     margin-bottom: 10px;
 }
 .container-left{
-    width: 60%
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+}
+.container-left app-search-product{
+    width: 100%;
 }
 .container-right{
-    width: 35%;
+    width: 30%;
 }

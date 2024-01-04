@@ -29,8 +29,21 @@ export class ApiInsertDeleteService {
        })
     );
  }
-
- addClientCommand(newClientCommand: any){
+ 
+  addClient (client:Cliente){
+    const cliente:Cliente = {
+      cpf:client.cpf,
+      name:client.name,
+      contact:client.contact
+    }
+    return this.http.post<Cliente>(`${this.baseClientUrl}`,client).pipe(
+      catchError( error => {
+        console.error('Cliente não encontrado: ', error);
+      throw error;
+      })
+    )
+  }
+  addCommand(newClientCommand:Command | any){
    const cliente:Cliente = {
     cpf:newClientCommand.cpf,
     name:newClientCommand.name,
@@ -40,12 +53,13 @@ export class ApiInsertDeleteService {
     client:cliente,
     entry: newClientCommand.entry,
     id: newClientCommand.idCommand,
-
    }
-
-   console.log(cliente)
-   console.log("------------")
    console.log(command)
-  return this.http
+  return this.http.post<Command | any>(`${this.baseCommandUrl}`,command).pipe(
+    catchError( error => {
+      console.error("deu error: ", error );
+      throw error;
+    })
+  )
  }
-}
+} 

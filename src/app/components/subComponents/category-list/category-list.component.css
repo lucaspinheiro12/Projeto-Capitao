@@ -1,9 +1,9 @@
 .container{
-    display: flex;
-    height: 100%;
-    align-items: center;
-}
+    display: flex; 
+    height: 50px;  
+    align-items: center;}
 .container-list__catecory{
+    padding: 10px 0 10px 0 ;
     cursor: pointer;
     color: black;
     text-align: center;
@@ -12,15 +12,13 @@
     width: auto;
     margin: 0 10px 0 10px;
 }
-
 .container-list__newCatecory{
     font-weight: 500;
     color: aliceblue;
     text-align: center;
-    padding: 4px 12px 4px 12px;
+    padding: 10px 14px 10px 14px;
     border-radius: 10px;
     width: auto;
-    margin: 2px 5px 5px 5px;
     background-color: #0da2ff;
     margin: 0 10px 0 10px;
 }
