@@ -1,8 +1,22 @@
 <div class="container">
     <div class="container-left-menu">
         <ul class="container-left-menu__ul">
-            <li class="container-ul__ul__li">Vendas</li>
-            <li class="container-ul__ul__li">cadastro Clientes</li>
+            <li class="container-ul__ul__li">
+                <a 
+                    [routerLinkActive]="['activated']"
+                    [routerLinkActiveOptions]="{exact: true}"
+                    [routerLink]="['/sales']">
+                    Vendas
+                </a>
+            </li>
+            <li class="container-ul__ul__li">
+                <a 
+                    [routerLinkActive]="['activated']"
+                    [routerLinkActiveOptions]="{exact: true}"
+                    [routerLink]="['/']">
+                    cadastro Clientes
+                </a>
+            </li>
             <li class="container-ul__ul__li">vendas por Cliente</li>
             <li class="container-ul__ul__li">buscar Comanda</li>
         </ul>
