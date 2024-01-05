@@ -23,6 +23,10 @@ button{
     background:linear-gradient(to right,#007DFF, #00ACFF) ;
     border: none;
 }
+a{
+    text-decoration: none;
+    color: inherit;
+}
 
 
 

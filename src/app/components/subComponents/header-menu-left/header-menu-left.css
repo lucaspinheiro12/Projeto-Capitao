@@ -12,7 +12,7 @@
     display: flex;
     flex-direction: row;
     list-style-type: none; 
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 }
 .container-ul__ul__li{
@@ -21,3 +21,13 @@
     font-size: 20px;
 }
 
+.activated{
+    font-weight: 500;
+    color: aliceblue;
+    text-align: center;
+    padding: 10px 14px 10px 14px;
+    border-radius: 10px;
+    width: auto;
+    background-color: #0da2ff;
+    margin: 0 10px 0 10px;
+}
