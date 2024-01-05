@@ -18,12 +18,11 @@ export class BoxOrderComponent implements OnInit{
   ngOnInit() {
     this.apiService.commandSelecionado$.subscribe(command => {
       this.command = command;
-      console.log(command)
     })
     this.apiService.produtosSelecionados$.subscribe(produtos => {
       this.orders = produtos;
     });
-    this.apiService.getSales().subscribe(sale => {console.log(sale)})
+    this.apiService.getSales().subscribe(sale => {sale})
   }
    
   removeOrder(produto: Order) {
@@ -54,7 +53,6 @@ export class BoxOrderComponent implements OnInit{
           vendor: 'Angular',
           commands: this.command
        }
-       console.log('Payload enviado para a API:', this.sale); // Adicione esta linha
        this.apiInsertDelete.addSale(this.sale).subscribe(res => console.log("respsta", res));
        // Limpar os produtos selecionados ou tomar outra ação necessária
        this.apiService.atualizarProdutos([]);
