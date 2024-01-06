@@ -46,6 +46,7 @@ export class BoxOrderComponent implements OnInit{
   }
 
   finalizarPedido(): void {
+    const orderTaxa = {}
     if (this.command) {
        this.sale = {
           id: 0,
