@@ -27,9 +27,17 @@
             </li>
         </ul>
     </div>
+    <div class="container-client">
+        <p class="container-client__attributes">Numero da comanda: {{testC.id}}</p>
+        <p class="container-client__attributes">Nome: {{testC.client.name}}</p>
+        <p class="container-client__attributes">CPF: {{testC.client.cpf}}</p>
+        <p class="container-client__attributes">Contato: {{testC.client.contact}}</p>
+        <p class="container-client__attributes">Entrada: {{testC.entry}}</p>
+        <p class="container-client__attributes">Valor total: {{testC.fullValue}}</p>
+    </div>
     <div class="container-result">
         <div *ngIf="mostrarPedidoResumido">
-            <app-summed-up></app-summed-up>
+            <app-summed-up [testeValor]="test"></app-summed-up>
         </div>
         <div *ngIf="mostrarPedidoDetalhado">
         <app-detailed></app-detailed>
@@ -37,8 +45,6 @@
     </div>
 </div>
 
-<p>fazer um check box com numero da comanda, nome, cpf</p>
-<p>assim que escolher o inpt vai fazer a busca pelo valor atribuido</p>
-<p>assim criando um campo com os dados do cliente junto da comanda, e apos um tabela com suas vendas sendo que cada linha da tabela vai se referir a uma venda</p>
+<p>assim que escolher o inpt vai fazer a busca pelo valor atribuido(FALTA FAZER A FUNÇAO DO INPUT)</p>
+<p>CAMPO COM DADOS CRIADOS AGORA VER COMO VAI PEGAR ELE DINAMICAMENTE, POIS VAI VIR UM SALEDTO E UM SALE </p>
 <p>lembrando que eu ja consigo pegar a rota pelo o input cabe a mim fazer um observable diferente para cada um deles .</p>
-<p>porem deve se perguntar . fazer a busca com click ou igual a do produto EX(VAI DIGITANDO E VAI APARECENDO VALORES RELACIONADOS)?</p>

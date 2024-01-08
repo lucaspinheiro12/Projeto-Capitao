@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-summed-up',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./summed-up.component.css']
 })
 export class SummedUpComponent {
-
+  @Input () testeValor: any[] =[];
 }

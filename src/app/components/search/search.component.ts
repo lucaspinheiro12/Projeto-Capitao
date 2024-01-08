@@ -7,7 +7,51 @@ import { ApiService } from '../../services/api.serviceComands';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
-  
+  test: any = [
+    {
+      "id": null,
+      "product": {
+          "id": 1,
+          "name": "Capricho",
+          "price": 89,
+          "categoria": "Pratos"
+      },
+      "quantity": 1,
+      "price": 97.9
+  },
+  {
+      "id": null,
+      "product": {
+          "id": 3,
+          "name": "Balde Original",
+          "price": 80,
+          "categoria": "Cervejas e Chopp"
+      },
+      "quantity": 1,
+      "price": 88
+  },
+  {
+      "id": null,
+      "product": {
+          "id": 4,
+          "name": "Cap Cebola",
+          "price": 49.4,
+          "categoria": "Pratos"
+      },
+      "quantity": 3,
+      "price": 163.02
+  }
+  ]
+  testC: any ={
+    "id": 1,
+        "client": {
+            "cpf": "1",
+            "name": "xf",
+            "contact": "1"
+        },
+        "entry": 1,
+        "fullValue": 469.51
+  }
   constructor(private apiService: ApiService){}
   checkbox1: boolean = false;
   checkbox2: boolean = true;
