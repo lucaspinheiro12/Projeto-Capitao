@@ -15,6 +15,7 @@
 .container-return-type{
     align-self: center;
     width: 30%;
+    margin-bottom: 50px;
 }
 .container-return-type__ul{
     display: flex;
@@ -38,4 +39,24 @@
     background-color: #0da2ff;
     margin: 0 10px 0 10px;
     cursor: pointer;
+}
+.container-client{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #b4bccc;
+    height: 50px;
+    align-items: center;
+    border-left: solid;
+}
+.container-client__attributes{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    border-right: solid;
+    font-size: 18px;
+    text-align: center;
+    width: 16%;
+    font-weight: 600;
 }
