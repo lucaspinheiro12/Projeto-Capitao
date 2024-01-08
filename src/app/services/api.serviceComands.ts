@@ -17,6 +17,10 @@ export class ApiService {
    private termoBuscaSubjectCategoia = new BehaviorSubject<string>('');
    termoBuscaCategoia$ = this.termoBuscaSubject.asObservable();
 
+   //define o type da busca
+   private termoBuscaSubjectType = new BehaviorSubject<string>('');
+   termoBuscaType$ = this.termoBuscaSubject.asObservable();
+
    private commandSelecionadoSubject = new BehaviorSubject<Command| any>([]);
    commandSelecionado$ = this.commandSelecionadoSubject.asObservable();
 
@@ -151,6 +155,11 @@ export class ApiService {
   //seta o valor da categoria
   setCategoriaSelecionadaTipo(tipo: string): void {
     this.termoBuscaSubjectCategoia.next(tipo);
+  }
+
+  //seta o type da busca
+  setTypeSelected(tipo: string): void {
+    this.termoBuscaSubjectType.next(tipo);
   }
 
  //atualiza o input de busca de produtos

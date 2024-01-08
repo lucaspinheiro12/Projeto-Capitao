@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="container-checkbox">
+        <label class="container-checkbox__label" (change)="updateCheckboxes(1)" >
+            <input class="container-checkbox__input" [(ngModel)]="checkbox1"  type="checkbox">
+            CPF
+        </label>
+        <label class="container-checkbox__label"  (change)="updateCheckboxes(2)"  >
+            <input class="container-checkbox__input" [(ngModel)]="checkbox2"  type="checkbox">
+            Nome
+        </label>
+        <label class="container-checkbox__label"   (change)="updateCheckboxes(3)">
+            <input class="container-checkbox__input" [(ngModel)]="checkbox3"  type="checkbox"> 
+            Numero Comanda
+        </label>
+    </div>
+    <div class="container-return-type">
+        <ul class="container-return-type__ul">
+            <li [ngClass]="{'container-return-type__li' : !isSelectedType('resumido'), 'container-return-type__li__click' : isSelectedType('resumido')}"
+                (click)="selectType('resumido')"
+                (click)="showPedidoResumido()">
+                Resumido
+            </li>
+            <li [ngClass]="{'container-return-type__li' : !isSelectedType('detalhado'), 'container-return-type__li__click' : isSelectedType('detalhado')}"
+                (click)="selectType('detalhado')"
+                (click)="showPedidoDetalhado()">
+                Detalhado
+            </li>
+        </ul>
+    </div>
+    <div class="container-result">
+        <div *ngIf="mostrarPedidoResumido">
+            <app-summed-up></app-summed-up>
+        </div>
+        <div *ngIf="mostrarPedidoDetalhado">
+        <app-detailed></app-detailed>
+        </div>
+    </div>
+</div>
+
+<p>fazer um check box com numero da comanda, nome, cpf</p>
+<p>assim que escolher o inpt vai fazer a busca pelo valor atribuido</p>
+<p>assim criando um campo com os dados do cliente junto da comanda, e apos um tabela com suas vendas sendo que cada linha da tabela vai se referir a uma venda</p>
+<p>lembrando que eu ja consigo pegar a rota pelo o input cabe a mim fazer um observable diferente para cada um deles .</p>
+<p>porem deve se perguntar . fazer a busca com click ou igual a do produto EX(VAI DIGITANDO E VAI APARECENDO VALORES RELACIONADOS)?</p>
