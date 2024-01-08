@@ -18,6 +18,10 @@ import { OrderComponent } from './components/subComponents/box-order/order/order
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './components/register/register.component';
+import { SearchComponent } from './components/search/search.component';
+import { SummedUpComponent } from './components/search/sub-components/summed-up/summed-up.component';
+import { DetailedComponent } from './components/search/sub-components/detailed/detailed.component';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +38,10 @@ import { RegisterComponent } from './components/register/register.component';
     BoxOrderComponent,
     MainComponent,
     OrderComponent,
-    RegisterComponent
+    RegisterComponent,
+    SearchComponent,
+    SummedUpComponent,
+    DetailedComponent
   ],
   imports: [
     BrowserModule,
