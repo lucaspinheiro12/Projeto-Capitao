@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-detailed',
@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./detailed.component.css']
 })
 export class DetailedComponent {
+
+  @Input () testValorFUll: any[] = []
+  testeas(){
+    console.log(this.testValorFUll)
+  }
+
 
 }
