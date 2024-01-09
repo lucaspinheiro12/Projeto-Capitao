@@ -37,10 +37,23 @@
     </div>
     <div class="container-result">
         <div *ngIf="mostrarPedidoResumido">
+            <ul class="container-sales-summedUp__ul">
+                <li class="container-sales-summedUp__ul__li">nome:</li>
+                <li class="container-sales-summedUp__ul__li"> preço unidade:</li>
+                <li class="container-sales-summedUp__ul__li">quantidade:</li>
+                <li class="container-sales-summedUp__ul__li">valor total</li>
+            </ul>
             <app-summed-up [testeValor]="test"></app-summed-up>
         </div>
         <div *ngIf="mostrarPedidoDetalhado">
-        <app-detailed></app-detailed>
+            <ul class="container-sales-detailed__ul">
+                <li class="container-sales-detailed__ul__li">nome:</li>
+                <li class="container-sales-detailed__ul__li"> preço unidade:</li>
+                <li class="container-sales-detailed__ul__li">quantidade:</li>
+                <li class="container-sales-detailed__ul__li">valor total</li>
+                <li class="container-sales-detailed__ul__li">vendedor</li>
+            </ul>
+        <app-detailed [testValorFUll]="testFull"></app-detailed>
         </div>
     </div>
 </div>
