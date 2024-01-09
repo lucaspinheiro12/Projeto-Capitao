@@ -1,12 +1,11 @@
 <div class="container">
     <div class="container-sales" *ngFor="let tes of testeValor">
-        <p>{{tes.product.id}}</p>
-        <p>{{tes.product.name}}</p>
-        <p>{{tes.product.price}}</p>
-        <p>{{tes.product.categoria}}</p>
-        <p>{{tes.quantity}}</p>
-        <p>{{tes.price}}</p>
-
+        <ul class="container-sales__ul">
+            <li class="container-sales__ul__li">{{tes.product.name}}</li>
+            <li class="container-sales__ul__li"> {{tes.product.price}}</li>
+            <li class="container-sales__ul__li">{{tes.quantity}}</li>
+            <li class="container-sales__ul__li">{{tes.price}}</li>
+        </ul>
     </div>
 </div>
 

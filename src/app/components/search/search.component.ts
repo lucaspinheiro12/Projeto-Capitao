@@ -52,6 +52,124 @@ export class SearchComponent {
         "entry": 1,
         "fullValue": 469.51
   }
+
+  testFull: any[] = [
+    {
+      "id": 3,
+      "order": [
+          {
+              "id": 3,
+              "product": {
+                  "id": 1,
+                  "name": "Capricho",
+                  "price": 89,
+                  "categoria": "Pratos"
+              },
+              "quantity": 1,
+              "price": 97.9
+          }
+      ],
+      "vendor": "Angular",
+      "commands": {
+          "id": 1,
+          "client": {
+              "cpf": "123",
+              "name": "llu",
+              "contact": "31931649"
+          },
+          "entry": 12
+      }
+  },
+  {
+      "id": 4,
+      "order": [
+          {
+              "id": 4,
+              "product": {
+                  "id": 5,
+                  "name": "Balde Amstel",
+                  "price": 70,
+                  "categoria": "Cervejas e Chopp"
+              },
+              "quantity": 3,
+              "price": 231
+          }
+      ],
+      "vendor": "Angular",
+      "commands": {
+          "id": 1,
+          "client": {
+              "cpf": "123",
+              "name": "llu",
+              "contact": "31931649"
+          },
+          "entry": 12
+      }
+  },
+  {
+      "id": 5,
+      "order": [
+          {
+              "id": 5,
+              "product": {
+                  "id": 3,
+                  "name": "Balde Original",
+                  "price": 80,
+                  "categoria": "Cervejas e Chopp"
+              },
+              "quantity": 3,
+              "price": 264
+          }
+      ],
+      "vendor": "Angular",
+      "commands": {
+          "id": 1,
+          "client": {
+              "cpf": "123",
+              "name": "llu",
+              "contact": "31931649"
+          },
+          "entry": 12
+      }
+  },
+  {
+      "id": 6,
+      "order": [
+          {
+              "id": 6,
+              "product": {
+                  "id": 5,
+                  "name": "Balde Amstel",
+                  "price": 70,
+                  "categoria": "Cervejas e Chopp"
+              },
+              "quantity": 1,
+              "price": 77
+          },
+          {
+              "id": 7,
+              "product": {
+                  "id": 3,
+                  "name": "Balde Original",
+                  "price": 80,
+                  "categoria": "Cervejas e Chopp"
+              },
+              "quantity": 1,
+              "price": 88
+          }
+      ],
+      "vendor": "Angular",
+      "commands": {
+          "id": 1,
+          "client": {
+              "cpf": "123",
+              "name": "llu",
+              "contact": "31931649"
+          },
+          "entry": 12
+      }
+  }
+  ]
   constructor(private apiService: ApiService){}
   checkbox1: boolean = false;
   checkbox2: boolean = true;
