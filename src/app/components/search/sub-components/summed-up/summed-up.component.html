@@ -1,11 +1,13 @@
 <div class="container">
-    <div class="container-sales" *ngFor="let tes of testeValor">
-        <ul class="container-sales__ul">
-            <li class="container-sales__ul__li">{{tes.product.name}}</li>
-            <li class="container-sales__ul__li"> {{tes.product.price}}</li>
-            <li class="container-sales__ul__li">{{tes.quantity}}</li>
-            <li class="container-sales__ul__li">{{tes.price}}</li>
-        </ul>
+    <div class="container-sales" *ngIf="resultValue">
+        <div *ngFor="let result of resultValue.order">
+            <ul class="container-sales__ul" >
+                <li class="container-sales__ul__li" >{{result.product.name}}</li>
+                <li class="container-sales__ul__li"> {{result.product.price}}</li>
+                <li class="container-sales__ul__li">{{result.quantity}}</li>
+                <li class="container-sales__ul__li">{{result.price  | number: '1.2-2'}}</li>
+            </ul>
+        </div>
     </div>
 </div>
 

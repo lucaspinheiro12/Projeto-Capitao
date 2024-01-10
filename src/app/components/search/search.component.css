@@ -10,7 +10,23 @@
 }
 .container-checkbox__label{
     padding: 10px;
+    margin-bottom: 10px;
+}
+.container-button-buscar{
+    display: flex;
+    align-self: center;
     margin-bottom: 50px;
+}
+.container-button-buscar__buscar{
+    font-size: 20px;
+        color: aliceblue;
+        text-align: center;
+        padding: 10px 14px 10px 14px;
+        border-radius: 10px;
+        width: auto;
+        background-color: #0da2ff;
+        margin: 0 10px 0 10px;
+        cursor: pointer;
 }
 .container-return-type{
     align-self: center;

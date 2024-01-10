@@ -31,3 +31,9 @@ export type Sale = {
     commands: Command, 
 }
 
+export type SaleSummedUp = {
+    commands: Command,
+    fullValue: number,
+    order: Order[]
+}
+
