@@ -19,20 +19,18 @@ export class SearchNameComponent implements OnInit {
   ngOnInit() {
         this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
        this.currentRoute = this.router.url;
-      console.log(this.currentRoute)
     });
   }
 
  
   onValorInputChange() {
-    console.log(this.currentRoute)
-    //console.log(this.currentRoute.subscribe(res => console.log(res)))
-   /* if(this.currentRoute.includes('/sales')){
-      console.log("sales")
-    }else if(this.currentRoute.includes('/')){
-      console.log('cadastro')
-    }*/
-    this.apiService.atualizarValorInput(this.valorInput);
+    if(this.currentRoute === ('/')){
+      console.log("no cadastro")
+    }else if( this.currentRoute.includes('/sales')){
+      this.apiService.atualizarValorInputVendas(this.valorInput);
+    }else if (this.currentRoute.includes('/search')){
+      this.apiService.atualizarValorInputBuscar(this.valorInput);
+    }
   }
 
 }

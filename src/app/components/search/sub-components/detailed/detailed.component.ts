@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Sale } from 'src/app/models/modelos';
 
 @Component({
   selector: 'app-detailed',
@@ -7,10 +8,9 @@ import { Component, Input } from '@angular/core';
 })
 export class DetailedComponent {
 
-  @Input () testValorFUll: any[] = []
-  testeas(){
-    console.log(this.testValorFUll)
+  @Input () resultDetalhado: Sale[] = []
+
+  teste(){
+    console.log(this.resultDetalhado)
   }
-
-
 }
