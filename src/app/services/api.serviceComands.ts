@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Command, Product,Cliente, Sale} from '../models/modelos';
+import { Command, Product,Cliente, Sale, SaleSummedUp} from '../models/modelos';
 import { api } from 'src/app/services/api.service'
 import { BehaviorSubject, Observable, catchError, map, of, take, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -9,10 +9,15 @@ import { HttpClient } from '@angular/common/http';
 //Essa API faz os gets e alguns sets para visualizar os produtos e apresentalos na interface...
 //ela apenas faz a função de apresentar os produtos na tela, e buscar a command do client 
 export class ApiService {
-   //buscas por string produtos
+
+   //atualiza o input e buscas por string os produtos somente na aba vendas
    private termoBuscaSubject = new BehaviorSubject<string>('');
    termoBusca$ = this.termoBuscaSubject.asObservable();
 
+  //atualiza o input e buscas por string os clientes somente na aba Busca
+   private termoBuscaClientSubject = new BehaviorSubject< any>('');
+   termoClientBusca$ = this.termoBuscaClientSubject.asObservable();
+   
   //busta pela categoria
    private termoBuscaSubjectCategoia = new BehaviorSubject<string>('');
    termoBuscaCategoia$ = this.termoBuscaSubject.asObservable();
@@ -34,6 +39,9 @@ export class ApiService {
   private baseUrlClient: string = '';
   private clientData:  Cliente[] | any;
 
+  private clientBuscaResumido:  SaleSummedUp | any;
+  private clientBuscaDetalhado:  Sale[] | any;
+  
   private baseUrlCommand:string = '';
   private commandData:  Command[] =[]; 
   private commandCap!:Command
@@ -64,11 +72,85 @@ export class ApiService {
         }
       }),
       catchError(error => {
-        console.error('Erro ao obter produtos:', error);
+        console.error('Erro ao obter Cliente:', error);
         // Trate o erro conforme necessário
         throw error;
       })
     );
+  }
+
+  //pega as vendas detalhadas do cliente pelo numero da comanda
+  getClientSalesDetalhadoId(id:number):Observable<any>{
+    return this.http.get<Sale | any>(`${this.baseUrlSale}/client/id/${id}`).pipe(
+      tap(data => {
+        this.clientBuscaDetalhado = data;
+      }),
+      catchError(error => {
+        console.log('Erro ao obter o cliente com as vendas', error)
+        throw error
+      })
+    )
+  }
+ //pega as vendas detalhadas do cliente pelo NOME
+  getClientSalesDetalhadoName(name:string):Observable<any>{
+    return this.http.get<Sale | any>(`${this.baseUrlSale}/client/name/${name}`).pipe(
+      tap(data => {
+        this.clientBuscaDetalhado = data;
+      }),
+      catchError(error => {
+        console.log('Erro ao obter o cliente com as vendas', error)
+        throw error
+      })
+    )
+  }
+ //pega as vendas detalhadas do cliente pelo numero da cpf
+  getClientSalesDetalhadoCpf(cpf:string):Observable<any>{
+    return this.http.get<Sale | any>(`${this.baseUrlSale}/client/cpf/${cpf}`).pipe(
+      tap(data => {
+        this.clientBuscaDetalhado = data;
+      }),
+      catchError(error => {
+        console.log('Erro ao obter o cliente com as vendas', error)
+        throw error
+      })
+    )
+  }
+
+  //pega as vendas resumidas do cliente pelo numero da comanda
+  getClientSalesResumidoId(id:number):Observable<any>{
+    return this.http.get<Sale>(`${this.baseUrlSale}/client/summedUp/id/${id}`).pipe(
+      tap(data => {
+        this.clientBuscaResumido = data;
+      }),
+      catchError(error => {
+        console.log('Erro ao obter o cliente com as vendas', error)
+        throw error
+      })
+    )
+  }
+   //pega as vendas resumidas do cliente pelo nome cliente
+   getClientSalesResumidoName(name:string):Observable<any>{
+    return this.http.get<Sale>(`${this.baseUrlSale}/client/summedUp/name/${name}`).pipe(
+      tap(data => {
+        this.clientBuscaResumido = data;
+      }),
+      catchError(error => {
+        console.log('Erro ao obter o cliente com as vendas', error)
+        throw error
+      })
+    )
+  }
+   //pega as vendas resumidas do cliente pelo numero do cpf
+   getClientSalesResumidoCPF(cpf:string):Observable<any>{
+    return this.http.get<Sale>(`${this.baseUrlSale}/client/summedUp/cpf/${cpf}`).pipe(
+      tap(data => {
+        this.clientBuscaResumido = data;
+      }),
+      catchError(error => {
+        console.log('Erro ao obter o cliente com as vendas', error)
+        throw error
+      })
+    )
   }
   getSales():Observable<Sale[]|any> {
     return this.http.get<Sale[]|any>(this.baseUrlSale).pipe(
@@ -109,6 +191,7 @@ export class ApiService {
     );
     
   }
+  //busca comanda pelo Id
   getCommandById(id: number): Observable<Command | any> {
     return this.http.get<Command>(`${this.baseUrlCommand}/${id}`).pipe(
       map(res => {
@@ -162,12 +245,17 @@ export class ApiService {
     this.termoBuscaSubjectType.next(tipo);
   }
 
- //atualiza o input de busca de produtos
- atualizarValorInput(valor: string) {
+ //atualiza o input de busca de produtos na aba vendas
+ atualizarValorInputVendas(valor: string) {
   this.termoBuscaSubject.next(valor)  
 }
 
-//faz o filtro dos produtos de acordo com oque esta no imput
+//atualiza o input de busca de client na aba buscar
+atualizarValorInputBuscar(valor: any) {
+  this.termoBuscaClientSubject.next(valor)  
+}
+
+//faz o filtro dos produtos de acordo com oque esta no imput no component vendas
 getProdutoNome(termoBusca: string): Product[] {
   if (termoBusca.trim() !== '') {
     // Transforma o termo de busca em minúsculas para comparar sem diferenciação entre maiúsculas e minúsculas

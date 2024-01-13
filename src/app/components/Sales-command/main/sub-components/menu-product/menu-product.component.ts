@@ -37,11 +37,13 @@ export class MenuProductComponent implements OnInit {
   getProdutosFiltrados(): any[] {
     // Obter o tipo da categoria selecionada
     const tipoCategoriaSelecionada = this.apiService.getCategoriaSelecionadaTipo();
+        // Filtrar os produtos com base no tipo da categoria selecionada
     if (tipoCategoriaSelecionada !== null && this.valorInput.trim() == '' ) {
       // Se não há valor de entrada, mas há um tipo selecionado, filtrar por tipo
       this.newArrayProd = this.listProduto.filter((produto: { categoria: string  }) => produto.categoria === tipoCategoriaSelecionada);
       return this.newArrayProd;
-    // Filtrar os produtos com base no tipo da categoria selecionada
+
+      //filtrar com base no valor do input
     } else if (this.valorInput.trim() !== '') {
       // Se há um valor de entrada, filtrar pelos resultados da busca
       return this.apiService.getProdutoNome(this.valorInput)

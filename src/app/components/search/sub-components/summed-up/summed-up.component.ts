@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { SaleSummedUp } from 'src/app/models/modelos';
 
 @Component({
   selector: 'app-summed-up',
@@ -6,5 +7,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./summed-up.component.css']
 })
 export class SummedUpComponent {
-  @Input () testeValor: any[] =[];
+  @Input () resultValue: SaleSummedUp  |any;
+
 }

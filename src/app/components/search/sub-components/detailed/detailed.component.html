@@ -1,12 +1,12 @@
 <div class="container">
-    <div class="container-sales" *ngFor="let tes of testValorFUll"  >
-        <div *ngFor="let pedido of tes.order">
+    <div class="container-sales" *ngFor="let res of resultDetalhado"  >
+        <div *ngFor="let pedido of res.order">
             <ul class="container-sales__ul" >
                 <li class="container-sales__ul__li">{{pedido.product.name}}</li>
                 <li class="container-sales__ul__li"> {{pedido.product.price}}</li>
                 <li class="container-sales__ul__li">{{pedido.quantity}}</li>
                 <li class="container-sales__ul__li">{{pedido.price}}</li>
-                <li class="container-sales__ul__li">{{tes.vendor}}</li>
+                <li class="container-sales__ul__li">{{res.vendor}}</li>
             </ul>
     </div>
     </div>

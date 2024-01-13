@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError } from 'rxjs';
-import { Order, Sale,Cliente, Command } from '../models/modelos';
+import {  Sale,Cliente, Command } from '../models/modelos';
 import { api } from './api.service';
-
+import Swal from 'sweetalert2'
 @Injectable({
   providedIn: 'root'
 })
@@ -34,7 +34,7 @@ export class ApiInsertDeleteService {
     const cliente:Cliente = {
       cpf:client.cpf,
       name:client.name,
-      contact:client.contact
+      contact:client.contact,
     }
     return this.http.post<Cliente>(`${this.baseClientUrl}`,client).pipe(
       catchError( error => {
@@ -54,9 +54,15 @@ export class ApiInsertDeleteService {
     entry: newClientCommand.entry,
     id: newClientCommand.idCommand,
    }
-   console.log(command)
+
   return this.http.post<Command | any>(`${this.baseCommandUrl}`,command).pipe(
     catchError( error => {
+      console.log(error.error)
+      Swal.fire({
+        title: 'Erro!',
+        text: error.error,
+        icon: 'error',
+      });
       console.error("deu error: ", error );
       throw error;
     })

@@ -3,25 +3,25 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MenuHeaderComponent } from './components/subComponents/header/menu-header.component';
-import { SubHeaderMenu } from './components/subComponents/sub-header/sub-header.component';
-import { MenuProductComponent } from './components/subComponents/menu-product/menu-product.component';
-import { CategoryListComponent } from './components/subComponents/category-list/category-list.component';
-import { HeaderMenuLeftComponent } from './components/subComponents/header-menu-left/header-menu-left';
-import { HeaderMenuRinghtComponent } from './components/subComponents/header-menu-right/header-menu-right';
-import { ProductsBoxRightComponent } from './components/subComponents/menu-product/products-box-right/products-box-right.component';
-import { SearchCommandComponent } from './components/subComponents/search-command/search-command.component';
-import { SearchNameComponent } from './components/subComponents/search-product/search-product.component';
-import { BoxOrderComponent } from './components/subComponents/box-order/box-order.component';
+import { MenuHeaderComponent } from './components/header/menu-header.component';
+import { SubHeaderMenu } from './components/Sales-command/main/sub-components/sub-header/sub-header.component';
+import { MenuProductComponent } from './components/Sales-command/main/sub-components/menu-product/menu-product.component';
+import { CategoryListComponent } from './components/Sales-command/main/sub-components/sub-header/sub-components/category-list/category-list.component';
+import { HeaderMenuLeftComponent } from './components/header/sub-components/header-menu-left/header-menu-left';
+import { HeaderMenuRinghtComponent } from './components/header/sub-components/header-menu-right/header-menu-right';
+import { ProductsBoxRightComponent } from './components/Sales-command/main/sub-components/menu-product/products-box-right/products-box-right.component';
+import { SearchCommandComponent } from './components/Sales-command/main/sub-components/sub-header/sub-components/search-command/search-command.component';
+import { SearchNameComponent } from './components/header/sub-components/search-product/search-product.component';
 import { MainComponent } from './components/Sales-command/main/main.component';
-import { OrderComponent } from './components/subComponents/box-order/order/order.component'
+import { OrderComponent } from './components/Sales-command/main/sub-components/box-order/order/order.component'
 import { FormsModule } from '@angular/forms';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './components/register/register.component';
 import { SearchComponent } from './components/search/search.component';
 import { SummedUpComponent } from './components/search/sub-components/summed-up/summed-up.component';
 import { DetailedComponent } from './components/search/sub-components/detailed/detailed.component';
-
+import { BoxOrderComponent } from './components/Sales-command/main/sub-components/box-order/box-order.component';
 
 @NgModule({
   declarations: [
@@ -35,20 +35,21 @@ import { DetailedComponent } from './components/search/sub-components/detailed/d
     ProductsBoxRightComponent,
     SearchCommandComponent,
     SearchNameComponent,
-    BoxOrderComponent,
     MainComponent,
     OrderComponent,
     RegisterComponent,
     SearchComponent,
     SummedUpComponent,
-    DetailedComponent
-  ],
+    DetailedComponent,
+    BoxOrderComponent,
+  ],  
+  
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    
+    SweetAlert2Module,
   ],
   providers: [],
   bootstrap: [AppComponent]

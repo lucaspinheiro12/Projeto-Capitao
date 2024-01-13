@@ -1,17 +1,22 @@
 <div class="container">
     <div class="container-checkbox">
         <label class="container-checkbox__label" (change)="updateCheckboxes(1)" >
-            <input class="container-checkbox__input" [(ngModel)]="checkbox1"  type="checkbox">
+            <input class="container-checkbox__input" [(ngModel)]="checkboxCPF"  type="checkbox">
             CPF
         </label>
         <label class="container-checkbox__label"  (change)="updateCheckboxes(2)"  >
-            <input class="container-checkbox__input" [(ngModel)]="checkbox2"  type="checkbox">
+            <input class="container-checkbox__input" [(ngModel)]="checkboxName"  type="checkbox">
             Nome
         </label>
         <label class="container-checkbox__label"   (change)="updateCheckboxes(3)">
-            <input class="container-checkbox__input" [(ngModel)]="checkbox3"  type="checkbox"> 
+            <input class="container-checkbox__input" [(ngModel)]="checkboxIdCommand"  type="checkbox"> 
             Numero Comanda
         </label>
+    </div>
+    <div class="container-button-buscar">
+        <button class="container-button-buscar__buscar" (click)="buscarDados()">
+            Buscar
+        </button>
     </div>
     <div class="container-return-type">
         <ul class="container-return-type__ul">
@@ -27,13 +32,13 @@
             </li>
         </ul>
     </div>
-    <div class="container-client">
-        <p class="container-client__attributes">Numero da comanda: {{testC.id}}</p>
-        <p class="container-client__attributes">Nome: {{testC.client.name}}</p>
-        <p class="container-client__attributes">CPF: {{testC.client.cpf}}</p>
-        <p class="container-client__attributes">Contato: {{testC.client.contact}}</p>
-        <p class="container-client__attributes">Entrada: {{testC.entry}}</p>
-        <p class="container-client__attributes">Valor total: {{testC.fullValue}}</p>
+    <div class="container-client" *ngIf="resultDetalhado || resultadoResumido">
+        <p class="container-client__attributes">Numero da comanda: {{resultDetalhado[0].commands.id}}</p>
+        <p class="container-client__attributes">Nome:{{resultDetalhado[0].commands.client.name}} </p>
+        <p class="container-client__attributes">CPF: {{resultDetalhado[0].commands.client.cpf}}</p>
+        <p class="container-client__attributes">Contato:{{resultDetalhado[0].commands.client.contact}} </p>
+        <p class="container-client__attributes">Entrada: {{resultDetalhado[0].commands.entry}}</p>
+        <p class="container-client__attributes">Valor total: {{resultadoResumido.fullValue}}</p>
     </div>
     <div class="container-result">
         <div *ngIf="mostrarPedidoResumido">
@@ -43,7 +48,7 @@
                 <li class="container-sales-summedUp__ul__li">quantidade:</li>
                 <li class="container-sales-summedUp__ul__li">valor total</li>
             </ul>
-            <app-summed-up [testeValor]="test"></app-summed-up>
+            <app-summed-up [resultValue]="resultadoResumido"></app-summed-up>
         </div>
         <div *ngIf="mostrarPedidoDetalhado">
             <ul class="container-sales-detailed__ul">
@@ -53,11 +58,7 @@
                 <li class="container-sales-detailed__ul__li">valor total</li>
                 <li class="container-sales-detailed__ul__li">vendedor</li>
             </ul>
-        <app-detailed [testValorFUll]="testFull"></app-detailed>
+        <app-detailed [resultDetalhado]="resultDetalhado"></app-detailed>
         </div>
     </div>
 </div>
-
-<p>assim que escolher o inpt vai fazer a busca pelo valor atribuido(FALTA FAZER A FUNÇAO DO INPUT)</p>
-<p>CAMPO COM DADOS CRIADOS AGORA VER COMO VAI PEGAR ELE DINAMICAMENTE, POIS VAI VIR UM SALEDTO E UM SALE </p>
-<p>lembrando que eu ja consigo pegar a rota pelo o input cabe a mim fazer um observable diferente para cada um deles .</p>
