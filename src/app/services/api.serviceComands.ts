@@ -26,6 +26,7 @@ export class ApiService {
    private termoBuscaSubjectType = new BehaviorSubject<string>('');
    termoBuscaType$ = this.termoBuscaSubject.asObservable();
 
+  //atualiza o input e buscas da comanda
    private commandSelecionadoSubject = new BehaviorSubject<Command| any>([]);
    commandSelecionado$ = this.commandSelecionadoSubject.asObservable();
 
@@ -79,6 +80,45 @@ export class ApiService {
     );
   }
 
+  //pega o cliente sem vendas id.
+  getClientSemVendasId(result:any):Observable<any>{
+    return this.http.get<Command | any>(`${this.baseUrlCommand}/${result}`).pipe(
+      tap(data => {
+        this.clientData = data;
+      }),
+      catchError(error =>{
+        console.log('error ao obter o cliente', error)
+        throw error
+      })
+    )
+  }
+
+  //pega o cliente sem vendas nome.
+  getClientSemVendasName(result:any):Observable<any>{
+    return this.http.get<Command | any>(`${this.baseUrlCommand}/name/${result}`).pipe(
+      tap(data => {
+        this.clientData = data;
+      }),
+      catchError(error =>{
+        console.log('error ao obter o cliente', error)
+        throw error
+      })
+    )
+  }
+
+  //pega o cliente sem vendas cpf.
+  getClientSemVendasCPF(result:any):Observable<any>{
+    return this.http.get<Command | any>(`${this.baseUrlCommand}/cpf/${result}`).pipe(
+      tap(data => {
+        this.clientData = data;
+      }),
+      catchError(error =>{
+        console.log('error ao obter o cliente', error)
+        throw error
+      })
+    )
+
+  }
   //pega as vendas detalhadas do cliente pelo numero da comanda
   getClientSalesDetalhadoId(id:number):Observable<any>{
     return this.http.get<Sale | any>(`${this.baseUrlSale}/client/id/${id}`).pipe(
