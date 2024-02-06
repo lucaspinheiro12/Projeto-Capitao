@@ -32,7 +32,6 @@ export class RegisterComponent {
       this.apiInsert.addClient(clientCommand).subscribe(result => {
         this.apiInsert.addCommand(clientCommand).subscribe(
           successResult => {
-            console.log(successResult);
             this.contact = '';
             this.name = '';
             this.CPF = '';
@@ -55,7 +54,6 @@ export class RegisterComponent {
     }
   }
   
-    
   private isValidCPF(cpf:string){
     if (typeof cpf !== "string") return false
     cpf = cpf.replace(/[\s.-]*/igm, '')

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.serviceComands';
-import { Sale, SaleSummedUp } from 'src/app/models/modelos';
+import { Cliente, Sale, SaleSummedUp } from 'src/app/models/modelos';
+import { Observable } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-search',
@@ -14,7 +16,7 @@ export class SearchComponent implements OnInit{
         this.valorInput = novoValor;
       });    
     }
-
+    
     checkboxCPF: boolean = true;
     checkboxName: boolean = false;
   checkboxIdCommand: boolean = false;
@@ -24,6 +26,7 @@ export class SearchComponent implements OnInit{
   valorInput:number |any;
   resultDetalhado: Sale | any;
   resultadoResumido:SaleSummedUp | any;
+  teste: Cliente| any;
 
     updateCheckboxes(checkboxNumber: number): void {
         // Desmarca todos os checkboxes
@@ -61,21 +64,23 @@ export class SearchComponent implements OnInit{
     buscarDados(): void {
       let detalhadoObservable;
       let resumidoObservable;
+      let ClientSemVenda: Observable<any>;
     
       // Escolha a lógica de busca com base nos checkboxes selecionados
       if (this.checkboxIdCommand) {
         detalhadoObservable = this.apiService.getClientSalesDetalhadoId(this.valorInput);
         resumidoObservable = this.apiService.getClientSalesResumidoId(this.valorInput);
+        ClientSemVenda = this.apiService.getClientSemVendasId(this.valorInput)
       } else if (this.checkboxCPF) {
         detalhadoObservable = this.apiService.getClientSalesDetalhadoCpf(this.valorInput);
         resumidoObservable = this.apiService.getClientSalesResumidoCPF(this.valorInput);
-        console.log(typeof this.valorInput)
+        ClientSemVenda = this.apiService.getClientSemVendasCPF(this.valorInput)
       } else if (this.checkboxName) {
         detalhadoObservable = this.apiService.getClientSalesDetalhadoName(this.valorInput);
         resumidoObservable = this.apiService.getClientSalesResumidoName(this.valorInput);
-        console.log(typeof this.valorInput)
+        ClientSemVenda = this.apiService.getClientSemVendasName(this.valorInput)
       }      
-    
+
       // Realizar as chamadas apenas se o observable detalhado estiver definido
       if (detalhadoObservable) {
         detalhadoObservable.subscribe(
@@ -84,7 +89,22 @@ export class SearchComponent implements OnInit{
               if(result ==  ''){
                 console.log("vazio porra")
                 //aqui tenho que colocar uma logica que vai pegar os dados dos clientes que não tem vendas
+                ClientSemVenda.subscribe(
+                  {
+                    next: (res) => {
+                      console.log(res.client)
+                      Swal.fire({
+                        title: 'O cliente: ' + res.client.name,
+                        text: 'Ainda não tem nenhum pedido',
+                        icon: 'warning',
+                      });
+                    }
+                  }
+                )
                 //acho melhor criar um metodo parecido com este que pega o valor e faz um get no client ou commanda pegando o valor.
+
+
+
               }
               this.resultDetalhado = result;
               console.log(result)
@@ -94,7 +114,6 @@ export class SearchComponent implements OnInit{
             }
           }
         );
-        
       }
       if(resumidoObservable){
         resumidoObservable.subscribe(
@@ -108,7 +127,6 @@ export class SearchComponent implements OnInit{
           }
         );
       }
-      console.log(this.resultDetalhado)
     }
       
 }

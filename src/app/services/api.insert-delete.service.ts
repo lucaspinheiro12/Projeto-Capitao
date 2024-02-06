@@ -57,7 +57,6 @@ export class ApiInsertDeleteService {
 
   return this.http.post<Command | any>(`${this.baseCommandUrl}`,command).pipe(
     catchError( error => {
-      console.log(error.error)
       Swal.fire({
         title: 'Erro!',
         text: error.error,

@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.serviceComands';
 import { Command, Order, Product, Sale } from 'src/app/models/modelos';
 import { ApiInsertDeleteService } from 'src/app/services/api.insert-delete.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-box-order',
   templateUrl: './box-order.component.html',
@@ -46,21 +47,28 @@ export class BoxOrderComponent implements OnInit{
   }
 
   finalizarPedido(): void {
-    const orderTaxa = {}
-    if (this.command) {
+    if (this.command != '') {
        this.sale = {
           id: 0,
           order: this.orders,
           vendor: 'Angular',
           commands: this.command
        }
-       this.apiInsertDelete.addSale(this.sale).subscribe(res => console.log("respsta", res));
+       this.apiInsertDelete.addSale(this.sale).subscribe();
+       Swal.fire({
+        title: 'Sucesso!',
+        text: 'venda realizada para o cliente: ' + this.command.client.name,
+        icon: 'success',
+      });
        // Limpar os produtos selecionados ou tomar outra ação necessária
        this.apiService.atualizarProdutos([]);
        this.apiService.atualizaInputCommand ('');
-       console.log(this.command)
     } else {
-       console.log('Cliente não encontrado');
+      Swal.fire({
+        title: 'error!',
+        text: 'comanda não encontrada' ,
+        icon: 'error',
+      });
     }
  }
 }
