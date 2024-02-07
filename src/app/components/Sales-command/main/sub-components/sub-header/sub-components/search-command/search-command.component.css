@@ -21,3 +21,11 @@ width: 100%;
     width: 35px;
     height: 20px;
 }
+
+@media (max-width:755px){
+    .container-result{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

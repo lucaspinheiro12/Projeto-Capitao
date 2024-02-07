@@ -23,3 +23,20 @@
     background-color: #0da2ff;
     margin: 0 10px 0 10px;
 }
+@media (max-width: 755px){
+    .container{
+        padding-top: 10px;
+    }
+    .container-list__catecory{
+        padding: 0 ;
+        font-size: 13px;
+        min-width: 75px;
+        max-width: 75px;
+    }
+    .container-list__newCatecory{
+        font-size: 13px;
+        padding: 5px 7px 5px 7px;
+        min-width: 85px;
+        width: 85px;
+    }
+}

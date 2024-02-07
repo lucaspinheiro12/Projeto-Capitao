@@ -8,7 +8,6 @@ import { SubHeaderMenu } from './components/Sales-command/main/sub-components/su
 import { MenuProductComponent } from './components/Sales-command/main/sub-components/menu-product/menu-product.component';
 import { CategoryListComponent } from './components/Sales-command/main/sub-components/sub-header/sub-components/category-list/category-list.component';
 import { HeaderMenuLeftComponent } from './components/header/sub-components/header-menu-left/header-menu-left';
-import { HeaderMenuRinghtComponent } from './components/header/sub-components/header-menu-right/header-menu-right';
 import { ProductsBoxRightComponent } from './components/Sales-command/main/sub-components/menu-product/products-box-right/products-box-right.component';
 import { SearchCommandComponent } from './components/Sales-command/main/sub-components/sub-header/sub-components/search-command/search-command.component';
 import { SearchNameComponent } from './components/header/sub-components/search-product/search-product.component';
@@ -31,7 +30,6 @@ import { BoxOrderComponent } from './components/Sales-command/main/sub-component
     MenuProductComponent,
     CategoryListComponent,
     HeaderMenuLeftComponent,
-    HeaderMenuRinghtComponent,
     ProductsBoxRightComponent,
     SearchCommandComponent,
     SearchNameComponent,

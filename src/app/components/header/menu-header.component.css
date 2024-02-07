@@ -1,18 +1,15 @@
 .container{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
     justify-content: space-between;
     margin-bottom: 10px;
 }
-.container-left{
+.container-top{
     display: flex;
     flex-direction: column;
-    width: 65%;
-}
-.container-left app-search-product{
     width: 100%;
 }
-.container-right{
-    width: 30%;
+.container-bottom{
+    width: 100%;
 }

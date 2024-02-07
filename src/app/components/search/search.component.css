@@ -19,14 +19,14 @@
 }
 .container-button-buscar__buscar{
     font-size: 20px;
-        color: aliceblue;
-        text-align: center;
-        padding: 10px 14px 10px 14px;
-        border-radius: 10px;
-        width: auto;
-        background-color: #0da2ff;
-        margin: 0 10px 0 10px;
-        cursor: pointer;
+    color: aliceblue;
+    text-align: center;
+    padding: 10px 14px 10px 14px;
+    border-radius: 10px;
+    width: auto;
+    background-color: #0da2ff;
+    margin: 0 10px 0 10px;
+    cursor: pointer;
 }
 .container-return-type{
     align-self: center;
@@ -56,7 +56,17 @@
     margin: 0 10px 0 10px;
     cursor: pointer;
 }
-.container-client{
+.container-client-static{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #b4bccc;
+    height: 50px;
+    align-items: center;
+    border: solid;
+    border-bottom: none;
+}
+.container-client-date{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -120,4 +130,27 @@
     text-align: center;
     width: 24%;
     font-weight: 600;
+}
+@media (max-width:800px) {
+    .container-client__attributes{
+        font-size: 13px;
+    }
+    .container-sales-summedUp__ul__li{
+        font-size: 13px;
+    }
+    .container-sales-detailed__ul__li{
+        font-size: 13px;
+    }
+}
+@media (max-width:600px) {
+    .container-client{
+        width: auto;
+        overflow-x: auto;
+    }
+    .container-client-static{
+        width: 600px;
+    }
+    .container-client-date{
+        width: 600px;
+    }
 }
