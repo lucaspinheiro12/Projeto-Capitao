@@ -8,3 +8,19 @@
     width: max-content;
     height: 100%;
 }
+.container-commands{
+    display: flex;
+
+    justify-content: center;
+}
+
+@media (max-width:950px){
+    .container{
+        flex-direction: column;
+        height: 140px;
+    }
+    .container-category-list{
+        width: 100%;
+        overflow-x:auto ;
+    }
+}

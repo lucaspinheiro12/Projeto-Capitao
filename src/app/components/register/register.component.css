@@ -42,6 +42,19 @@
     cursor: pointer;
 }
 
+@media(max-width:850px){
+    .container-register-client{
+        width: 100%;
+    }
+    .container-register-client__input{
+        width: 95%;
+    }
+    .container-register-button__button{
+        width: 95%;
+    }
+}
+
+
 
 
 

@@ -30,3 +30,10 @@
     color: wheat;
     cursor: pointer;
 }
+
+@media (max-width: 700px){
+    .container-price__final{
+        width: 100%;
+        font-size: 17px;
+    }
+}
