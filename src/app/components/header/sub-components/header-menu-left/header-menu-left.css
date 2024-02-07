@@ -1,9 +1,10 @@
 .container{
     height: 60px;
     width: 100%;
-
+    display: flex;
 }
 .container-left-menu{
+    width: 80%;
     height: 90%;
     padding: 10px;
 }
@@ -29,4 +30,37 @@
     width: auto;
     background-color: #0da2ff;
     margin: 0 10px 0 10px;
+}
+
+.container-right-logo{
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    width: 35%;
+    align-items: center;
+    justify-content: space-around;
+}
+.container-right-logo__img{
+    padding: 5px;
+    width: 40px;
+    height: 30px;
+}
+.container-right-logo p{
+    font-size: 20px;
+}
+
+@media (max-width:650px){
+    .container-left-menu{
+        width: 100%;
+    }
+    .container-ul__ul__li{
+        font-size: 18px;
+    }
+    .activated{
+        margin: 0 ;
+        padding: 5px 7px 5px 7px;
+    }
+    .container-right-logo{
+        display: none;
+    }
 }

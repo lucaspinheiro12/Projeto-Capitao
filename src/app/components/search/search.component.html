@@ -32,31 +32,43 @@
             </li>
         </ul>
     </div>
+
     <div class="container-client" *ngIf="resultDetalhado || resultadoResumido">
-        <p class="container-client__attributes">Numero da comanda: {{resultDetalhado[0].commands.id}}</p>
-        <p class="container-client__attributes">Nome:{{resultDetalhado[0].commands.client.name}} </p>
-        <p class="container-client__attributes">CPF: {{resultDetalhado[0].commands.client.cpf}}</p>
-        <p class="container-client__attributes">Contato:{{resultDetalhado[0].commands.client.contact}} </p>
-        <p class="container-client__attributes">Entrada: {{resultDetalhado[0].commands.entry}}</p>
-        <p class="container-client__attributes">Valor total: {{resultadoResumido.fullValue}}</p>
+        <ul class="container-client-static">
+            <li class="container-client__attributes"> Numero da comanda:</li>
+            <li class="container-client__attributes"> Nome:</li>
+            <li class="container-client__attributes"> CPF:</li>
+            <li class="container-client__attributes"> Contato:</li>
+            <li class="container-client__attributes"> Entrada:</li>
+            <li class="container-client__attributes"> Valor total:</li>
+        </ul>
+        <ul class="container-client-date">
+            <li class="container-client__attributes">{{resultDetalhado[0].commands.id}}</li>
+            <li class="container-client__attributes">{{resultDetalhado[0].commands.client.name}}</li>
+            <li class="container-client__attributes">{{resultDetalhado[0].commands.client.cpf}}</li>
+            <li class="container-client__attributes">{{resultDetalhado[0].commands.client.contact}}</li>
+            <li class="container-client__attributes">{{resultDetalhado[0].commands.entry}}</li>
+            <li class="container-client__attributes">{{resultadoResumido.fullValue}}</li>
+        </ul>
     </div>
+    
     <div class="container-result">
         <div *ngIf="mostrarPedidoResumido">
             <ul class="container-sales-summedUp__ul">
-                <li class="container-sales-summedUp__ul__li">nome:</li>
-                <li class="container-sales-summedUp__ul__li"> preço unidade:</li>
-                <li class="container-sales-summedUp__ul__li">quantidade:</li>
-                <li class="container-sales-summedUp__ul__li">valor total</li>
+                <li class="container-sales-summedUp__ul__li">Nome:</li>
+                <li class="container-sales-summedUp__ul__li"> Preço Unidade:</li>
+                <li class="container-sales-summedUp__ul__li">Quantidade:</li>
+                <li class="container-sales-summedUp__ul__li">Valor Total:</li>
             </ul>
             <app-summed-up [resultValue]="resultadoResumido"></app-summed-up>
         </div>
         <div *ngIf="mostrarPedidoDetalhado">
             <ul class="container-sales-detailed__ul">
-                <li class="container-sales-detailed__ul__li">nome:</li>
-                <li class="container-sales-detailed__ul__li"> preço unidade:</li>
-                <li class="container-sales-detailed__ul__li">quantidade:</li>
-                <li class="container-sales-detailed__ul__li">valor total</li>
-                <li class="container-sales-detailed__ul__li">vendedor</li>
+                <li class="container-sales-detailed__ul__li">Nome:</li>
+                <li class="container-sales-detailed__ul__li"> Preço Unidade:</li>
+                <li class="container-sales-detailed__ul__li">Quantidade:</li>
+                <li class="container-sales-detailed__ul__li">Valor Total:</li>
+                <li class="container-sales-detailed__ul__li">Vendedor:</li>
             </ul>
         <app-detailed [resultDetalhado]="resultDetalhado"></app-detailed>
         </div>

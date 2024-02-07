@@ -1,12 +1,23 @@
-
 .container__main{
     display: flex;
     flex-direction: row;
-    width: 100%;
+    padding-left: 20px;
 }
 .container-menu-product{
     width: 75%;
 }
 .container-box-order{
     width: 25%;
+}
+
+@media  (max-width: 600px) {
+    .container__main{
+        padding: 0;
+    }
+    .container-menu-product{
+        width: 60%;
+    }
+    .container-box-order{
+        width: 40%;
+    }
 }
