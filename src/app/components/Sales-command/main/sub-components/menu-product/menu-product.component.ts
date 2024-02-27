@@ -16,25 +16,41 @@ export class MenuProductComponent implements OnInit {
   valorInput: string = '';
    listProduto!:  Product[];
    newArrayProd:  Product[]|any;
-  ngOnInit() {
+   ngOnInit() {
     this.apiService.getProdutos().subscribe(
-      {
-        next:  (result) => { 
-          this.listProduto = result;
-        },
-        error: (err) => {
-          console.log(err)
-        }
+      (result) => {
+        this.listProduto = result;
+      },
+      (error) => {
+        console.error(error);
       }
-    )
-    this.apiService.termoBusca$.subscribe(novoValor => {
+    );
+  
+    this.apiService.termoBusca$.subscribe((novoValor) => {
       this.valorInput = novoValor;
-      this.getProdutosFiltrados();
+      // Chama a lógica de filtragem diretamente, se necessário
+      const produtosFiltrados = this.getProdutosFiltrados();
+      // Faça algo com os produtos filtrados, se necessário
     });
-
   }
- 
-  getProdutosFiltrados(): any[] {
+  
+  getProdutosFiltrados(): Product[] {
+    if (!this.listProduto) {
+      return [];
+    }  
+    const tipoCategoriaSelecionada = this.apiService.getCategoriaSelecionadaTipo();
+  
+    if (tipoCategoriaSelecionada !== null && this.valorInput.trim() === '') {
+      return this.listProduto.filter((produto: Product) => produto.categoria === tipoCategoriaSelecionada);
+    } else if (this.valorInput.trim() !== '') {
+      return this.apiService.getProdutoNome(this.valorInput);
+    } else {
+      return this.listProduto;
+    }
+  }
+  
+
+  /*getProdutosFiltrados(): any[] {
     // Obter o tipo da categoria selecionada
     const tipoCategoriaSelecionada = this.apiService.getCategoriaSelecionadaTipo();
         // Filtrar os produtos com base no tipo da categoria selecionada
@@ -50,5 +66,5 @@ export class MenuProductComponent implements OnInit {
     }else {
       return this.listProduto;
     }
-  }
+  }*/
 }
