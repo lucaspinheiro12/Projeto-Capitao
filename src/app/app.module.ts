@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuHeaderComponent } from './components/header/menu-header.component';
-import { SubHeaderMenu } from './components/Sales-command/main/sub-components/sub-header/sub-header.component';
 import { MenuProductComponent } from './components/Sales-command/main/sub-components/menu-product/menu-product.component';
 import { CategoryListComponent } from './components/Sales-command/main/sub-components/category-list/category-list.component';
 import { HeaderMenuLeftComponent } from './components/header/sub-components/header-menu-left/header-menu-left';
@@ -26,7 +25,6 @@ import { CarrinhoComponent } from './components/Sales-command/main/sub-component
   declarations: [
     AppComponent,
     MenuHeaderComponent,
-    SubHeaderMenu,
     MenuProductComponent,
     CategoryListComponent,
     HeaderMenuLeftComponent,
