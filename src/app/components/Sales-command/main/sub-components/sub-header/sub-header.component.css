@@ -10,9 +10,21 @@
 }
 .container-commands{
     display: flex;
-
     justify-content: center;
 }
+.menu_lateral_telas_menores{
+    display: none;
+}
+
+.container-left-carrinho-img {
+    display: none;
+  }
+
+  
+  .menu-aberto .carrinho {
+    transform: translateX(0);
+  }
+
 
 @media (max-width:950px){
     .container{
@@ -23,4 +35,17 @@
         width: 100%;
         overflow-x:auto ;
     }
+}
+@media(max-width:750px){
+    .container-category-list{
+        height: 60%;
+    }
+    .container-commands{
+        display: nome;
+    }
+    app-search-command{
+        display: none;
+    }
+
+
 }

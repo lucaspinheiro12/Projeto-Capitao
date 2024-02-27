@@ -16,6 +16,7 @@ export class SearchNameComponent implements OnInit {
   private currentRoute = '';
   valorInput: string = '';
 
+
   ngOnInit() {
         this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
        this.currentRoute = this.router.url;
@@ -25,12 +26,12 @@ export class SearchNameComponent implements OnInit {
  
   onValorInputChange() {
     if(this.currentRoute === ('/')){
-      console.log("no cadastro")
     }else if( this.currentRoute.includes('/sales')){
       this.apiService.atualizarValorInputVendas(this.valorInput);
     }else if (this.currentRoute.includes('/search')){
       this.apiService.atualizarValorInputBuscar(this.valorInput);
     }
   }
-
+    
 }
+
