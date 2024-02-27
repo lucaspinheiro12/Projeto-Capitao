@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent {
-
+  menuAberto = false;
+  toggleMenu() {
+    this.menuAberto = !this.menuAberto;
+    console.log( this.menuAberto)
+  }
+  
+  fecharMenu() {
+    this.menuAberto = false;
+    console.log( this.menuAberto)
+  }
 }
