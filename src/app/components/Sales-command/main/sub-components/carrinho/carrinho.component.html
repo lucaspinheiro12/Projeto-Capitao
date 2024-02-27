@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="container-search">
+        <input    [(ngModel)]="valorInput" type="text" class="container-search__input" placeholder="Numero da comanda">
+        <div class="container-search-img">
+            <img class="container-search-img__img" src="./../../../../../../assets/img/lupa.svg" alt="Search"  (click)="pegaCommand(valorInput)">
+        </div>
+    </div>
+     <div class="container-result">
+        <ng-container *ngIf="commandEncontrado; else semResultado">
+          <p class="container-result__nameCommand">✧ {{ commandEncontrado.client.name }}</p>
+          <p class="container-result__codCommand">✧ {{ commandEncontrado.id }}</p>
+        </ng-container>
+        <ng-template #semResultado>
+          <p class="container-result__nameCommand">✧ Nome: </p>
+          <p class="container-result__nameCommand">✧ Numero da Comanda:</p>
+        </ng-template>
+      </div>
+  
+
+      <div  class="container-orders" *ngFor="let produtos of orders">
+        <app-order [produto]="produtos" (valueZero)="removeOrder(produtos)"   ></app-order>  
+    </div>
+    <div class="container-price">
+        <div class="container-price__taxa">
+            <p>taxa:</p>
+            <p>$ {{calcularTaxa()}}</p>
+        </div>
+        <button class="container-price__final" (click)="finalizarPedido()">TOTAL $ {{calcularTotal()}} </button>
+    </div>  
+</div>
+
