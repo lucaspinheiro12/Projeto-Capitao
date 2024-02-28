@@ -16,10 +16,10 @@
         </ng-template>
       </div>
   
-
-      <div  class="container-orders" *ngFor="let produtos of testeSemBanco">
+    <div class="container-orders">
+      <div  class="container-orders__orders" *ngFor="let produtos of testeSemBanco">
         <app-order [produto]="produtos" (valueZero)="removeOrder(produtos)"   ></app-order> 
-        
+      </div>
     </div>
     <div class="container-price">
         <div class="container-price__taxa">

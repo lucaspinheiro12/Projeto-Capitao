@@ -25,6 +25,11 @@ width: 100%;
 }
 
 .container-orders{
+    height: 80%;
+    overflow-y:auto ;
+}
+
+.container-orders__orders{
     height: auto;
 }
 .container-price{
