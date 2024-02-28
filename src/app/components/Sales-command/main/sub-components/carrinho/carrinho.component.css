@@ -25,9 +25,15 @@ width: 100%;
 }
 
 .container-orders{
+    height: 80%;
+    overflow-y:auto ;
+}
+
+.container-orders__orders{
     height: auto;
 }
 .container-price{
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     height: 20%;

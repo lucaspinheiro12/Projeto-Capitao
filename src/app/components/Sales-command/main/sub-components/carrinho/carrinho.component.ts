@@ -12,6 +12,44 @@ import Swal from 'sweetalert2';
 export class CarrinhoComponent implements OnInit{
   constructor(private apiService: ApiService , private apiInsertDelete: ApiInsertDeleteService) {}
 
+  testeSemBanco: Order[] =[
+    {
+      id: 1,
+      product: {id:1,
+        name: 'string',
+        price:21,
+        categoria:'sd'},
+      quantity: 2,
+      price: 42
+    },
+    {
+      id: 2,
+      product: {id:2,
+        name: 'string2',
+        price:211,
+        categoria:'sd2'},
+      quantity: 22,
+      price: 422
+    },
+    {
+      id: 3,
+      product: {id:3,
+        name: 'string3',
+        price:311,
+        categoria:'sd3'},
+      quantity: 33,
+      price: 332
+    }, {
+      id: 4,
+      product: {id:4,
+        name: 'string4',
+        price:411,
+        categoria:'sd4'},
+      quantity: 44,
+      price: 444
+    },
+
+  ]
   //parte dos peditos . tenho que refatorar.
   orders : Order[] =[];
   command:Command |any;

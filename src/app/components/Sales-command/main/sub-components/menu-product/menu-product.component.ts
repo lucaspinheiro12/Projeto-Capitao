@@ -28,7 +28,7 @@ export class MenuProductComponent implements OnInit {
   
     this.apiService.termoBusca$.subscribe((novoValor) => {
       this.valorInput = novoValor;
-      // Chama a lógica de filtragem diretamente, se necessário
+      // Chama a lógica de filtragem diretamente, se necessário2
       const produtosFiltrados = this.getProdutosFiltrados();
       // Faça algo com os produtos filtrados, se necessário
     });
