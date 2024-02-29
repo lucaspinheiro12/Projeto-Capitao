@@ -6,7 +6,6 @@
 .container-checkbox{
     justify-content: center;
     display: flex;
-    margin-right: 70px;
 }
 .container-checkbox__label{
     padding: 10px;
