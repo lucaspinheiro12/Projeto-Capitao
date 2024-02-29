@@ -2,6 +2,7 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    padding: 5px;
 }
 .container app-products-box-right{
     display: flex;
