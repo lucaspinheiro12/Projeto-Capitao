@@ -8,6 +8,7 @@
     height:80px;
 }
 .container-left-carrinho-img {
+    padding: 1% 2% 1% 1%;
     align-self: end;
     display: flex;
     position: relative;
@@ -32,11 +33,9 @@
 .container__main{
     display: flex;
     flex-direction: row;
-    padding-left: 20px;
+   
 }
-.container-menu-product{
-    width: 100%;
-}
+
 .container-box-order{
     width: 25%;
 }
@@ -48,13 +47,6 @@
     }
 }
 
-@media ( max-width:750px){
-    .container-menu-product{
-        width: 100%;
-    }
-
-
-}
 
 /*@media  (max-width: 600px) {
     .container__main{
