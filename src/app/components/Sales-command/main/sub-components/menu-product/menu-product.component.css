@@ -7,8 +7,21 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin: 5px 5px 5px 0;
+    margin: 10px 10px 10px 0;
    
+}
+
+@media( max-width:550px){
+    .container{
+        justify-content: space-between;
+    }
+    .container app-products-box-right{
+        width: 45%;
+        margin: 5px;
+        padding: 5px;
+        margin: 5px 5px 5px 0;
+    }
+    
 }
 
 

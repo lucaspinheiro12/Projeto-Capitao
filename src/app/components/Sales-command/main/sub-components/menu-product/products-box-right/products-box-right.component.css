@@ -1,18 +1,33 @@
 .container{
-    width: 100px;
+    width: 100%;
     height: auto;
     cursor: pointer;
     }
 
 .container-img {
-    height: 65px;
+    height: 80px;
+    width: 110px;
 }
 .container-img img{
-    max-width: 100px;
-    max-height: 65px;
+    width: 110px;
+    height: 65px;
 }
 .container-text{
-    max-width: 100px;
-    font-size: 13px;
+    width: 110px;
+    font-size: 16px;
+    font-weight: 500;
     text-align: center;
+}
+@media(max-width:550px){
+    .container-img {
+        width: 100%;
+        height: auto;
+    }
+    .container-img img{
+        width: 95%;
+        height: 95%;
+    }
+    .container-text{
+        width: 95%;
+    }
 }
