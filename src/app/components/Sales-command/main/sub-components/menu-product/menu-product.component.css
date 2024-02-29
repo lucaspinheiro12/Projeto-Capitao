@@ -2,11 +2,14 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    padding: 5px;
 }
 .container app-products-box-right{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    margin: 5px 5px 5px 0;
    
 }
+
+
+
