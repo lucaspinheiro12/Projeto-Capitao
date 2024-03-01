@@ -1,8 +1,10 @@
 <div class="container">
     <div class="container-left-carrinho-img"  [ngClass]="{'menu-aberto': menuAberto}">
-        <img src="assets/img/carrinho-de-compras.png" alt="carrinho" class="container-left-carrinho__img" (click)="toggleMenu()">
+        <img src="assets/img/carrinho-de-compras.png" alt="carrinho" class="container-left-carrinho__img" (click)="toggleMenu()"/>
     <div class="carrinho" >
-        <P (click)="fecharMenu()">X</P>
+        <div class="carrinho-img"> 
+            <img class="carrinho-img__cloused" src="assets/img/excluir.png" (click)="fecharMenu()"/>
+        </div>
         <app-carrinho></app-carrinho>
     </div>   
 </div>
@@ -11,7 +13,7 @@
     </div>
     <div class="container__main">
         <div class="container-menu-product">
-            <menu-product-menu></menu-product-menu>
+            <app-products-box-right [produtosBox]="getProdutosFiltrados() "></app-products-box-right>  
         </div>
     </div>
 </div>
