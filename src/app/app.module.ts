@@ -4,10 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuHeaderComponent } from './components/header/menu-header.component';
-import { MenuProductComponent } from './components/Sales-command/main/sub-components/menu-product/menu-product.component';
 import { CategoryListComponent } from './components/Sales-command/main/sub-components/category-list/category-list.component';
 import { HeaderMenuLeftComponent } from './components/header/sub-components/header-menu-left/header-menu-left';
-import { ProductsBoxRightComponent } from './components/Sales-command/main/sub-components/menu-product/products-box-right/products-box-right.component';
+import { ProductsBoxRightComponent } from './components/Sales-command/main/sub-components/products-box-right/products-box-right.component';
 import { SearchNameComponent } from './components/header/sub-components/search-product/search-product.component';
 import { MainComponent } from './components/Sales-command/main/main.component';
 import { OrderComponent } from './components/Sales-command/main/sub-components/box-order/order/order.component'
@@ -25,7 +24,6 @@ import { CarrinhoComponent } from './components/Sales-command/main/sub-component
   declarations: [
     AppComponent,
     MenuHeaderComponent,
-    MenuProductComponent,
     CategoryListComponent,
     HeaderMenuLeftComponent,
     ProductsBoxRightComponent,
