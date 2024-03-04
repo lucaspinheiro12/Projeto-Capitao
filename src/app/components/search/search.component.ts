@@ -4,6 +4,7 @@ import { Cliente, Sale, SaleSummedUp } from 'src/app/models/modelos';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -68,66 +69,67 @@ export class SearchComponent implements OnInit{
     
       // Escolha a lógica de busca com base nos checkboxes selecionados
       if (this.checkboxIdCommand) {
-        detalhadoObservable = this.apiService.getClientSalesDetalhadoId(this.valorInput);
-        resumidoObservable = this.apiService.getClientSalesResumidoId(this.valorInput);
-        ClientSemVenda = this.apiService.getClientSemVendasId(this.valorInput)
+        detalhadoObservable = this.apiService.getClientSalesDetalhado('id', this.valorInput);
+        resumidoObservable = this.apiService.getClientSalesResumida('id', this.valorInput);
+        ClientSemVenda = this.apiService.getClientSemVendasId(this.valorInput);
       } else if (this.checkboxCPF) {
-        detalhadoObservable = this.apiService.getClientSalesDetalhadoCpf(this.valorInput);
-        resumidoObservable = this.apiService.getClientSalesResumidoCPF(this.valorInput);
-        ClientSemVenda = this.apiService.getClientSemVendasCPF(this.valorInput)
+        detalhadoObservable = this.apiService.getClientSalesDetalhado('cpf', this.valorInput);
+        resumidoObservable = this.apiService.getClientSalesResumida('cpf', this.valorInput);
+        ClientSemVenda = this.apiService.getClientSemVendasCPFName('cpf', this.valorInput);
       } else if (this.checkboxName) {
-        detalhadoObservable = this.apiService.getClientSalesDetalhadoName(this.valorInput);
-        resumidoObservable = this.apiService.getClientSalesResumidoName(this.valorInput);
-        ClientSemVenda = this.apiService.getClientSemVendasName(this.valorInput)
-      }      
-
+        detalhadoObservable = this.apiService.getClientSalesDetalhado('name', this.valorInput);
+        resumidoObservable = this.apiService.getClientSalesResumida('name', this.valorInput);
+        ClientSemVenda = this.apiService.getClientSemVendasCPFName('name', this.valorInput);
+      }
+    
       // Realizar as chamadas apenas se o observable detalhado estiver definido
       if (detalhadoObservable) {
-        detalhadoObservable.subscribe(
-          {
-            next: (result) => {
-              if(result ==  ''){
-                console.log("vazio porra")
-                //aqui tenho que colocar uma logica que vai pegar os dados dos clientes que não tem vendas
-                ClientSemVenda.subscribe(
-                  {
-                    next: (res) => {
-                      console.log(res.client)
-                      Swal.fire({
-                        title: 'O cliente: ' + res.client.name,
-                        text: 'Ainda não tem nenhum pedido',
-                        icon: 'warning',
-                      });
-                    }
-                  }
-                )
-                //acho melhor criar um metodo parecido com este que pega o valor e faz um get no client ou commanda pegando o valor.
-
-
-
-              }
-              this.resultDetalhado = result;
-              console.log(result)
-            },
-            error: (err) => {
-              console.log(err);
+        detalhadoObservable.subscribe({
+          next: (result) => {
+            //se o cliente não tem venda ele entra nesse if
+            if (result == '') {
+              //retorna os dados do cliente sem vendas.
+              ClientSemVenda.subscribe({
+                next: (res) => {
+                  console.log(res)
+                  this.resultDetalhado = [{
+                    commands: {
+                      id: res.id,
+                      client: {
+                        name: res.client.name,
+                        cpf: res.client.cpf,
+                        contact: res.client.contact,
+                      },
+                      entry: res.entry,
+                    },
+                  }];
+                  Swal.fire({
+                    title: 'O cliente: ' + res.client.name,
+                    text: 'Ainda não tem nenhum pedido',
+                    icon: 'warning',
+                  });
+                },
+              });
             }
-          }
-        );
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
       }
-      if(resumidoObservable){
-        resumidoObservable.subscribe(
-          {
-            next: (result) => {
-              this.resultadoResumido = result;
-            },
-            error: (err) => {
-              console.log(err);
-            }
-          }
-        );
-      }
+    //retorna os valores se o cliente tiver vendas 
+      if (resumidoObservable) {
+        resumidoObservable.subscribe({
+          next: (result) => {
+            this.resultadoResumido = result;
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      } 
     }
-      
+    
+     
 }
 
