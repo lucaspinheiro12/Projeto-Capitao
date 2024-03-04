@@ -36,14 +36,14 @@ export class CarrinhoComponent implements OnInit{
     
   }
    
-  removeOrder(produto: Order) {
-    const index = this.orders.findIndex(order => order.id === produto.id);
-    if (index !== -1) {
-      const updatedOrders = [...this.orders.slice(0, index), ...this.orders.slice(index + 1)];
-      this.orders = updatedOrders;
-      this.apiService.atualizarProdutos([...updatedOrders]);
-    }
+  //recebe o valor do <app-order> de qual produto está sendo clicado e faz um novo array sem o produto clicaco
+  removeOrderCarrinho(produto: Order) {
+    const updatedOrders = this.orders.filter(order => order.product.id !== produto.product.id);
+    console.log(updatedOrders)
+    this.orders = updatedOrders;
+    this.apiService.atualizarProdutos([...updatedOrders]);
   }
+
   calcularTotal(): number {
     const result = this.orders.reduce((total, order) => total + order.price * order.quantity, 0) + this.calcularTaxa();
     return +result.toFixed(2) ;

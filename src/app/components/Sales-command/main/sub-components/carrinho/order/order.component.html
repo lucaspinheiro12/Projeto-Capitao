@@ -8,4 +8,7 @@
         <input [(ngModel)]="produto.quantity" class="container-quantity__quantity" type="text" >
         <button (click)="increaseValue()" class="container-quantity__more">+</button>
     </div>
+    <div class="container-remover" (click)="removeOrder()" >
+        <p >X</p>
+    </div>
 </div>
