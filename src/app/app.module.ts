@@ -9,7 +9,7 @@ import { HeaderMenuLeftComponent } from './components/header/sub-components/head
 import { ProductsBoxRightComponent } from './components/Sales-command/main/sub-components/products-box-right/products-box-right.component';
 import { SearchNameComponent } from './components/header/sub-components/search-product/search-product.component';
 import { MainComponent } from './components/Sales-command/main/main.component';
-import { OrderComponent } from './components/Sales-command/main/sub-components/box-order/order/order.component'
+import { OrderComponent } from './components/Sales-command/main/sub-components/carrinho/order/order.component'
 import { FormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { HttpClientModule } from '@angular/common/http';
@@ -17,7 +17,6 @@ import { RegisterComponent } from './components/register/register.component';
 import { SearchComponent } from './components/search/search.component';
 import { SummedUpComponent } from './components/search/sub-components/summed-up/summed-up.component';
 import { DetailedComponent } from './components/search/sub-components/detailed/detailed.component';
-import { BoxOrderComponent } from './components/Sales-command/main/sub-components/box-order/box-order.component';
 import { CarrinhoComponent } from './components/Sales-command/main/sub-components/carrinho/carrinho.component';
 
 @NgModule({
@@ -34,7 +33,6 @@ import { CarrinhoComponent } from './components/Sales-command/main/sub-component
     SearchComponent,
     SummedUpComponent,
     DetailedComponent,
-    BoxOrderComponent,
     CarrinhoComponent,
   ],  
   
