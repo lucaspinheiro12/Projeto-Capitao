@@ -17,8 +17,8 @@
       </div>
   
     <div class="container-orders">
-      <div  class="container-orders__orders" *ngFor="let produtos of orders">
-        <app-order [produto]="produtos" (valueZero)="removeOrder(produtos)"   ></app-order> 
+      <div  class="container-orders__orders" *ngFor="let produto of orders">
+        <app-order [produto]="produto" (valueZero)="removeOrderCarrinho($event)"></app-order> 
       </div>
     </div>
     <div class="container-price">
