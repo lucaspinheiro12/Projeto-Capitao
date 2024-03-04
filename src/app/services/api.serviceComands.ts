@@ -6,8 +6,9 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-//Essa API faz os gets e alguns sets para visualizar os produtos e apresentalos na interface...
-//ela apenas faz a função de apresentar os produtos na tela, e buscar a command do client 
+/**
+ * Serviço para interação com a API, busca de dados e manipulação de estados.
+ */ 
 export class ApiService {
 
    //atualiza o input e buscas por string os produtos somente na aba vendas
@@ -61,6 +62,10 @@ export class ApiService {
     this.termoBuscaSubjectCategoia.next('Pratos');
   }
 
+  /**
+   * Obtém a lista de clientes.
+   * @returns Observable<Cliente[]>
+   */
   getClientes():Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.baseUrlClient).pipe(
       tap(data => {
@@ -80,7 +85,11 @@ export class ApiService {
     );
   }
 
-  //pega o cliente sem vendas id.
+  /**
+   * Obtém um cliente sem vendas pelo ID.
+   * @param result - ID do cliente
+   * @returns Observable<any>
+   */
   getClientSemVendasId(result:any):Observable<any>{
     return this.http.get<Command | any>(`${this.baseUrlCommand}/${result}`).pipe(
       tap(data => {
@@ -93,9 +102,15 @@ export class ApiService {
     )
   }
 
-  //pega o cliente sem vendas nome.
-  getClientSemVendasName(result:any):Observable<any>{
-    return this.http.get<Command | any>(`${this.baseUrlCommand}/name/${result}`).pipe(
+
+  /**
+   * Obtém um cliente sem vendas pelo cpf e pelo nome.
+   * @param result - cpf ou nome do cliente
+   * @param type - criterio da busca
+   * @returns Observable<any>
+   */
+  getClientSemVendasCPFName(type: string, result:any):Observable<any>{
+    return this.http.get<Command | any>(`${this.baseUrlCommand}/${type}/${result}`).pipe(
       tap(data => {
         this.clientData = data;
       }),
@@ -104,94 +119,51 @@ export class ApiService {
         throw error
       })
     )
-  }
-
-  //pega o cliente sem vendas cpf.
-  getClientSemVendasCPF(result:any):Observable<any>{
-    return this.http.get<Command | any>(`${this.baseUrlCommand}/cpf/${result}`).pipe(
-      tap(data => {
-        this.clientData = data;
-      }),
-      catchError(error =>{
-        console.log('error ao obter o cliente', error)
-        throw error
-      })
-    )
 
   }
-  //pega as vendas detalhadas do cliente pelo numero da comanda
-  getClientSalesDetalhadoId(id:number):Observable<any>{
-    return this.http.get<Sale | any>(`${this.baseUrlSale}/client/id/${id}`).pipe(
-      tap(data => {
-        this.clientBuscaDetalhado = data;
-      }),
-      catchError(error => {
-        console.log('Erro ao obter o cliente com as vendas', error)
-        throw error
-      })
-    )
-  }
- //pega as vendas detalhadas do cliente pelo NOME
-  getClientSalesDetalhadoName(name:string):Observable<any>{
-    return this.http.get<Sale | any>(`${this.baseUrlSale}/client/name/${name}`).pipe(
-      tap(data => {
-        this.clientBuscaDetalhado = data;
-      }),
-      catchError(error => {
-        console.log('Erro ao obter o cliente com as vendas', error)
-        throw error
-      })
-    )
-  }
- //pega as vendas detalhadas do cliente pelo numero da cpf
-  getClientSalesDetalhadoCpf(cpf:string):Observable<any>{
-    return this.http.get<Sale | any>(`${this.baseUrlSale}/client/cpf/${cpf}`).pipe(
-      tap(data => {
-        this.clientBuscaDetalhado = data;
-      }),
-      catchError(error => {
-        console.log('Erro ao obter o cliente com as vendas', error)
-        throw error
-      })
-    )
-  }
+  
+  /** 
+   * Obtém um cliente com vendas detalhadas pelo critério de busca (cpf,nome,idComanda)
+   * @param type - criterio da busca
+   * @param value - valor do cliente a ser buscado
+   * @returns Observable<any>
+   */
+getClientSalesDetalhado(type: string, value: string): Observable<any> {
+  const endpoint = `${this.baseUrlSale}/client/${type}/${value}`;
+  return this.http.get<Sale>(endpoint).pipe(
+    tap(data => {
+      this.clientBuscaResumido = data;
+    }),
+    catchError(error => {
+      console.log('Erro ao obter o cliente com as vendas', error);
+      throw error;
+    })
+  );
+}
 
-  //pega as vendas resumidas do cliente pelo numero da comanda
-  getClientSalesResumidoId(id:number):Observable<any>{
-    return this.http.get<Sale>(`${this.baseUrlSale}/client/summedUp/id/${id}`).pipe(
-      tap(data => {
-        this.clientBuscaResumido = data;
-      }),
-      catchError(error => {
-        console.log('Erro ao obter o cliente com as vendas', error)
-        throw error
-      })
-    )
-  }
-   //pega as vendas resumidas do cliente pelo nome cliente
-   getClientSalesResumidoName(name:string):Observable<any>{
-    return this.http.get<Sale>(`${this.baseUrlSale}/client/summedUp/name/${name}`).pipe(
-      tap(data => {
-        this.clientBuscaResumido = data;
-      }),
-      catchError(error => {
-        console.log('Erro ao obter o cliente com as vendas', error)
-        throw error
-      })
-    )
-  }
-   //pega as vendas resumidas do cliente pelo numero do cpf
-   getClientSalesResumidoCPF(cpf:string):Observable<any>{
-    return this.http.get<Sale>(`${this.baseUrlSale}/client/summedUp/cpf/${cpf}`).pipe(
-      tap(data => {
-        this.clientBuscaResumido = data;
-      }),
-      catchError(error => {
-        console.log('Erro ao obter o cliente com as vendas', error)
-        throw error
-      })
-    )
-  }
+
+/** 
+   * Obtém um cliente com vendas resumido pelo critério de busca (cpf,nome,idComanda)
+   * @param type - criterio da busca
+   * @param value - valor do cliente a ser buscado
+   * @returns Observable<any>
+   */
+getClientSalesResumida(type: string, value: string): Observable<any> {
+  const endpoint = `${this.baseUrlSale}/client/summedUp/${type}/${value}`;
+  return this.http.get<Sale>(endpoint).pipe(
+    tap(data => {
+      this.clientBuscaResumido = data;
+    }),
+    catchError(error => {
+      console.log('Erro ao obter o cliente com as vendas', error);
+      throw error;
+    })
+  );
+}
+
+
+
+ 
   getSales():Observable<Sale[]|any> {
     return this.http.get<Sale[]|any>(this.baseUrlSale).pipe(
       tap(data => {
