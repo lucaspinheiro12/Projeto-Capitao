@@ -43,6 +43,7 @@ export class ApiInsertDeleteService {
       })
     )
   }
+  
   addCommand(newClientCommand:Command | any){
    const cliente:Cliente = {
     cpf:newClientCommand.cpf,

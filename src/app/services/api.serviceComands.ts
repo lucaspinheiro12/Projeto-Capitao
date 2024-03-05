@@ -6,8 +6,9 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-//Essa API faz os gets e alguns sets para visualizar os produtos e apresentalos na interface...
-//ela apenas faz a função de apresentar os produtos na tela, e buscar a command do client 
+/**
+ * Serviço para interação com a API, busca de dados e manipulação de estados.
+ */ 
 export class ApiService {
 
    //atualiza o input e buscas por string os produtos somente na aba vendas
@@ -61,6 +62,10 @@ export class ApiService {
     this.termoBuscaSubjectCategoia.next('Pratos');
   }
 
+  /**
+   * Obtém a lista de clientes.
+   * @returns Observable<Cliente[]>
+   */
   getClientes():Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.baseUrlClient).pipe(
       tap(data => {
@@ -80,138 +85,34 @@ export class ApiService {
     );
   }
 
-  //pega o cliente sem vendas id.
-  getClientSemVendasId(result:any):Observable<any>{
-    return this.http.get<Command | any>(`${this.baseUrlCommand}/${result}`).pipe(
-      tap(data => {
-        this.clientData = data;
-      }),
-      catchError(error =>{
-        console.log('error ao obter o cliente', error)
-        throw error
-      })
-    )
-  }
-
-  //pega o cliente sem vendas nome.
-  getClientSemVendasName(result:any):Observable<any>{
-    return this.http.get<Command | any>(`${this.baseUrlCommand}/name/${result}`).pipe(
-      tap(data => {
-        this.clientData = data;
-      }),
-      catchError(error =>{
-        console.log('error ao obter o cliente', error)
-        throw error
-      })
-    )
-  }
-
-  //pega o cliente sem vendas cpf.
-  getClientSemVendasCPF(result:any):Observable<any>{
-    return this.http.get<Command | any>(`${this.baseUrlCommand}/cpf/${result}`).pipe(
-      tap(data => {
-        this.clientData = data;
-      }),
-      catchError(error =>{
-        console.log('error ao obter o cliente', error)
-        throw error
-      })
-    )
-
-  }
-  //pega as vendas detalhadas do cliente pelo numero da comanda
-  getClientSalesDetalhadoId(id:number):Observable<any>{
-    return this.http.get<Sale | any>(`${this.baseUrlSale}/client/id/${id}`).pipe(
-      tap(data => {
-        this.clientBuscaDetalhado = data;
-      }),
-      catchError(error => {
-        console.log('Erro ao obter o cliente com as vendas', error)
-        throw error
-      })
-    )
-  }
- //pega as vendas detalhadas do cliente pelo NOME
-  getClientSalesDetalhadoName(name:string):Observable<any>{
-    return this.http.get<Sale | any>(`${this.baseUrlSale}/client/name/${name}`).pipe(
-      tap(data => {
-        this.clientBuscaDetalhado = data;
-      }),
-      catchError(error => {
-        console.log('Erro ao obter o cliente com as vendas', error)
-        throw error
-      })
-    )
-  }
- //pega as vendas detalhadas do cliente pelo numero da cpf
-  getClientSalesDetalhadoCpf(cpf:string):Observable<any>{
-    return this.http.get<Sale | any>(`${this.baseUrlSale}/client/cpf/${cpf}`).pipe(
-      tap(data => {
-        this.clientBuscaDetalhado = data;
-      }),
-      catchError(error => {
-        console.log('Erro ao obter o cliente com as vendas', error)
-        throw error
-      })
-    )
-  }
-
-  //pega as vendas resumidas do cliente pelo numero da comanda
-  getClientSalesResumidoId(id:number):Observable<any>{
-    return this.http.get<Sale>(`${this.baseUrlSale}/client/summedUp/id/${id}`).pipe(
-      tap(data => {
-        this.clientBuscaResumido = data;
-      }),
-      catchError(error => {
-        console.log('Erro ao obter o cliente com as vendas', error)
-        throw error
-      })
-    )
-  }
-   //pega as vendas resumidas do cliente pelo nome cliente
-   getClientSalesResumidoName(name:string):Observable<any>{
-    return this.http.get<Sale>(`${this.baseUrlSale}/client/summedUp/name/${name}`).pipe(
-      tap(data => {
-        this.clientBuscaResumido = data;
-      }),
-      catchError(error => {
-        console.log('Erro ao obter o cliente com as vendas', error)
-        throw error
-      })
-    )
-  }
-   //pega as vendas resumidas do cliente pelo numero do cpf
-   getClientSalesResumidoCPF(cpf:string):Observable<any>{
-    return this.http.get<Sale>(`${this.baseUrlSale}/client/summedUp/cpf/${cpf}`).pipe(
-      tap(data => {
-        this.clientBuscaResumido = data;
-      }),
-      catchError(error => {
-        console.log('Erro ao obter o cliente com as vendas', error)
-        throw error
-      })
-    )
-  }
-  getSales():Observable<Sale[]|any> {
-    return this.http.get<Sale[]|any>(this.baseUrlSale).pipe(
-      tap(data => {
-        // Certifique-se de que this.productData é um array
-        if (Array.isArray(data)) {
-          this.SaleData = data;
-          console.log(this.SaleData)
-        } else {
-          // Se não for um array, você pode querer lidar com isso de outra forma
-          console.error('Os dados obtidos não são um array:', data);
-        }
-      }),
-      catchError(error => {
-        console.error('Erro ao obter produtos:', error);
-        // Trate o erro conforme necessário
-        throw error;
-      })
-    );
-  }
-
+  
+/** 
+  * Obtém a lista de vendas.
+   * @returns Observable<Sale[]>
+   */
+getSales():Observable<Sale[]|any> {
+  return this.http.get<Sale[]|any>(this.baseUrlSale).pipe(
+    tap(data => {
+      // Certifique-se de que this.productData é um array
+      if (Array.isArray(data)) {
+        this.SaleData = data;
+        console.log(this.SaleData)
+      } else {
+        // Se não for um array, você pode querer lidar com isso de outra forma
+        console.error('Os dados obtidos não são um array:', data);
+      }
+    }),
+    catchError(error => {
+      console.error('Erro ao obter produtos:', error);
+      // Trate o erro conforme necessário
+      throw error;
+    })
+  );
+}
+  /** 
+  * Obtém a lista de comandas.
+  * @returns Observable<Command[]>
+  */
   getCommand() :Observable<Command[]> {
     return this.http.get<Command[]>(this.baseUrlCommand).pipe(
       tap(data => {
@@ -229,9 +130,113 @@ export class ApiService {
         throw error;
       })
     );
-    
   }
+
+  /** 
+  * Obtém a lista de produtos.
+  * @returns  Observable<Product[]>
+  */
+  getProdutos(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.baseUrlProdutos).pipe(
+      tap(data => {
+        // Certifique-se de que this.productData é um array
+        if (Array.isArray(data)) {
+          this.productData = data;
+        } else {
+          // Se não for um array, você pode querer lidar com isso de outra forma
+          console.error('Os dados obtidos não são um array:', data);
+        }
+      }),
+      catchError(error => {
+        console.error('Erro ao obter produtos:', error);
+        // Trate o erro conforme necessário
+        throw error;
+      })
+    );
+  }
+
+  /**
+   * Obtém um cliente sem vendas pelo ID.
+   * @param result - ID do cliente
+   * @returns Observable<any>
+   */
+  getClientSemVendasId(result:any):Observable<any>{
+    return this.http.get<Command | any>(`${this.baseUrlCommand}/${result}`).pipe(
+      tap(data => {
+        this.clientData = data;
+      }),
+      catchError(error =>{
+        console.log('error ao obter o cliente', error)
+        throw error
+      })
+    )
+  }
+
+
+  /**
+   * Obtém um cliente sem vendas pelo cpf e pelo nome.
+   * @param result - cpf ou nome do cliente
+   * @param type - criterio da busca
+   * @returns Observable<any>
+   */
+  getClientSemVendasCPFName(type: string, result:any):Observable<any>{
+    return this.http.get<Command | any>(`${this.baseUrlCommand}/${type}/${result}`).pipe(
+      tap(data => {
+        this.clientData = data;
+      }),
+      catchError(error =>{
+        console.log('error ao obter o cliente', error)
+        throw error
+      })
+    )
+
+  }
+  
+  /** 
+   * Obtém um cliente com vendas detalhadas pelo critério de busca (cpf,nome,idComanda)
+   * @param type - criterio da busca
+   * @param value - valor do cliente a ser buscado
+   * @returns Observable<any>
+   */
+  getClientSalesDetalhado(type: string, value: string): Observable<any> {
+    const endpoint = `${this.baseUrlSale}/client/${type}/${value}`;
+    return this.http.get<Sale>(endpoint).pipe(
+      tap(data => {
+        this.clientBuscaResumido = data;
+      }),
+      catchError(error => {
+        console.log('Erro ao obter o cliente com as vendas', error);
+        throw error;
+      })
+    );
+  }
+
+
+/** 
+   * Obtém um cliente com vendas resumido pelo critério de busca (cpf,nome,idComanda)
+   * @param type - criterio da busca
+   * @param value - valor do cliente a ser buscado
+   * @returns Observable<any>
+   */
+  getClientSalesResumida(type: string, value: string): Observable<any> {
+    const endpoint = `${this.baseUrlSale}/client/summedUp/${type}/${value}`;
+    return this.http.get<Sale>(endpoint).pipe(
+      tap(data => {
+        this.clientBuscaResumido = data;
+      }),
+      catchError(error => {
+        console.log('Erro ao obter o cliente com as vendas', error);
+        throw error;
+      })
+    );
+  }
+
   //busca comanda pelo Id
+  /** 
+   * Obtém a comanda pelo numero do Id
+   * @param id - numero da comanda 
+   * @return sObservable <Command>
+   */
   getCommandById(id: number): Observable<Command | any> {
     return this.http.get<Command>(`${this.baseUrlCommand}/${id}`).pipe(
       map(res => {
@@ -251,71 +256,84 @@ export class ApiService {
     );
   }
 
-   //retorna todos produtos
-   getProdutos(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.baseUrlProdutos).pipe(
-      tap(data => {
-        // Certifique-se de que this.productData é um array
-        if (Array.isArray(data)) {
-          this.productData = data;
-        } else {
-          // Se não for um array, você pode querer lidar com isso de outra forma
-          console.error('Os dados obtidos não são um array:', data);
-        }
-      }),
-      catchError(error => {
-        console.error('Erro ao obter produtos:', error);
-        // Trate o erro conforme necessário
-        throw error;
-      })
-    );
-    }
+  /**
+  *faz o filtro dos produtos de acordo com oque esta no imput no component vendas <app-main>
+  * @param termoBusca nome do produto
+  */
+  getProdutoNome(termoBusca: string): Product[] {
+    if (termoBusca.trim() !== '') {
+      // Transforma o termo de busca em minúsculas para comparar sem diferenciação entre maiúsculas e minúsculas
+      termoBusca = termoBusca.toLowerCase();
 
-   //pega o valor da categoria
+      // Filtra os produtos com base no termo de busca
+      return this.productData.filter((produto: { name: string; }) => produto.name.toLowerCase().includes(termoBusca));
+
+    } else {
+      // Se o campo de busca estiver vazio, retorna todos os produtos
+      return this.productData;
+    }
+  }
+
+  /**
+  *pega os produtos do banco de dados e retorna eles separando por categoria 
+  * @param categoria Observable<Product[]>
+  */
+  getProdutoPorCategoria(categoria: string): Observable<Product[]> {
+    return this.getProdutos().pipe(
+      map((produtos: Product[]) => produtos.filter(produto => produto.categoria === categoria))
+    );
+  }
+
+   /** 
+   * Obtém a categoria selecionada no component <main-app>
+   * @return string com o nome da categoria.
+   */
    getCategoriaSelecionadaTipo(): string  {
     return this.termoBuscaSubjectCategoia.value;
   }
+
   //seta o valor da categoria
+   /** 
+   * seta a categoria selecionada no component <app-category-list>
+   * @return string com o nome da categoria.
+   */
   setCategoriaSelecionadaTipo(tipo: string): void {
     this.termoBuscaSubjectCategoia.next(tipo);
   }
 
   //seta o type da busca
+  /**
+   * seta o tipo da busca no <app-search>
+   * @param tipo 
+   */
   setTypeSelected(tipo: string): void {
     this.termoBuscaSubjectType.next(tipo);
   }
 
- //atualiza o input de busca de produtos na aba vendas
+ /**
+  * atualiza o input de busca de produtos na aba vendas no component <app-search-product >
+  * @param valor produto
+  */
  atualizarValorInputVendas(valor: string) {
   this.termoBuscaSubject.next(valor)  
 }
 
-//atualiza o input de busca de client na aba buscar
+
+/**
+  *atualiza o input de busca de client na aba buscar no component <app-search-product >
+  * @param valor cliente
+  */
 atualizarValorInputBuscar(valor: any) {
   this.termoBuscaClientSubject.next(valor)  
 }
 
-//faz o filtro dos produtos de acordo com oque esta no imput no component vendas
-getProdutoNome(termoBusca: string): Product[] {
-  if (termoBusca.trim() !== '') {
-    // Transforma o termo de busca em minúsculas para comparar sem diferenciação entre maiúsculas e minúsculas
-    termoBusca = termoBusca.toLowerCase();
 
-    // Filtra os produtos com base no termo de busca
-    return this.productData.filter((produto: { name: string; }) => produto.name.toLowerCase().includes(termoBusca));
-
-  } else {
-    // Se o campo de busca estiver vazio, retorna todos os produtos
-    return this.productData;
-  }
-}
-
-getProdutoPorCategoria(categoria: string): Observable<Product[]> {
-  return this.getProdutos().pipe(
-    map((produtos: Product[]) => produtos.filter(produto => produto.categoria === categoria))
-  );
-}
-  // Adiciona um novo produto ou incrementa a quantidade se já existir
+  /**
+  *Adiciona um novo produto ou incrementa a quantidade se já existir no component <app-products-box-right >
+  * resumidamente quando eu cliclo em um produto e o mesmo ja esta no carrinho ele adiciona mais na quantidade do mesmo produto
+  * caso nao exista esse produto no carrinho ele adiciona
+  * @param produto 
+  */
   adicionarOuIncrementarProduto(produto: Product) {
     this.produtosSelecionadosSubject.pipe(take(1)).subscribe(produtosCopia => {
       const produtoExistenteIndex = produtosCopia.findIndex(p => p.product.id === produto.id);
@@ -343,11 +361,21 @@ getProdutoPorCategoria(categoria: string): Observable<Product[]> {
     });
   }
   
-  // atualiza a lista e remove o produto caso o input seja <= 0
+  //
+ /**
+  * atualiza a lista e remove o produto caso o input seja <= 0
+  * e remove quando a venda foi comcluida
+  * @param produto 
+  */
   atualizarProdutos(produtos: any[]) {
     this.produtosSelecionadosSubject.next([...produtos]);  // Garante uma nova referência do array
   }
 
+  /**
+  * atualiza o valor do input
+  * zera ele após a venda ser comcluida
+  * @param command 
+  */
   atualizaInputCommand (command:string){
     this.commandSelecionadoSubject.next(command);
   }
