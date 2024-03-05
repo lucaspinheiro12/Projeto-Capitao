@@ -379,5 +379,23 @@ atualizarValorInputBuscar(valor: any) {
   atualizaInputCommand (command:string){
     this.commandSelecionadoSubject.next(command);
   }
+/**
+ * funçoes de validação de login
+ */
+  private isAuthenticated: boolean = false;
+
+  loginService(username: string, password: string): boolean {
+    // Simples validação de login e senha
+    this.isAuthenticated = username == 'admin' && password == 'admin';
+    return this.isAuthenticated;
+  }
+
+  logout(): void {
+    this.isAuthenticated = false;
+  }
+
+  isLoggedIn(): boolean {
+    return this.isAuthenticated;
+  }
 
 }

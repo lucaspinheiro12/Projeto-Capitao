@@ -14,7 +14,7 @@ export class SearchNameComponent implements OnInit {
     
   }
   private currentRoute = '';
-  valorInput: string = '';
+  protected valorInput: string = '';
 
 
   ngOnInit() {
