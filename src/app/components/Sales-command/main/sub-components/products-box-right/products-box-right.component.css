@@ -2,7 +2,6 @@
     width: 120px;
     height: auto;
     cursor: pointer;
-    margin: 10px 10px 10px 0;
     }
 
 .container-img {
@@ -22,10 +21,10 @@
 @media(max-width:550px){
     .container{
         justify-content: space-evenly;
-        width: 45%;
+        width: 95%;
         margin: 5px;
         padding: 5px;
-        margin: 5px 5px 5px 0;
+
     }
     .container-img {
         width: 100%;
