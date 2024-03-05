@@ -28,7 +28,6 @@
 .carrinho-img{
     display: flex;
     width: 100%;
-    justify-content: end;
 }
 .carrinho-img__cloused{
     padding: 2% 1% 1% 1%;
