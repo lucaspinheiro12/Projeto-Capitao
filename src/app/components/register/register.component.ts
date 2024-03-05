@@ -12,11 +12,11 @@ export class RegisterComponent {
 
   constructor(private apiInsert:ApiInsertDeleteService){}
 
-  contact:number | any;
-  name:string | any;
-  CPF:string | any;
-  entry:number | any;
-  idCommand:number | any;
+  protected contact:number | any;
+  protected name:string | any;
+  protected CPF:string | any;
+  protected entry:number | any;
+  protected idCommand:number | any;
 
   
   addClientCommand(contact: number, name: string, CPF: string, entry: number, idCommand: number) {

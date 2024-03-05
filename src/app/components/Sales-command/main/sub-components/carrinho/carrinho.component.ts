@@ -12,44 +12,7 @@ import Swal from 'sweetalert2';
 export class CarrinhoComponent implements OnInit{
   constructor(private apiService: ApiService , private apiInsertDelete: ApiInsertDeleteService) {}
 
-  testeSemBanco: Order[] =[
-    {
-      id: 1,
-      product: {id:1,
-        name: 'string',
-        price:21,
-        categoria:'sd'},
-      quantity: 2,
-      price: 42
-    },
-    {
-      id: 2,
-      product: {id:2,
-        name: 'string2',
-        price:211,
-        categoria:'sd2'},
-      quantity: 22,
-      price: 422
-    },
-    {
-      id: 3,
-      product: {id:3,
-        name: 'string3',
-        price:311,
-        categoria:'sd3'},
-      quantity: 33,
-      price: 332
-    }, {
-      id: 4,
-      product: {id:4,
-        name: 'string4',
-        price:411,
-        categoria:'sd4'},
-      quantity: 44,
-      price: 444
-    },
-
-  ]
+  
   //parte dos peditos . tenho que refatorar.
   orders : Order[] =[];
   command:Command |any;
@@ -72,18 +35,15 @@ export class CarrinhoComponent implements OnInit{
 
     
   }
-
-
-
    
-  removeOrder(produto: Order) {
-    const index = this.orders.findIndex(order => order.id === produto.id);
-    if (index !== -1) {
-      const updatedOrders = [...this.orders.slice(0, index), ...this.orders.slice(index + 1)];
-      this.orders = updatedOrders;
-      this.apiService.atualizarProdutos([...updatedOrders]);
-    }
+  //recebe o valor do <app-order> de qual produto está sendo clicado e faz um novo array sem o produto clicaco
+  removeOrderCarrinho(produto: Order) {
+    const updatedOrders = this.orders.filter(order => order.product.id !== produto.product.id);
+    console.log(updatedOrders)
+    this.orders = updatedOrders;
+    this.apiService.atualizarProdutos([...updatedOrders]);
   }
+
   calcularTotal(): number {
     const result = this.orders.reduce((total, order) => total + order.price * order.quantity, 0) + this.calcularTaxa();
     return +result.toFixed(2) ;

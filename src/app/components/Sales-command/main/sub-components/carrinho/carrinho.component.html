@@ -17,16 +17,16 @@
       </div>
   
     <div class="container-orders">
-      <div  class="container-orders__orders" *ngFor="let produtos of testeSemBanco">
-        <app-order [produto]="produtos" (valueZero)="removeOrder(produtos)"   ></app-order> 
+      <div  class="container-orders__orders" *ngFor="let produto of orders">
+        <app-order [produto]="produto" (valueZero)="removeOrderCarrinho($event)"></app-order> 
       </div>
     </div>
     <div class="container-price">
         <div class="container-price__taxa">
             <p>taxa: </p>
-            <p>$ 95,40{{calcularTaxa()}}</p>
+            <p>$ {{calcularTaxa()}}</p>
         </div>
-        <button class="container-price__final" (click)="finalizarPedido()">TOTAL $ 954,00{{calcularTotal()}} </button>
+        <button class="container-price__final" (click)="finalizarPedido()">TOTAL $ {{calcularTotal()}} </button>
     </div>  
 </div>
 
