@@ -18,8 +18,8 @@ export class SearchComponent implements OnInit{
       });    
     }
     
-    checkboxCPF: boolean = true;
-    checkboxName: boolean = false;
+  checkboxCPF: boolean = true;
+  checkboxName: boolean = false;
   checkboxIdCommand: boolean = false;
   selectedItem: string = 'resumido';
   mostrarPedidoResumido: boolean = true;
@@ -29,34 +29,46 @@ export class SearchComponent implements OnInit{
   resultadoResumido:SaleSummedUp | any;
   teste: Cliente| any;
 
-    updateCheckboxes(checkboxNumber: number): void {
-        // Desmarca todos os checkboxes
-        this.checkboxCPF = false;
-        this.checkboxName= false;
-        this.checkboxIdCommand = false;
-        // Marca apenas o checkbox clicado
-        if (checkboxNumber === 1) {
-        this.checkboxCPF = true;
-        } else if (checkboxNumber === 2) {
-        this.checkboxName = true;
-        } else if (checkboxNumber === 3) {
-        this.checkboxIdCommand = true;
-        }
-    }
+  updateCheckboxes(checkboxNumber: number): void {
+    this.checkboxCPF = checkboxNumber === 1;
+    this.checkboxName = checkboxNumber === 2;
+    this.checkboxIdCommand = checkboxNumber === 3;
+  }
 
+    /**
+     * Este método é chamado quando um tipo de categoria é selecionado.
+      *Ele atribui o nome da categoria selecionada à variável this.selectedItem.
+      *Em seguida, chama this.apiService.setTypeSelected(this.selectedItem) para informar o serviço sobre o tipo de categoria selecionada.
+     * @param nomeCategoria strind
+     */
     selectType(nomeCategoria: string) {
         this.selectedItem = nomeCategoria;
         this.apiService.setTypeSelected(this.selectedItem);
     }
   
+    /**
+     * Este método verifica se um determinado tipo de categoria está selecionado.
+     * Retorna true se o item fornecido for igual à this.selectedItem, indicando que a categoria está selecionada; caso contrário, retorna false.
+     * @param item 
+     * @returns true or false
+     */
     isSelectedType(item: string): boolean {
         return this.selectedItem === item;
     }
+
+    /**
+     * Este método é chamado quando a opção "Resumido" é selecionada.
+     * Define this.mostrarPedidoResumido como true e this.mostrarPedidoDetalhado como false, indicando que a exibição deve mostrar pedidos no formato resumido.
+     */
     showPedidoResumido(): void {
         this.mostrarPedidoResumido = true;
         this.mostrarPedidoDetalhado = false;
     }
 
+    /**
+     * Este método é chamado quando a opção "Detalhado" é selecionada.
+     * Define this.mostrarPedidoResumido como false e this.mostrarPedidoDetalhado como true, indicando que a exibição deve mostrar pedidos no formato detalhado.
+     */
     showPedidoDetalhado(): void {
         this.mostrarPedidoResumido = false;
         this.mostrarPedidoDetalhado = true;
