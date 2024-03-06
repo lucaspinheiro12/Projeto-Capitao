@@ -383,10 +383,16 @@ atualizarValorInputBuscar(valor: any) {
  * funçoes de validação de login
  */
   private isAuthenticated: boolean = false;
-
+  private usuarios: { username: string, password: string }[] = [
+    { username: 'lucas', password: 'lucas' },
+    { username: 'lucas2', password: 'lucas2' },
+    { username: 'lucas3', password: 'lucas3' },
+    { username: 'lucas4', password: 'lucas4' },
+  ];
   loginService(username: string, password: string): boolean {
-    // Simples validação de login e senha
-    this.isAuthenticated = username == 'admin' && password == 'admin';
+    // Simples validação de login e senha usando o array de usuários
+    const user = this.usuarios.find(user => user.username === username && user.password === password);
+    this.isAuthenticated = user !== undefined;
     return this.isAuthenticated;
   }
 

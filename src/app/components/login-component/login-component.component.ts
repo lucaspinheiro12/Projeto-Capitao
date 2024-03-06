@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { ApiService } from 'src/app/services/api.serviceComands';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login-component',
@@ -18,12 +19,24 @@ export class LoginComponent {
 
   login(): void {
     const user : string = this.username;
-    console.log('aqui')
-    console.log(user.toString)
     if (this.apiService.loginService(this.username, this.password)) {
       this.router.navigate(['/register']);
+      console.log(this.username)
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: this.username + ' Bem vindo à comanda Online',
+        showConfirmButton: false,
+        timer: 2000
+      });
     } else {
-      this.errorMessage = 'Login ou senha incorretos';
+      Swal.fire({
+        position: "top-end",
+        icon: "warning",
+        title: "Usuario ou senha invalida",
+        showConfirmButton: false,
+        timer: 1500
+      });
     }
   }
 }
