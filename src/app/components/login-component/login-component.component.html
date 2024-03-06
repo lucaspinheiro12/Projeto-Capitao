@@ -1,0 +1,16 @@
+<!-- login.component.html -->
+<div class="login-container">
+  <h1 class="title">Login: </h1>
+  <h2 class="subTitle"> Capitão Gourmet</h2>
+  <div class="login-container__input">
+    <label class="lambel" for="username">Usuário:</label>
+    <input class="login-container__input__ login" [(ngModel)]="username" type="text" id="username"  required>
+
+    <label  class="lambel" for="password">Senha:</label>
+    <input class="login-container__input__ password"  type="password" id="password" [(ngModel)]="password" required>
+  </div>
+  <div class="button-login" >
+      <button class="button-login__button" type="button"  (click)="login()">Entrar</button>
+  </div>
+</div>
+  

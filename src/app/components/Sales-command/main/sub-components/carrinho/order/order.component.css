@@ -39,3 +39,13 @@
     height: 80%;
     cursor: pointer;
 }
+
+.container-remover{
+    display: flex;
+    justify-content: end;
+}
+.container-remove__img{
+    padding: 2% 1% 1% 1%;
+    width: 30px;
+    height: 30px;
+}

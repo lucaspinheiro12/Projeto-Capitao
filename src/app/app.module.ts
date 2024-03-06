@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuHeaderComponent } from './components/header/menu-header.component';
@@ -18,6 +17,8 @@ import { SearchComponent } from './components/search/search.component';
 import { SummedUpComponent } from './components/search/sub-components/summed-up/summed-up.component';
 import { DetailedComponent } from './components/search/sub-components/detailed/detailed.component';
 import { CarrinhoComponent } from './components/Sales-command/main/sub-components/carrinho/carrinho.component';
+import { LoginComponent } from './components/login-component/login-component.component';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { CarrinhoComponent } from './components/Sales-command/main/sub-component
     SummedUpComponent,
     DetailedComponent,
     CarrinhoComponent,
+    LoginComponent
   ],  
   
   imports: [
