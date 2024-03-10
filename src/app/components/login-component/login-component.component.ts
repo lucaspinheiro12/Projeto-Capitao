@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.serviceComands';
 import Swal from 'sweetalert2';
 
@@ -9,36 +10,61 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login-component.component.css']
 })
 
-
 export class LoginComponent {
-  username: string = '';
-  password: string = '';
-  errorMessage: string = '';
+  loginForm: FormGroup;
 
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private apiService: ApiService,
+    private router: Router
+  ) {
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
 
   login(): void {
-    const user : string = this.username;
-    if (this.apiService.loginService(this.username, this.password)) {
-      this.router.navigate(['/register']);
-      console.log(this.username)
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: this.username + ' Bem vindo à comanda Online',
-        showConfirmButton: false,
-        timer: 2000
-      });
-    } else {
-      Swal.fire({
-        position: "top-end",
-        icon: "warning",
-        title: "Usuario ou senha invalida",
-        showConfirmButton: false,
-        timer: 1500
-      });
+    if (this.loginForm.valid) {
+      const { username, password } = this.loginForm.value;
+
+      this.apiService.loginService(username, password).subscribe(
+        (loginSuccessful: boolean) => {
+          if (loginSuccessful) {
+            this.router.navigate(['/register']);
+            this.showSuccessMessage(username);
+          } else {
+            this.showErrorMessage('Usuário ou senha inválida');
+          }
+        },
+        (error) => {
+          console.error('Erro no login:', error);
+          this.showErrorMessage('Erro no login');
+        }
+      );
     }
   }
+
+  private showSuccessMessage(username: string): void {
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: `${username} Bem vindo à comanda Online`,
+      showConfirmButton: false,
+      timer: 2000
+    });
+  }
+
+  private showErrorMessage(message: string): void {
+    Swal.fire({
+      position: 'top-end',
+      icon: 'warning',
+      title: message,
+      showConfirmButton: false,
+      timer: 1500
+    });
+  }
 }
+
 
 
