@@ -2,15 +2,14 @@
 <div class="login-container">
   <h1 class="title">Login: </h1>
   <h2 class="subTitle"> Capitão Gourmet</h2>
-  <div class="login-container__input">
+  <div class="login-container__input" [formGroup]="loginForm">
     <label class="lambel" for="username">Usuário:</label>
-    <input class="login-container__input__ login" [(ngModel)]="username" type="text" id="username"  required>
+    <input class="login-container__input__ login" formControlName="username" type="text" id="username" required>
 
-    <label  class="lambel" for="password">Senha:</label>
-    <input class="login-container__input__ password"  type="password" id="password" [(ngModel)]="password" required>
+    <label class="lambel" for="password">Senha:</label>
+    <input class="login-container__input__ password" formControlName="password" type="password" id="password" required>
   </div>
   <div class="button-login" >
-      <button class="button-login__button" type="button"  (click)="login()">Entrar</button>
+    <button class="button-login__button" type="button" (click)="login()">Entrar</button>
   </div>
 </div>
-  

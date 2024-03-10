@@ -61,7 +61,7 @@ export class CarrinhoComponent implements OnInit{
        this.sale = {
           id: 0,
           order: this.orders,
-          vendor: 'Angular',
+          vendor: this.apiService.getLoggedInEmployee(),
           commands: this.command
        }
        this.apiInsertDelete.addSale(this.sale).subscribe();

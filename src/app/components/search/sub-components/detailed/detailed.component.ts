@@ -11,6 +11,6 @@ export class DetailedComponent {
   @Input () resultDetalhado: Sale[] = []
 
   teste(){
-    console.log(this.resultDetalhado)
+    console.log(this.resultDetalhado[0].vendor)
   }
 }

@@ -7,9 +7,10 @@ import { ApiService } from './services/api.serviceComands';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private apiService: ApiService) {}
-  showMenu(): boolean {
-    return this.apiService.isLoggedIn();
-  }
+ constructor(private apiService: ApiService) {}
+
+ isLoggedIn(): boolean {
+  return this.apiService.isLoggedIn();
+}
   title = 'Comanda-Capitao';
 }
