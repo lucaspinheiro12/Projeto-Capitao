@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Command, Product,Cliente, Sale, SaleSummedUp} from '../models/modelos';
+import { Command, Product,Cliente, Sale, SaleSummedUp, Employee} from '../models/modelos';
 import { api } from 'src/app/services/api.service'
 import { BehaviorSubject, Observable, catchError, map, of, take, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -51,6 +51,10 @@ export class ApiService {
   private baseUrlSale :string ='';
   private SaleData:  Product[] | any;
 
+  private baseUrlEmployee: string = '';
+  private employeeLog: Employee | any;
+  private isAuthenticated: boolean = false;
+
   constructor(private http:HttpClient ) {
     this.baseUrlProdutos = api.produtos;
 
@@ -60,6 +64,8 @@ export class ApiService {
 
     this.baseUrlSale = api.vendas
     this.termoBuscaSubjectCategoia.next('Pratos');
+
+    this.baseUrlEmployee = api.employee;
   }
 
   /**
@@ -171,7 +177,28 @@ getSales():Observable<Sale[]|any> {
       })
     )
   }
-
+  /**
+   * Obtém os funcionarios.
+   * @returns Observable<Employee>
+   */
+  getEmployee():Observable<Employee[]> {
+    return this.http.get<Employee[]>(this.baseUrlEmployee).pipe(
+      tap(data => {
+        // Certifique-se de que this.productData é um array
+        if (Array.isArray(data)) {
+          this.employeeLog = data;
+        } else {
+          // Se não for um array, você pode querer lidar com isso de outra forma
+          console.error('Os dados obtidos não são um array:', data);
+        }
+      }),
+      catchError(error => {
+        console.error('Erro ao obter produtos:', error);
+        // Trate o erro conforme necessário
+        throw error;
+      })
+    );
+  }
 
   /**
    * Obtém um cliente sem vendas pelo cpf e pelo nome.
@@ -202,7 +229,7 @@ getSales():Observable<Sale[]|any> {
     const endpoint = `${this.baseUrlSale}/client/${type}/${value}`;
     return this.http.get<Sale>(endpoint).pipe(
       tap(data => {
-        this.clientBuscaResumido = data;
+        this.clientBuscaDetalhado = data;
       }),
       catchError(error => {
         console.log('Erro ao obter o cliente com as vendas', error);
@@ -382,20 +409,40 @@ atualizarValorInputBuscar(valor: any) {
 /**
  * funçoes de validação de login
  */
-  private isAuthenticated: boolean = false;
-  private usuarios: { username: string, password: string }[] = [
-    { username: 'lucas', password: 'lucas' },
-    { username: 'lucas2', password: 'lucas2' },
-    { username: 'lucas3', password: 'lucas3' },
-    { username: 'lucas4', password: 'lucas4' },
-  ];
-  loginService(username: string, password: string): boolean {
-    // Simples validação de login e senha usando o array de usuários
-    const user = this.usuarios.find(user => user.username === username && user.password === password);
-    this.isAuthenticated = user !== undefined;
-    return this.isAuthenticated;
+  
+  // Método para fazer login
+  loginService(username: string, password: string): Observable<boolean> {
+    return this.getEmployee().pipe(
+      map((employees: Employee[]) => {
+        const loggedInEmployee = employees.find(employee => employee.userName === username && employee.password === password);
+
+        if (loggedInEmployee) {
+          this.employeeLog = loggedInEmployee;
+          this.isAuthenticated = true;
+          return true;
+        } else {
+          return false;
+        }
+      })
+    );
   }
 
+   // Obtém os funcionários e verifica se está autenticado
+   getEmployeeAndCheckAuthentication(): Observable<boolean> {
+    return this.getEmployee().pipe(
+      map((employees: Employee[]) => {
+        const loggedInEmployee = employees.find(employee => employee === this.employeeLog);
+        this.isAuthenticated = !!loggedInEmployee;
+        return this.isAuthenticated;
+      })
+    );
+  }
+  
+   // Adicione a função para obter o funcionário logado
+   getLoggedInEmployee(): Employee  {
+    console.log(this.employeeLog)
+    return this.employeeLog;
+  }
   logout(): void {
     this.isAuthenticated = false;
   }

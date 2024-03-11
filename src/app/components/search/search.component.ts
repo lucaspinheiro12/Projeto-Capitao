@@ -98,6 +98,7 @@ export class SearchComponent implements OnInit{
       if (detalhadoObservable) {
         detalhadoObservable.subscribe({
           next: (result) => {
+            console.log(result)
             //se o cliente não tem venda ele entra nesse if
             if (result == '') {
               //retorna os dados do cliente sem vendas.
@@ -122,7 +123,10 @@ export class SearchComponent implements OnInit{
                   });
                 },
               });
+            }else{
+              this.resultDetalhado = result;
             }
+           
           },
           error: (err) => {
             console.log(err);

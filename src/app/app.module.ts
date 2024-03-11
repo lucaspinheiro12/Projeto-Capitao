@@ -9,7 +9,7 @@ import { ProductsBoxRightComponent } from './components/Sales-command/main/sub-c
 import { SearchNameComponent } from './components/header/sub-components/search-product/search-product.component';
 import { MainComponent } from './components/Sales-command/main/main.component';
 import { OrderComponent } from './components/Sales-command/main/sub-components/carrinho/order/order.component'
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './components/register/register.component';
@@ -44,6 +44,7 @@ import { LoginComponent } from './components/login-component/login-component.com
     FormsModule,
     HttpClientModule,
     SweetAlert2Module,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

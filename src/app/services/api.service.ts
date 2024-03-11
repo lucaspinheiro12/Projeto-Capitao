@@ -4,4 +4,5 @@ export const api = {
     command: 'http://localhost:8080/commands',
     order: 'http://localhost:8080/order',
     vendas: 'http://localhost:8080/sales',
+    employee: 'http://localhost:8080/user'
 }
