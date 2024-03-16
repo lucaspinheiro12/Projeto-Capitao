@@ -20,7 +20,7 @@ export class DetailedComponent {
       if (result.order.length > 1) {
         // Executa o endpoint para remover o pedido da venda
         this.serviceInsertDelete.deleteOrderFromSale(result.id, orderId).subscribe(
-          response => {
+          _res => {
             alertSuccess('venda excluido com socesso!',' ')
               },
               error => {
@@ -30,7 +30,7 @@ export class DetailedComponent {
       } else {
         // Executa o endpoint para excluir a venda
         this.serviceInsertDelete.deletSale(result.id).subscribe(
-          response => {
+          _response => {
             alertSuccess('venda excluido com socesso!',' ')
             // Aqui você pode lidar com o redirecionamento ou qualquer outra lógica necessária após excluir a venda
           },
