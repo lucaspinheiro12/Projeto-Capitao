@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { SaleSummedUp } from 'src/app/models/modelos';
+import { Sale, SaleSummedUp } from 'src/app/models/modelos';
 
 @Component({
   selector: 'app-summed-up',

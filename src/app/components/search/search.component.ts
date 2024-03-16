@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.serviceComands';
 import { Cliente, Sale, SaleSummedUp } from 'src/app/models/modelos';
 import { Observable } from 'rxjs';
-import Swal from 'sweetalert2';
+import { alertWarning } from 'src/app/models/alerts';
 
 
 @Component({
@@ -98,13 +98,11 @@ export class SearchComponent implements OnInit{
       if (detalhadoObservable) {
         detalhadoObservable.subscribe({
           next: (result) => {
-            console.log(result)
             //se o cliente não tem venda ele entra nesse if
             if (result == '') {
               //retorna os dados do cliente sem vendas.
               ClientSemVenda.subscribe({
                 next: (res) => {
-                  console.log(res)
                   this.resultDetalhado = [{
                     commands: {
                       id: res.id,
@@ -116,11 +114,7 @@ export class SearchComponent implements OnInit{
                       entry: res.entry,
                     },
                   }];
-                  Swal.fire({
-                    title: 'O cliente: ' + res.client.name,
-                    text: 'Ainda não tem nenhum pedido',
-                    icon: 'warning',
-                  });
+                  alertWarning('O cliente: ' + res.client.name, 'Ainda não tem nenhum pedido')
                 },
               });
             }else{

@@ -7,8 +7,8 @@
                 <li class="container-sales__ul__li">{{pedido.quantity}}</li>
                 <li class="container-sales__ul__li">{{pedido.price}}</li>
                 <li class="container-sales__ul__li">{{res.vendor.name}}</li>
+                <li class="container-sales__ul__li" (click)="handleItemClick(res, pedido.id)"><img src="assets/img/excluirProdut.png" alt=""> </li>
             </ul>
     </div>
     </div>
 </div>
-

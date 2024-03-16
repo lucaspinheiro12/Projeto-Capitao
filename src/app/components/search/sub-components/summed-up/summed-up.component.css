@@ -26,6 +26,8 @@
     width: 24%;
     font-weight: 600;
 }
+
+
 @media (max-width:800px) {
     .container-sales__ul__li{
       font-size: 13px;

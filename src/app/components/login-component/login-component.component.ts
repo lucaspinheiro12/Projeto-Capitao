@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { alertTimerSuccess, aletTimerErro } from 'src/app/models/alerts';
 import { ApiService } from 'src/app/services/api.serviceComands';
 import Swal from 'sweetalert2';
 
@@ -32,37 +33,16 @@ export class LoginComponent {
         (loginSuccessful: boolean) => {
           if (loginSuccessful) {
             this.router.navigate(['/register']);
-            this.showSuccessMessage(username);
+            alertTimerSuccess(`${username} Bem vindo à comanda Online`, 1500);
           } else {
-            this.showErrorMessage('Usuário ou senha inválida');
+            aletTimerErro('Usuário ou senha inválida', 1500);
           }
         },
         (error) => {
-          console.error('Erro no login:', error);
-          this.showErrorMessage('Erro no login');
+          aletTimerErro('Erro no login: ' + error, 1500);
         }
       );
     }
-  }
-
-  private showSuccessMessage(username: string): void {
-    Swal.fire({
-      position: 'top-end',
-      icon: 'success',
-      title: `${username} Bem vindo à comanda Online`,
-      showConfirmButton: false,
-      timer: 2000
-    });
-  }
-
-  private showErrorMessage(message: string): void {
-    Swal.fire({
-      position: 'top-end',
-      icon: 'warning',
-      title: message,
-      showConfirmButton: false,
-      timer: 1500
-    });
   }
 }
 
