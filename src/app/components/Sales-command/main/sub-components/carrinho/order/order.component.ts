@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { alertSuccess } from 'src/app/models/alerts';
 import { Order, Product } from 'src/app/models/modelos';
 import Swal from 'sweetalert2';
 
@@ -30,7 +31,7 @@ export class OrderComponent implements OnInit {
   }
   removeOrder() {
     Swal.fire({
-      title: "Deseja remover: " + this.produto.product.name ,
+      title: 'Deseja remover: ' + this.produto.product.name ,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -39,11 +40,7 @@ export class OrderComponent implements OnInit {
       cancelButtonText:"Não"
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Produto: " + this.produto.product.name,
-          text: "Removido com sucesso!",
-          icon: "success"
-        });
+        alertSuccess('Produto: ' + this.produto.product.name, 'Removido com sucesso!')
         this.valueZero.emit(this.produto);
       }else{
         if(this.produto.quantity <= 0 )

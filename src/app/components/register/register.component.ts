@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { alertFail, alertSuccess } from 'src/app/models/alerts';
 import { ApiInsertDeleteService } from 'src/app/services/api.insert-delete.service';
-import Swal from 'sweetalert2'
 
 
 @Component({
@@ -37,20 +37,12 @@ export class RegisterComponent {
             this.CPF = '';
             this.entry = '';
             this.idCommand = '';
-            Swal.fire({
-              title: 'Sucesso!',
-              text: 'Cliente cadastrado',
-              icon: 'success',
-            });
+            alertSuccess('Sucesso!', 'Cliente cadastrado' )
           },
         );
       });
     } else {
-      Swal.fire({
-        title: 'Erro!',
-        text: 'CPF inválido',
-        icon: 'error',
-      });
+      alertFail('Erro!', 'CPF inválido' )
     }
   }
   

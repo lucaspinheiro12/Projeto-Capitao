@@ -27,6 +27,10 @@
     font-weight: 600;
 
 }
+.container-sales__ul__li img{
+    max-width: 90%;
+    max-height: 90%;
+}
 @media (max-width:800px) {
    .container-sales__ul__li{
      font-size: 13px;

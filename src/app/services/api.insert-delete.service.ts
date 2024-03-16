@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError } from 'rxjs';
-import {  Sale,Cliente, Command } from '../models/modelos';
+import { Observable, catchError, tap } from 'rxjs';
+import {  Sale,Cliente, Command, Product } from '../models/modelos';
 import { api } from './api.service';
-import Swal from 'sweetalert2'
+import {  alertFail } from '../models/alerts';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,10 +20,16 @@ export class ApiInsertDeleteService {
     this.baseCommandUrl = api.command;
   }
 
+  deletSale(id:number):Observable<Sale>{
+    return this.http.delete<Sale>(`${this.baseSaleUrl}/${id}`)
+  }
+  deleteOrderFromSale(saleId: number, orderId: number): Observable<Sale> {
+    return this.http.put<Sale>(`${this.baseSaleUrl}/${saleId}/${orderId}`, {});
+  }
+
   addSale(newSale: Sale| any): Observable<Sale > {
     return this.http.post<Sale| any>(`${this.baseSaleUrl}`, newSale).pipe(
        catchError(error => {
-        console.log("aqui")
           console.error('Erro na requisição HTTP:', error);
           throw error; // Lança o erro novamente para que outros possam tratá-lo
        })
@@ -58,12 +64,7 @@ export class ApiInsertDeleteService {
 
   return this.http.post<Command | any>(`${this.baseCommandUrl}`,command).pipe(
     catchError( error => {
-      Swal.fire({
-        title: 'Erro!',
-        text: error.error,
-        icon: 'error',
-      });
-      console.error("deu error: ", error );
+      alertFail('Erro!', error.error)
       throw error;
     })
   )
