@@ -53,22 +53,23 @@
     </div>
     
     <div class="container-result">
-        <div *ngIf="mostrarPedidoResumido">
+        <div class="container-result-summedUp__ul__interno" *ngIf="mostrarPedidoResumido">
             <ul class="container-sales-summedUp__ul">
                 <li class="container-sales-summedUp__ul__li">Nome:</li>
-                <li class="container-sales-summedUp__ul__li"> Preço Unidade:</li>
+                <li class="container-sales-summedUp__ul__li">Preço Unidade:</li>
                 <li class="container-sales-summedUp__ul__li">Quantidade:</li>
                 <li class="container-sales-summedUp__ul__li">Valor Total:</li>
             </ul>
             <app-summed-up [resultValue]="resultadoResumido"></app-summed-up>
         </div>
-        <div *ngIf="mostrarPedidoDetalhado">
+        <div class="container-result-detailed__ul__interno" *ngIf="mostrarPedidoDetalhado">
             <ul class="container-sales-detailed__ul">
                 <li class="container-sales-detailed__ul__li">Nome:</li>
-                <li class="container-sales-detailed__ul__li"> Preço Unidade:</li>
+                <li class="container-sales-detailed__ul__li">Preço Unidade:</li>
                 <li class="container-sales-detailed__ul__li">Quantidade:</li>
                 <li class="container-sales-detailed__ul__li">Valor Total:</li>
                 <li class="container-sales-detailed__ul__li">Vendedor:</li>
+                <li class="container-sales-detailed__ul__li"> Excluir: </li>
             </ul>
         <app-detailed [resultDetalhado]="resultDetalhado"></app-detailed>
         </div>

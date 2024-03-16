@@ -65,6 +65,9 @@
     border: solid;
     border-bottom: none;
 }
+.container-client{
+    margin-bottom: 50px;
+}
 .container-client-date{
     display: flex;
     flex-direction: row;
@@ -73,7 +76,6 @@
     height: 50px;
     align-items: center;
     border: solid;
-    margin-bottom: 50px;
 }
 .container-client__attributes{
     display: flex;
@@ -130,6 +132,7 @@
     width: 24%;
     font-weight: 600;
 }
+
 @media (max-width:800px) {
     .container-client__attributes{
         font-size: 13px;
@@ -145,11 +148,23 @@
     .container-client{
         width: auto;
         overflow-x: auto;
+        margin-bottom: 50px;
     }
     .container-client-static{
         width: 600px;
     }
     .container-client-date{
         width: 600px;
+    }
+}
+@media (max-width:460px) {
+    .container-result{
+        overflow-x: auto;
+    }
+    .container-result-summedUp__ul__interno{
+        width: 450px;
+    }
+    .container-result-detailed__ul__interno{
+        width: 450px;
     }
 }

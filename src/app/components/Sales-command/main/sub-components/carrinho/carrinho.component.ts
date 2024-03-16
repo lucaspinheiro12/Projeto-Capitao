@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { alertFail, alertSuccess } from 'src/app/models/alerts';
 import { Command, Order, Sale } from 'src/app/models/modelos';
 import { ApiInsertDeleteService } from 'src/app/services/api.insert-delete.service';
 import { ApiService } from 'src/app/services/api.serviceComands';
@@ -65,20 +66,12 @@ export class CarrinhoComponent implements OnInit{
           commands: this.command
        }
        this.apiInsertDelete.addSale(this.sale).subscribe();
-       Swal.fire({
-        title: 'Sucesso!',
-        text: 'venda realizada para o cliente: ' + this.command.client.name,
-        icon: 'success',
-      });
+       alertSuccess('Sucesso!', 'venda realizada para o cliente: ' + this.command.client.name)
        // Limpar os produtos selecionados ou tomar outra ação necessária
        this.apiService.atualizarProdutos([]);
        this.apiService.atualizaInputCommand ('');
     } else {
-      Swal.fire({
-        title: 'error!',
-        text: 'comanda não encontrada' ,
-        icon: 'error',
-      });
+      alertFail('error!', 'comanda não encontrada')
     }
  }
 
