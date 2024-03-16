@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Command, Product,Cliente, Sale, SaleSummedUp} from '../models/modelos';
+import { Command, Product,Cliente, Sale, SaleSummedUp, Employee} from '../models/modelos';
 import { api } from 'src/app/services/api.service'
 import { BehaviorSubject, Observable, catchError, map, of, take, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -50,6 +50,10 @@ export class ApiService {
 
   private baseUrlSale :string ='';
   private SaleData:  Product[] | any;
+  
+  private baseUrlEmployee: string = '';
+  private employeeLog: Employee | any;
+  private isAuthenticated: boolean = false;
 
   constructor(private http:HttpClient ) {
     this.baseUrlProdutos = api.produtos;
@@ -382,7 +386,6 @@ atualizarValorInputBuscar(valor: any) {
 /**
  * funçoes de validação de login
  */
-  private isAuthenticated: boolean = false;
   private usuarios: { username: string, password: string }[] = [
     { username: 'lucas', password: 'lucas' },
     { username: 'lucas2', password: 'lucas2' },
@@ -393,9 +396,19 @@ atualizarValorInputBuscar(valor: any) {
     // Simples validação de login e senha usando o array de usuários
     const user = this.usuarios.find(user => user.username === username && user.password === password);
     this.isAuthenticated = user !== undefined;
-    return this.isAuthenticated;
+    if (user) {
+      this.employeeLog = user;
+      this.isAuthenticated = true;
+      return true;
+    } else {
+      return false;
+    }
   }
-
+  
+   // Adicione a função para obter o funcionário logado
+   getLoggedInEmployee(): Employee  {
+    return this.employeeLog;
+  }
   logout(): void {
     this.isAuthenticated = false;
   }

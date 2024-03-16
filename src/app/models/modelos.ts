@@ -27,7 +27,7 @@ export type Command = {
 export type Sale = {
     id: number,
     order:Order [],
-    vendor: string,    
+    vendor: Employee,    
     commands: Command, 
 }
 
@@ -36,4 +36,13 @@ export type SaleSummedUp = {
     fullValue: number,
     order: Order[]
 }
+
+export type Employee = {
+    id: number,
+    function: number,
+    name: string,
+    password: string,
+    userName: string,
+}
+
 

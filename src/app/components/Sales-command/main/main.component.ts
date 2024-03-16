@@ -37,12 +37,10 @@ export class MainComponent implements OnInit {
    menuAberto = false;
   toggleMenu() {
     this.menuAberto = !this.menuAberto;
-    console.log( this.menuAberto)
   }
    //meno carrinho
   fecharMenu() {
     this.menuAberto = false;
-    console.log( this.menuAberto)
   }
 
   //pega os produtos filtrados pela sua categoria ou pelo nome no input. 

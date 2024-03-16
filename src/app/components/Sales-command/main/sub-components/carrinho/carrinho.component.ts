@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { alertFail, alertSuccess } from 'src/app/models/alerts';
 import { Command, Order, Sale } from 'src/app/models/modelos';
 import { ApiInsertDeleteService } from 'src/app/services/api.insert-delete.service';
 import { ApiService } from 'src/app/services/api.serviceComands';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-carrinho',
@@ -11,7 +11,6 @@ import Swal from 'sweetalert2';
 })
 export class CarrinhoComponent implements OnInit{
   constructor(private apiService: ApiService , private apiInsertDelete: ApiInsertDeleteService) {}
-
 
   testeSemBanco: Order[] =[
     {
@@ -51,7 +50,6 @@ export class CarrinhoComponent implements OnInit{
     },
 
   ]
-
   
   //parte dos peditos . tenho que refatorar.
   orders : Order[] =[];
@@ -101,24 +99,16 @@ export class CarrinhoComponent implements OnInit{
        this.sale = {
           id: 0,
           order: this.orders,
-          vendor: 'Angular',
+          vendor: this.apiService.getLoggedInEmployee(),
           commands: this.command
        }
        this.apiInsertDelete.addSale(this.sale).subscribe();
-       Swal.fire({
-        title: 'Sucesso!',
-        text: 'venda realizada para o cliente: ' + this.command.client.name,
-        icon: 'success',
-      });
+       alertSuccess('Sucesso!', 'venda realizada para o cliente: ' + this.command.client.name)
        // Limpar os produtos selecionados ou tomar outra ação necessária
        this.apiService.atualizarProdutos([]);
        this.apiService.atualizaInputCommand ('');
     } else {
-      Swal.fire({
-        title: 'error!',
-        text: 'comanda não encontrada' ,
-        icon: 'error',
-      });
+      alertFail('error!', 'comanda não encontrada')
     }
  }
 
@@ -136,4 +126,3 @@ valorInput: number|any;
    }
  }
 }
-
