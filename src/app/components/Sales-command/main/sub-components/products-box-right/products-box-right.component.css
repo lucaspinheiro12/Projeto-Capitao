@@ -22,7 +22,7 @@
 @media(max-width:550px){
     .container{
         justify-content: space-evenly;
-        width: 48%;
+        width: 98%;
         margin: 5px 5px 5px 0;
     }
     .container-img {

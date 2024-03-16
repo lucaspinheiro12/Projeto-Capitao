@@ -48,6 +48,7 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 .container-menu-product app-products-box-right{
@@ -71,6 +72,9 @@
     .container-menu-product app-products-box-right{
         justify-content: space-between;
     }  
+    app-products-box-right{
+        width: 48%;
+    }
 }
 
 
