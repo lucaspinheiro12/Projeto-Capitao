@@ -282,7 +282,7 @@ getSales():Observable<Sale[]|any> {
   *pega os produtos do banco de dados e retorna eles separando por categoria 
   * @param categoria Observable<Product[]>
   */
-  getProdutoPorCategoria(categoria: string): Observable<Product[]> {
+  getProdutoPorCategoria(categoria: number): Observable<Product[]> {
     return this.getProdutos().pipe(
       map((produtos: Product[]) => produtos.filter(produto => produto.categoria === categoria))
     );

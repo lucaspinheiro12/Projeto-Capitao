@@ -40,7 +40,6 @@ export class OrderComponent implements OnInit {
       cancelButtonText:"Não"
     }).then((result) => {
       if (result.isConfirmed) {
-        alertSuccess('Produto: ' + this.produto.product.name, 'Removido com sucesso!')
         this.valueZero.emit(this.produto);
       }else{
         if(this.produto.quantity <= 0 )

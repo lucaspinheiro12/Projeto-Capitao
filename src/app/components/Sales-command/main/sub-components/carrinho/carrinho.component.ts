@@ -18,7 +18,7 @@ export class CarrinhoComponent implements OnInit{
       product: {id:1,
         name: 'string',
         price:21,
-        categoria:'sd'},
+        categoria:1},
       quantity: 2,
       price: 42
     },
@@ -27,7 +27,7 @@ export class CarrinhoComponent implements OnInit{
       product: {id:2,
         name: 'string2',
         price:211,
-        categoria:'sd2'},
+        categoria:1},
       quantity: 22,
       price: 422
     },
@@ -36,7 +36,7 @@ export class CarrinhoComponent implements OnInit{
       product: {id:3,
         name: 'string3',
         price:311,
-        categoria:'sd3'},
+        categoria:2},
       quantity: 33,
       price: 332
     }, {
@@ -44,7 +44,7 @@ export class CarrinhoComponent implements OnInit{
       product: {id:4,
         name: 'string4',
         price:411,
-        categoria:'sd4'},
+        categoria:2},
       quantity: 44,
       price: 444
     },
