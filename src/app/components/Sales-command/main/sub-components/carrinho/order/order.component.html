@@ -3,12 +3,14 @@
         <p class="name">{{produto.product.name}}</p>
         <p class="price">$ {{produto.product.price}}</p>
     </div>
-    <div  class="container-quantity">
-        <button (click)="decreaseValue()" class="container-quantity__less">-</button>
-        <input [(ngModel)]="produto.quantity" class="container-quantity__quantity" type="text" >
-        <button (click)="increaseValue()" class="container-quantity__more">+</button>
-    </div>
-    <div class="container-remover" (click)="removeOrder()" >
-        <img class="container-remove__img" src="./assets/img/excluir.png">
-    </div>
+    <div class="container-footer">
+        <div  class="container-quantity">
+            <button (click)="decreaseValue()" class="container-quantity__less">-</button>
+            <input [(ngModel)]="produto.quantity" class="container-quantity__quantity" type="text" >
+            <button (click)="increaseValue()" class="container-quantity__more">+</button>
+        </div>
+        <div class="container-remover" (click)="removeOrder()" >
+            <img class="container-remove__img" src="./assets/img/excluir.png">
+        </div>
+    </div>  
 </div>
