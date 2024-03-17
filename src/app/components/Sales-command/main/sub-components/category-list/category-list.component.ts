@@ -8,14 +8,14 @@ import { ApiService } from 'src/app/services/api.serviceComands';
 export class CategoryListComponent {
 
   constructor(private apiService: ApiService) { }
-  selectedItem: string = 'Pratos';
+  selectedItem: number = 1;
 
-  selectItem(nomeCategoria: string) {
-    this.selectedItem = nomeCategoria;
+  selectItem(numeroCategoria: number) {
+    this.selectedItem = numeroCategoria;
      this.apiService.setCategoriaSelecionadaTipo(this.selectedItem);
   }
   
-  isSelected(item: string): boolean {
+  isSelected(item: number): boolean {
       return this.selectedItem === item;
   }
 }

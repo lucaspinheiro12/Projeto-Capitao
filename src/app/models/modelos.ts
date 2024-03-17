@@ -2,7 +2,7 @@ export type Product ={
     id:number,
     name: string,
     price:number,
-    categoria:string,
+    categoria:number,
 }
 
 export type Order = {
