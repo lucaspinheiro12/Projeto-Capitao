@@ -1,8 +1,9 @@
 .container{
-    padding: 2%;
-    height: 100px;
+    padding: 2% 0 0 2% 0;
+    height: 90px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 .container-product{
     height: 40%;
@@ -14,14 +15,14 @@
 .container-product p{
     font-weight: bold;
 }
-.container-quantity{
+.container-footer{
     display: flex;
-    align-items: end;
-    width: 200px;
-    height: 40px;
+    justify-content: space-between;
+    height: 30px;
 }
+
 .container-quantity__less{
-    height: 80%;
+    height: 90%;
     width: 40px;
     border-radius: 6px;
     cursor: pointer;
@@ -31,21 +32,23 @@
     text-align: center;
     margin: 0 7px 0 7px;
     width: 50px;
-    height: 80%;
+    height: 90%;
 }
 .container-quantity__more{
     border-radius: 6px;
     width: 40px;
-    height: 80%;
+    height: 90%;
     cursor: pointer;
 }
 
 .container-remover{
+    height: 90%;
     display: flex;
     justify-content: end;
 }
 .container-remove__img{
     padding: 2% 1% 1% 1%;
-    width: 30px;
-    height: 30px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

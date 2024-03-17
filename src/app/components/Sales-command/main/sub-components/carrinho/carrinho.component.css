@@ -14,7 +14,12 @@ padding: 5px;
 .container-search__input{
 width: 100%;
 }
-
+.container-orders__orders:nth-child(odd){  
+    background-color: #979797;
+}
+.container-orders__orders:nth-child(even){
+    background-color: #b6b6b6;
+}
 .container-search-img{
     cursor: pointer;
 }
