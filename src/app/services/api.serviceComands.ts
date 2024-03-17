@@ -20,7 +20,7 @@ export class ApiService {
    termoClientBusca$ = this.termoBuscaClientSubject.asObservable();
    
   //busta pela categoria
-   private termoBuscaSubjectCategoia = new BehaviorSubject<string>('');
+   private termoBuscaSubjectCategoia = new BehaviorSubject<number>(1);
    termoBuscaCategoia$ = this.termoBuscaSubject.asObservable();
 
    //define o type da busca
@@ -63,7 +63,7 @@ export class ApiService {
     this.baseUrlCommand = api.command;
 
     this.baseUrlSale = api.vendas
-    this.termoBuscaSubjectCategoia.next('Pratos');
+    //this.termoBuscaSubjectCategoia.next('Pratos');
   }
 
   /**
@@ -292,7 +292,7 @@ getSales():Observable<Sale[]|any> {
    * Obtém a categoria selecionada no component <main-app>
    * @return string com o nome da categoria.
    */
-   getCategoriaSelecionadaTipo(): string  {
+   getCategoriaSelecionadaTipo(): number  {
     return this.termoBuscaSubjectCategoia.value;
   }
 
@@ -301,7 +301,7 @@ getSales():Observable<Sale[]|any> {
    * seta a categoria selecionada no component <app-category-list>
    * @return string com o nome da categoria.
    */
-  setCategoriaSelecionadaTipo(tipo: string): void {
+  setCategoriaSelecionadaTipo(tipo: number): void {
     this.termoBuscaSubjectCategoia.next(tipo);
   }
 
