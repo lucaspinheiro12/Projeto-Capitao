@@ -13,6 +13,9 @@ export class ProductsBoxRightComponent {
 
   adicionarAoCarrinho(produto : Product){
     this.apiService.adicionarOuIncrementarProduto(produto);
+    console.log(produto)
+    console.log(produto.img)
   }
  
 }
+//https://th.bing.com/th/id/OIP.0c-7Y21JeOFRV-gTyLUMjAHaE8?rs=1&pid=ImgDetMain
