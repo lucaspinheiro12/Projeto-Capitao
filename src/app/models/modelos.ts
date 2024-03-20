@@ -11,6 +11,7 @@ export type Order = {
     product: Product;
     quantity: number;
     price: number;
+    rite:number
   };
 
 export type Cliente = {
@@ -34,8 +35,9 @@ export type Sale = {
 
 export type SaleSummedUp = {
     commands: Command,
+    fullValueRate:number,
     fullValue: number,
-    order: Order[]
+    order: Order[],
 }
 
 export type Employee = {
