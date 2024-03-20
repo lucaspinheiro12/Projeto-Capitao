@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { alertFail, alertSuccess } from 'src/app/models/alerts';
+import { alertFail, alertSuccess, aletTimerErro } from 'src/app/models/alerts';
 import { Command, Order, Sale } from 'src/app/models/modelos';
 import { ApiInsertDeleteService } from 'src/app/services/api.insert-delete.service';
 import { ApiService } from 'src/app/services/api.serviceComands';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-carrinho',
@@ -46,16 +45,16 @@ export class CarrinhoComponent implements OnInit{
   }
 
   calcularTotal(): number {
-    const result = this.orders.reduce((total, order) => total + order.price * order.quantity, 0) + this.calcularTaxa();
+    const result = this.orders.reduce((total, order) => total + order.price * order.quantity, 0);
     return +result.toFixed(2) ;
   }
-  calcularTaxa(): number {
+  /*calcularTaxa(): number {
     const taxa = this.orders.reduce(
       (total, order) => total + order.price * 0.1 * order.quantity,
       0
     );
     return +taxa.toFixed(2);
-  }
+  }*/
 
   finalizarPedido(): void {
     if (this.command != '') {
@@ -81,10 +80,10 @@ valorInput: number|any;
 
   
  async pegaCommand(id:number) {
-   console.log(id)
    try {
      this.commandEncontrado = await this.apiService.getCommandById(id).toPromise();
    } catch (error) {
+    aletTimerErro('Comanda: '+ id + ' Não encontrada', 1500)
      console.error('Erro ao buscar comanda:', error);
    }
  }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Command, Product,Cliente, Sale, SaleSummedUp, Employee} from '../models/modelos';
-import { api } from 'src/app/services/api.service'
 import { BehaviorSubject, Observable, catchError, map, of, take, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environments';
 @Injectable({
   providedIn: 'root'
 })
@@ -56,16 +56,16 @@ export class ApiService {
   private isAuthenticated: boolean = false;
 
   constructor(private http:HttpClient ) {
-    this.baseUrlProdutos = api.produtos;
+    this.baseUrlProdutos = `${environment.apiUrl}/produtos`;
 
-    this.baseUrlClient =api.clients;
+    this.baseUrlClient =`${environment.apiUrl}/cliente`;
 
-    this.baseUrlCommand = api.command;
+    this.baseUrlCommand = `${environment.apiUrl}/commands`;
 
-    this.baseUrlSale = api.vendas
+    this.baseUrlSale = `${environment.apiUrl}/sales`;
     this.termoBuscaSubjectCategoia.next(1);
 
-    this.baseUrlEmployee = api.employee;
+    this.baseUrlEmployee = `${environment.apiUrl}/user`;
   }
 
   /**
@@ -245,11 +245,12 @@ getSales():Observable<Sale[]|any> {
    * @param value - valor do cliente a ser buscado
    * @returns Observable<any>
    */
-  getClientSalesResumida(type: string, value: string): Observable<any> {
+  getClientSalesResumida(type: string, value: string): Observable<SaleSummedUp> {
     const endpoint = `${this.baseUrlSale}/client/summedUp/${type}/${value}`;
-    return this.http.get<Sale>(endpoint).pipe(
+    return this.http.get<SaleSummedUp>(endpoint).pipe(
       tap(data => {
         this.clientBuscaResumido = data;
+        console.log(data )
       }),
       catchError(error => {
         console.log('Erro ao obter o cliente com as vendas', error);

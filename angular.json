@@ -43,6 +43,12 @@
                   "maximumError": "4kb"
                 }
               ],
+              "fileReplacements": [
+                {
+                  "replace":"src/environments/environments.ts",
+                  "with":"src/environments/environment.prod.ts"
+                }
+              ],
               "outputHashing": "all"
             },
             "development": {
@@ -57,6 +63,7 @@
           },
           "defaultConfiguration": "production"
         },
+        
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
@@ -75,6 +82,7 @@
             "browserTarget": "CommandFrontEnd-Angular:build"
           }
         },
+        
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
@@ -94,7 +102,7 @@
           }
         }
       }
-    }
+    }    
   },
   "cli": {
     "analytics": false

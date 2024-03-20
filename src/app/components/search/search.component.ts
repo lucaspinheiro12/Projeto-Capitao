@@ -132,6 +132,7 @@ export class SearchComponent implements OnInit{
         resumidoObservable.subscribe({
           next: (result) => {
             this.resultadoResumido = result;
+            console.log(result)
           },
           error: (err) => {
             console.log(err);
