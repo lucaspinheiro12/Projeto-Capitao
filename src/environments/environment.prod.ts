@@ -1,5 +1,5 @@
 // environment.prod.ts
 export const environment = {
     production: true,
-    apiUrl: 'API_URL'
+    apiUrl: 'https://api.capgourmet.shop'
 };
