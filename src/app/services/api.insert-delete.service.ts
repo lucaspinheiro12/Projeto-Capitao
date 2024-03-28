@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError  } from 'rxjs';
-import {  Sale,Cliente, Command  } from '../models/modelos';
-
+import { Observable, catchError, tap } from 'rxjs';
+import {  Sale,Cliente, Command, Product } from '../models/modelos';
 import {  alertFail } from '../models/alerts';
 import { environment } from 'src/environments/environments';
-import { api } from './api.URL';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,10 +14,10 @@ export class ApiInsertDeleteService {
   private baseCommandUrl:string = '';
 
   constructor( private http:HttpClient) { 
-    this.baseSaleUrl = `${api}/sales`;
-    this.baseOrderUrl = `${api}/produtos`;
-    this.baseClientUrl = `${api}/cliente`;
-    this.baseCommandUrl = `${api}/commands`;
+    this.baseSaleUrl = `${environment.apiUrl}/sales`;
+    this.baseOrderUrl = `${environment.apiUrl}/order`;
+    this.baseClientUrl = `${environment.apiUrl}/cliente`;
+    this.baseCommandUrl = `${environment.apiUrl}/commands`;
   }
 
   deletSale(id:number):Observable<Sale>{

@@ -3,7 +3,6 @@ import { Command, Product,Cliente, Sale, SaleSummedUp, Employee} from '../models
 import { BehaviorSubject, Observable, catchError, map, of, take, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environments';
-import { api } from './api.URL';
 @Injectable({
   providedIn: 'root'
 })
@@ -57,17 +56,17 @@ export class ApiService {
   private isAuthenticated: boolean = false;
 
   constructor(private http:HttpClient ) {
-    this.baseUrlProdutos = `${api}/produtos`;
+    this.baseUrlProdutos = `${environment.apiUrl}/produtos`;
 
-    this.baseUrlClient =`${api}/cliente`;
+    this.baseUrlClient =`${environment.apiUrl}/cliente`;
 
-    this.baseUrlCommand = `${api}/commands`;
+    this.baseUrlCommand = `${environment.apiUrl}/commands`;
 
-    this.baseUrlSale = `${api}/sales`;
+    this.baseUrlSale = `${environment.apiUrl}/sales`;
     this.termoBuscaSubjectCategoia.next(1);
 
-    this.baseUrlEmployee = `${api}/user`;
-    console.log(this.baseUrlEmployee)
+    this.baseUrlEmployee = `${environment.apiUrl}/user`;
+    console.log
   }
 
   /**
