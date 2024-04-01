@@ -23,7 +23,7 @@ export class RegisterComponent {
     if (this.isValidCPF(CPF)) {
       const clientCommand: any = {
         cpf: CPF,
-        name: name,
+        name: this.exchangeSpaceForBar(name),
         contact: contact,
         entry: entry,
         idCommand: idCommand
@@ -79,5 +79,12 @@ export class RegisterComponent {
     if ((resto == 10) || (resto == 11))  resto = 0
     if (resto != parseInt(cpf.substring(10, 11) ) ) return false
     return true
+  }
+
+  //altera os espaos por barras para ter um padrão na hora de fazer buscas.
+  private exchangeSpaceForBar(texto: string): string {
+    // Substitui todos os espaços por '.'
+    let textoComBarras = texto.replace(/ /g, '.');
+    return textoComBarras.toLowerCase();
   }
 }

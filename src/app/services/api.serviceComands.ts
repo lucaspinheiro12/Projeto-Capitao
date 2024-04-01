@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { Command, Product,Cliente, Sale, SaleSummedUp, Employee} from '../models/modelos';
 import { BehaviorSubject, Observable, catchError, map, of, take, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environments';
+import { environment } from 'src/environments/environments.prod';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,11 +23,11 @@ export class ApiService {
    
   //busta pela categoria
    private termoBuscaSubjectCategoia = new BehaviorSubject<number>(1);
-   termoBuscaCategoia$ = this.termoBuscaSubject.asObservable();
+   termoBuscaCategoia$ = this.termoBuscaSubjectCategoia.asObservable();
 
    //define o type da busca
    private termoBuscaSubjectType = new BehaviorSubject<string>('');
-   termoBuscaType$ = this.termoBuscaSubject.asObservable();
+   termoBuscaType$ = this.termoBuscaSubjectType.asObservable();
 
   //atualiza o input e buscas da comanda
    private commandSelecionadoSubject = new BehaviorSubject<Command| any>([]);
@@ -66,6 +68,7 @@ export class ApiService {
     this.termoBuscaSubjectCategoia.next(1);
 
     this.baseUrlEmployee = `${environment.apiUrl}/user`;
+    console.log
   }
 
   /**
@@ -102,7 +105,6 @@ getSales():Observable<Sale[]|any> {
       // Certifique-se de que this.productData é um array
       if (Array.isArray(data)) {
         this.SaleData = data;
-        console.log(this.SaleData)
       } else {
         // Se não for um array, você pode querer lidar com isso de outra forma
         console.error('Os dados obtidos não são um array:', data);
@@ -172,7 +174,6 @@ getSales():Observable<Sale[]|any> {
         this.clientData = data;
       }),
       catchError(error =>{
-        console.log('error ao obter o cliente', error)
         throw error
       })
     )
@@ -212,7 +213,6 @@ getSales():Observable<Sale[]|any> {
         this.clientData = data;
       }),
       catchError(error =>{
-        console.log('error ao obter o cliente', error)
         throw error
       })
     )
@@ -232,7 +232,6 @@ getSales():Observable<Sale[]|any> {
         this.clientBuscaDetalhado = data;
       }),
       catchError(error => {
-        console.log('Erro ao obter o cliente com as vendas', error);
         throw error;
       })
     );
@@ -250,10 +249,8 @@ getSales():Observable<Sale[]|any> {
     return this.http.get<SaleSummedUp>(endpoint).pipe(
       tap(data => {
         this.clientBuscaResumido = data;
-        console.log(data )
       }),
       catchError(error => {
-        console.log('Erro ao obter o cliente com as vendas', error);
         throw error;
       })
     );
@@ -272,7 +269,6 @@ getSales():Observable<Sale[]|any> {
           this.commandSelecionadoSubject.next(res)
           return res;   
         } else {
-          console.log("Comanda não encontrada");
           return null;
         }
       }),
