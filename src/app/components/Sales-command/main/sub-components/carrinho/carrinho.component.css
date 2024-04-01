@@ -62,3 +62,8 @@ width: 100%;
     color: wheat;
     cursor: pointer;
 }
+@media (max-width: 755px){
+    .container{
+        max-height: 95%;
+    }
+}

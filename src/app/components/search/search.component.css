@@ -29,7 +29,7 @@
 }
 .container-return-type{
     align-self: center;
-    width: 30%;
+    width: auto;
     margin-bottom: 50px;
 }
 .container-return-type__ul{
@@ -73,7 +73,7 @@
     flex-direction: row;
     justify-content: space-between;
     background-color: #b4bccc;
-    height: 50px;
+    height: 60px;
     align-items: center;
     border: solid;
 }

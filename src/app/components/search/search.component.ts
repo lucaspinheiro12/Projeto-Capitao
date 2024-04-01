@@ -14,7 +14,7 @@ export class SearchComponent implements OnInit{
   constructor(private apiService: ApiService){}
     ngOnInit(): void {
       this.apiService.termoClientBusca$.subscribe(novoValor => {
-        this.valorInput = novoValor;
+        this.valorInput = this.exchangeSpaceForBar(novoValor).toLowerCase();
       });    
     }
     
@@ -24,10 +24,9 @@ export class SearchComponent implements OnInit{
   selectedItem: string = 'resumido';
   mostrarPedidoResumido: boolean = true;
   mostrarPedidoDetalhado: boolean = false;
-  valorInput:number |any;
+  valorInput: any;
   resultDetalhado: Sale | any;
   resultadoResumido:SaleSummedUp | any;
-  teste: Cliente| any;
 
   updateCheckboxes(checkboxNumber: number): void {
     this.checkboxCPF = checkboxNumber === 1;
@@ -93,7 +92,6 @@ export class SearchComponent implements OnInit{
         resumidoObservable = this.apiService.getClientSalesResumida('name', this.valorInput);
         ClientSemVenda = this.apiService.getClientSemVendasCPFName('name', this.valorInput);
       }
-    
       // Realizar as chamadas apenas se o observable detalhado estiver definido
       if (detalhadoObservable) {
         detalhadoObservable.subscribe({
@@ -140,7 +138,17 @@ export class SearchComponent implements OnInit{
         });
       } 
     }
-    
+    private exchangeSpaceForBar(texto: string): string {
+      // Substitui todos os espaços por '/'
+      let textoComBarras = texto.replace(/ /g, '.');
+      return textoComBarras;
+  }
+   exchangBarForSspace(texto: string): string{
+    // Substitui todas as barras por espaços
+    let textoComBarras = texto.replace(/\./g, ' ');
+    return textoComBarras;
+  }
+
      
 }
 

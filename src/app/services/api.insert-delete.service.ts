@@ -3,7 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, tap } from 'rxjs';
 import {  Sale,Cliente, Command, Product } from '../models/modelos';
 import {  alertFail } from '../models/alerts';
-import { environment } from 'src/environments/environments';
+import { environment } from 'src/environments/environments.prod';
+
+
 @Injectable({
   providedIn: 'root'
 })

@@ -18,6 +18,9 @@ export class CarrinhoComponent implements OnInit{
   command:Command |any;
   private sale!:Sale;
 
+  valorInput: number|any;
+   commandEncontrado: Command | any; // Adicione essa propriedade para armazenar o cliente encontrado
+
   ngOnInit() {
     this.apiService.commandSelecionado$.subscribe(command => {
       this.command = command;
@@ -74,10 +77,6 @@ export class CarrinhoComponent implements OnInit{
     }
  }
 
-//Parte comanda devo ajutar e refatorar.
-valorInput: number|any;
- commandEncontrado: Command | any; // Adicione essa propriedade para armazenar o cliente encontrado
-
   
  async pegaCommand(id:number) {
    try {
@@ -87,5 +86,8 @@ valorInput: number|any;
      console.error('Erro ao buscar comanda:', error);
    }
  }
+ formatarNomeCliente(nome: string): string {
+  return nome.replace(/\./g, ' ');
+  }
 }
 

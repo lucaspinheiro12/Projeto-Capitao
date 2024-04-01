@@ -7,7 +7,7 @@
     </div>
      <div class="container-result">
         <ng-container *ngIf="commandEncontrado; else semResultado">
-          <p class="container-result__nameCommand">✧ {{ commandEncontrado.client.name }}</p>
+          <p class="container-result__nameCommand">✧ {{formatarNomeCliente(commandEncontrado.client.name) }}</p>
           <p class="container-result__codCommand">✧ {{ commandEncontrado.id }}</p>
         </ng-container>
         <ng-template #semResultado>

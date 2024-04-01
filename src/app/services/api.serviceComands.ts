@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { Command, Product,Cliente, Sale, SaleSummedUp, Employee} from '../models/modelos';
 import { BehaviorSubject, Observable, catchError, map, of, take, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environments';
+import { environment } from 'src/environments/environments.prod';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,11 +23,11 @@ export class ApiService {
    
   //busta pela categoria
    private termoBuscaSubjectCategoia = new BehaviorSubject<number>(1);
-   termoBuscaCategoia$ = this.termoBuscaSubject.asObservable();
+   termoBuscaCategoia$ = this.termoBuscaSubjectCategoia.asObservable();
 
    //define o type da busca
    private termoBuscaSubjectType = new BehaviorSubject<string>('');
-   termoBuscaType$ = this.termoBuscaSubject.asObservable();
+   termoBuscaType$ = this.termoBuscaSubjectType.asObservable();
 
   //atualiza o input e buscas da comanda
    private commandSelecionadoSubject = new BehaviorSubject<Command| any>([]);
