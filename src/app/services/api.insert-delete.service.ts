@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, tap } from 'rxjs';
 import {  Sale,Cliente, Command, Product } from '../models/modelos';
 import {  alertFail } from '../models/alerts';
-import { environment } from 'src/environments/environments.prod';
+import { environment } from 'src/environments/environments';
 
 
 @Injectable({
@@ -16,10 +16,10 @@ export class ApiInsertDeleteService {
   private baseCommandUrl:string = '';
 
   constructor( private http:HttpClient) { 
-    this.baseSaleUrl = `${environment.apiUrl}/sales`;
-    this.baseOrderUrl = `${environment.apiUrl}/order`;
-    this.baseClientUrl = `${environment.apiUrl}/cliente`;
-    this.baseCommandUrl = `${environment.apiUrl}/commands`;
+    this.baseSaleUrl = `http://localhost:8080/sales`;
+    this.baseOrderUrl = `http://localhost:8080/order`;
+    this.baseClientUrl = `http://localhost:8080/cliente`;
+    this.baseCommandUrl = `http://localhost:8080/commands`;
   }
 
   deletSale(id:number):Observable<Sale>{
@@ -46,7 +46,7 @@ export class ApiInsertDeleteService {
     }
     return this.http.post<Cliente>(`${this.baseClientUrl}`,client).pipe(
       catchError( error => {
-        console.error('Cliente não encontrado: ', error);
+        alertFail('Erro!', "Cadastro não realizado verifique os dados se estão corretos.")
       throw error;
       })
     )
@@ -66,7 +66,7 @@ export class ApiInsertDeleteService {
 
   return this.http.post<Command | any>(`${this.baseCommandUrl}`,command).pipe(
     catchError( error => {
-      alertFail('Erro!', error.error)
+      alertFail('Erro!', "Cadastro não realizado verifique os dados se estão corretos.")
       throw error;
     })
   )

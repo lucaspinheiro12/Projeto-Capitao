@@ -15,33 +15,39 @@ export class RegisterComponent {
   protected contact:number | any;
   protected name:string | any;
   protected CPF:string | any;
-  protected entry:number | any;
-  protected idCommand:number | any;
+  protected entry!: number;
+  protected idCommand!:number ;
 
   
   addClientCommand(contact: number, name: string, CPF: string, entry: number, idCommand: number) {
+    //verifica se o CPF é valido
     if (this.isValidCPF(CPF)) {
-      const clientCommand: any = {
-        cpf: CPF,
-        name: this.exchangeSpaceForBar(name),
-        contact: contact,
-        entry: entry,
-        idCommand: idCommand
-      };
-  
-      this.apiInsert.addClient(clientCommand).subscribe(result => {
-        this.apiInsert.addCommand(clientCommand).subscribe(
-          successResult => {
-            this.contact = '';
-            this.name = '';
-            this.CPF = '';
-            this.entry = '';
-            this.idCommand = '';
-            alertSuccess('Sucesso!', 'Cliente cadastrado' )
-          },
-        );
-      });
-    } else {
+      //verifica se type dos valores são numeros
+      if(this.onlyOumbers(entry) && this.onlyOumbers(idCommand)){
+        const clientCommand: any = {
+          cpf: CPF,
+          name: this.exchangeSpaceForBar(name),
+          contact: contact,
+          entry: entry,
+          idCommand: idCommand
+        };
+    
+        this.apiInsert.addClient(clientCommand).subscribe(result => {
+          this.apiInsert.addCommand(clientCommand).subscribe(
+            successResult => {
+              this.contact = '';
+              this.name = '';
+              this.CPF = '';
+              this.entry ;
+              this.idCommand ;
+              alertSuccess('Sucesso!', 'Cliente cadastrado' )
+            },
+          );
+        });
+      } else{
+        alertFail('Erro!', 'Valor da entrada ou numero da comanda invalido' )
+      }
+    }else {
       alertFail('Erro!', 'CPF inválido' )
     }
   }
@@ -87,4 +93,8 @@ export class RegisterComponent {
     let textoComBarras = texto.replace(/ /g, '.');
     return textoComBarras.toLowerCase();
   }
+  
+  private onlyOumbers(value: any): boolean{
+    return !isNaN(Number(value));
+    }
 }

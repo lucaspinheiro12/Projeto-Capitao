@@ -92,8 +92,8 @@ export class SearchComponent implements OnInit{
         resumidoObservable = this.apiService.getClientSalesResumida('name', this.valorInput);
         ClientSemVenda = this.apiService.getClientSemVendasCPFName('name', this.valorInput);
       }
-      // Realizar as chamadas apenas se o observable detalhado estiver definido
-      if (detalhadoObservable) {
+      // Realizar as chamadas apenas se o observable estiver definido
+      if (detalhadoObservable ) {
         detalhadoObservable.subscribe({
           next: (result) => {
             //se o cliente não tem venda ele entra nesse if
@@ -116,33 +116,31 @@ export class SearchComponent implements OnInit{
                 },
               });
             }else{
+              //retorna o detalhado se tiver vendas
               this.resultDetalhado = result;
             }
-           
           },
           error: (err) => {
             console.log(err);
           },
         });
-      }
-    //retorna os valores se o cliente tiver vendas 
+    }
+    //retorna os valores resumidos se o cliente tiver vendas 
       if (resumidoObservable) {
         resumidoObservable.subscribe({
           next: (result) => {
             this.resultadoResumido = result;
-            console.log(result)
-          },
-          error: (err) => {
-            console.log(err);
           },
         });
       } 
     }
+    
     private exchangeSpaceForBar(texto: string): string {
       // Substitui todos os espaços por '/'
       let textoComBarras = texto.replace(/ /g, '.');
       return textoComBarras;
   }
+
    exchangBarForSspace(texto: string): string{
     // Substitui todas as barras por espaços
     let textoComBarras = texto.replace(/\./g, ' ');
