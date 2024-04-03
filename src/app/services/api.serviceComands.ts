@@ -3,6 +3,7 @@ import { Command, Product,Cliente, Sale, SaleSummedUp, Employee} from '../models
 import { BehaviorSubject, Observable, catchError, map, of, take, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environments.prod';
+import { alertWarning } from '../models/alerts';
 
 
 @Injectable({
@@ -58,16 +59,16 @@ export class ApiService {
   private isAuthenticated: boolean = false;
 
   constructor(private http:HttpClient ) {
-    this.baseUrlProdutos = `${environment.apiUrl}/produtos`;
+    this.baseUrlProdutos = `http://localhost:8080/produtos`;
 
-    this.baseUrlClient =`${environment.apiUrl}/cliente`;
+    this.baseUrlClient =`$http://localhost:8080/cliente`;
 
-    this.baseUrlCommand = `${environment.apiUrl}/commands`;
+    this.baseUrlCommand = `http://localhost:8080/commands`;
 
-    this.baseUrlSale = `${environment.apiUrl}/sales`;
+    this.baseUrlSale = `http://localhost:8080/sales`;
     this.termoBuscaSubjectCategoia.next(1);
 
-    this.baseUrlEmployee = `${environment.apiUrl}/user`;
+    this.baseUrlEmployee = `http://localhost:8080/user`;
     console.log
   }
 
@@ -164,21 +165,6 @@ getSales():Observable<Sale[]|any> {
   }
 
   /**
-   * Obtém um cliente sem vendas pelo ID.
-   * @param result - ID do cliente
-   * @returns Observable<any>
-   */
-  getClientSemVendasId(result:any):Observable<any>{
-    return this.http.get<Command | any>(`${this.baseUrlCommand}/${result}`).pipe(
-      tap(data => {
-        this.clientData = data;
-      }),
-      catchError(error =>{
-        throw error
-      })
-    )
-  }
-  /**
    * Obtém os funcionarios.
    * @returns Observable<Employee>
    */
@@ -207,16 +193,39 @@ getSales():Observable<Sale[]|any> {
    * @param type - criterio da busca
    * @returns Observable<any>
    */
-  getClientSemVendasCPFName(type: string, result:any):Observable<any>{
-    return this.http.get<Command | any>(`${this.baseUrlCommand}/${type}/${result}`).pipe(
+  getClientSemVendasCPFName(type: string, value:any):Observable<any>{
+    return this.http.get<Command | any>(`${this.baseUrlCommand}/${type}/${value}`).pipe(
       tap(data => {
         this.clientData = data;
       }),
       catchError(error =>{
-        throw error
+        if(type === 'name'){
+          type = 'nome';
+          alertWarning('O ' + type +': ' + value + ' não encontrado.', ' verifique se o valor está correto.')
+          throw error;
+      }
+      alertWarning('O ' + type + ' não encontrado.', ' verifique se o valor está correto.')
+        throw error;
       })
     )
 
+  }
+  
+  /**
+   * Obtém um cliente sem vendas pelo ID.
+   * @param result - ID do cliente
+   * @returns Observable<any>
+   */
+  getClientSemVendasId(result:any):Observable<any>{
+    return this.http.get<Command | any>(`${this.baseUrlCommand}/${result}`).pipe(
+      tap(data => {
+        this.clientData = data;
+      }),
+      catchError(error =>{
+        alertWarning('Id não encontrado.', ' verifique se o valor esta correto.')
+        throw error
+      })
+    )
   }
   
   /** 
@@ -232,6 +241,12 @@ getSales():Observable<Sale[]|any> {
         this.clientBuscaDetalhado = data;
       }),
       catchError(error => {
+        if(type === 'name'){
+          type = 'nome';
+          alertWarning('O ' + type +': ' + value + ' não encontrado.', ' verifique se o valor está correto.')
+          throw error;
+      }
+      alertWarning('O ' + type + ' não encontrado.', ' verifique se o valor está correto.')
         throw error;
       })
     );
@@ -251,6 +266,12 @@ getSales():Observable<Sale[]|any> {
         this.clientBuscaResumido = data;
       }),
       catchError(error => {
+        if(type === 'name'){
+          type = 'nome';
+          alertWarning('O ' + type +': ' + value + ' não encontrado.', ' verifique se o valor está correto.')
+          throw error;
+      }
+      alertWarning('O ' + type + ' não encontrado.', ' verifique se o valor está correto.')
         throw error;
       })
     );
