@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { alertFail, alertSuccess } from 'src/app/models/alerts';
 import { ApiInsertDeleteService } from 'src/app/services/api.insert-delete.service';
-
-
+import { NgxMaskDirective} from 'ngx-mask' 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
 
@@ -15,8 +14,8 @@ export class RegisterComponent {
   protected contact:number | any;
   protected name:string | any;
   protected CPF:string | any;
-  protected entry!: number;
-  protected idCommand!:number ;
+  protected entry: number | any;
+  protected idCommand:number | any;
 
   
   addClientCommand(contact: number, name: string, CPF: string, entry: number, idCommand: number) {
@@ -38,14 +37,12 @@ export class RegisterComponent {
               this.contact = '';
               this.name = '';
               this.CPF = '';
-              this.entry ;
-              this.idCommand ;
+              this.entry  = null;
+              this.idCommand = null;
               alertSuccess('Sucesso!', 'Cliente cadastrado' )
             },
           );
         });
-      } else{
-        alertFail('Erro!', 'Valor da entrada ou numero da comanda invalido' )
       }
     }else {
       alertFail('Erro!', 'CPF inválido' )

@@ -20,8 +20,13 @@ export class DetailedComponent {
       if (result.order.length > 1) {
         // Executa o endpoint para remover o pedido da venda
         this.serviceInsertDelete.deleteOrderFromSale(result.id, orderId).subscribe(
+          
           response => {
-            alertSuccess('venda excluido com socesso!',' ')
+            result.order.forEach(order => {
+              if(order.id === orderId){
+                alertSuccess('venda ' +order.product.name ,' excluido com socesso!')
+              }
+            })
               },
               error => {
                 alertFail('Erro ao buscar a venda atualizada:', error)

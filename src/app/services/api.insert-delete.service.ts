@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, tap } from 'rxjs';
 import {  Sale,Cliente, Command, Product } from '../models/modelos';
 import {  alertFail } from '../models/alerts';
-import { environment } from 'src/environments/environments';
+import { environment } from 'src/environments/environments.prod';
 
 
 @Injectable({
@@ -16,10 +16,10 @@ export class ApiInsertDeleteService {
   private baseCommandUrl:string = '';
 
   constructor( private http:HttpClient) { 
-    this.baseSaleUrl = `http://localhost:8080/sales`;
-    this.baseOrderUrl = `http://localhost:8080/order`;
-    this.baseClientUrl = `http://localhost:8080/cliente`;
-    this.baseCommandUrl = `http://localhost:8080/commands`;
+    this.baseSaleUrl = `${environment.apiUrl}/sales`;
+    this.baseOrderUrl = `${environment.apiUrl}/order`;
+    this.baseClientUrl = `${environment.apiUrl}cliente`;
+    this.baseCommandUrl = `${environment.apiUrl}commands`;
   }
 
   deletSale(id:number):Observable<Sale>{
@@ -28,7 +28,7 @@ export class ApiInsertDeleteService {
   deleteOrderFromSale(saleId: number, orderId: number): Observable<Sale> {
     return this.http.put<Sale>(`${this.baseSaleUrl}/${saleId}/${orderId}`, {});
   }
-
+  
   addSale(newSale: Sale| any): Observable<Sale > {
     return this.http.post<Sale| any>(`${this.baseSaleUrl}`, newSale).pipe(
        catchError(error => {
@@ -46,12 +46,12 @@ export class ApiInsertDeleteService {
     }
     return this.http.post<Cliente>(`${this.baseClientUrl}`,client).pipe(
       catchError( error => {
-        alertFail('Erro!', "Cadastro não realizado verifique os dados se estão corretos.")
+        alertFail('Erro!', error.error)
       throw error;
       })
     )
   }
-  
+
   addCommand(newClientCommand:Command | any){
    const cliente:Cliente = {
     cpf:newClientCommand.cpf,
@@ -66,7 +66,7 @@ export class ApiInsertDeleteService {
 
   return this.http.post<Command | any>(`${this.baseCommandUrl}`,command).pipe(
     catchError( error => {
-      alertFail('Erro!', "Cadastro não realizado verifique os dados se estão corretos.")
+      alertFail('Erro!', error.error)
       throw error;
     })
   )

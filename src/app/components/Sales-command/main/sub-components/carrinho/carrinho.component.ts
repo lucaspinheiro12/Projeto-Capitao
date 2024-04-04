@@ -34,7 +34,7 @@ export class CarrinhoComponent implements OnInit{
     this.apiService.produtosSelecionados$.subscribe(produtos => {
       this.orders = produtos;
     });
-    this.apiService.getSales().subscribe(sale => {sale})
+    //this.apiService.getSales().subscribe(sale => {sale})
 
     
   }
@@ -42,7 +42,6 @@ export class CarrinhoComponent implements OnInit{
   //recebe o valor do <app-order> de qual produto está sendo clicado e faz um novo array sem o produto clicaco
   removeOrderCarrinho(produto: Order) {
     const updatedOrders = this.orders.filter(order => order.product.id !== produto.product.id);
-    console.log(updatedOrders)
     this.orders = updatedOrders;
     this.apiService.atualizarProdutos([...updatedOrders]);
   }
@@ -51,13 +50,6 @@ export class CarrinhoComponent implements OnInit{
     const result = this.orders.reduce((total, order) => total + order.price * order.quantity, 0);
     return +result.toFixed(2) ;
   }
-  /*calcularTaxa(): number {
-    const taxa = this.orders.reduce(
-      (total, order) => total + order.price * 0.1 * order.quantity,
-      0
-    );
-    return +taxa.toFixed(2);
-  }*/
 
   finalizarPedido(): void {
     if (this.command != '') {

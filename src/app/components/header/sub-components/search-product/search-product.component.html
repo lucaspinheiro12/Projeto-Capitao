@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="showInput">
     <div class="container-left-input">
     <input [(ngModel)]="valorInput" type="text" class="container-left-input__search" placeholder="Bucar"
         (ngModelChange)="onValorInputChange()" >

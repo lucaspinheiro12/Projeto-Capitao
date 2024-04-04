@@ -59,17 +59,17 @@ export class ApiService {
   private isAuthenticated: boolean = false;
 
   constructor(private http:HttpClient ) {
-    this.baseUrlProdutos = `http://localhost:8080/produtos`;
+    this.baseUrlProdutos = `${environment.apiUrl}/produtos`;
 
-    this.baseUrlClient =`$http://localhost:8080/cliente`;
+    this.baseUrlClient =`${environment.apiUrl}cliente`;
 
-    this.baseUrlCommand = `http://localhost:8080/commands`;
+    this.baseUrlCommand = `${environment.apiUrl}/commands`;
 
-    this.baseUrlSale = `http://localhost:8080/sales`;
+    this.baseUrlSale = `${environment.apiUrl}/sales`;
     this.termoBuscaSubjectCategoia.next(1);
 
-    this.baseUrlEmployee = `http://localhost:8080/user`;
-    console.log
+    this.baseUrlEmployee = `${environment.apiUrl}/user`;
+
   }
 
   /**
@@ -368,7 +368,7 @@ getSales():Observable<Sale[]|any> {
   *atualiza o input de busca de client na aba buscar no component <app-search-product >
   * @param valor cliente
   */
-atualizarValorInputBuscar(valor: any) {
+atualizarValorInputBuscar(valor: string) {
   this.termoBuscaClientSubject.next(valor)  
 }
 
@@ -458,7 +458,6 @@ atualizarValorInputBuscar(valor: any) {
   
    // Adicione a função para obter o funcionário logado
    getLoggedInEmployee(): Employee  {
-    console.log(this.employeeLog)
     return this.employeeLog;
   }
   logout(): void {
