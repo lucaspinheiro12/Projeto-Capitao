@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { alertTimerSuccess, aletTimerErro } from 'src/app/models/alerts';
 import { ApiService } from 'src/app/services/api.serviceComands';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login-component',

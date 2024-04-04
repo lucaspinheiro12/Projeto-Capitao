@@ -18,7 +18,7 @@ import { SummedUpComponent } from './components/search/sub-components/summed-up/
 import { DetailedComponent } from './components/search/sub-components/detailed/detailed.component';
 import { CarrinhoComponent } from './components/Sales-command/main/sub-components/carrinho/carrinho.component';
 import { LoginComponent } from './components/login-component/login-component.component';
-
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -45,8 +45,9 @@ import { LoginComponent } from './components/login-component/login-component.com
     HttpClientModule,
     SweetAlert2Module,
     ReactiveFormsModule,
+    NgxMaskDirective, NgxMaskPipe
   ],
-  providers: [],
+  providers: [provideNgxMask()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

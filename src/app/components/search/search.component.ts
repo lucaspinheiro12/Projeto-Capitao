@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.serviceComands';
-import { Cliente, Sale, SaleSummedUp } from 'src/app/models/modelos';
+import { Sale, SaleSummedUp } from 'src/app/models/modelos';
 import { Observable } from 'rxjs';
 import { alertWarning } from 'src/app/models/alerts';
 
@@ -121,7 +121,6 @@ export class SearchComponent implements OnInit{
             }
           },
           error: (err) => {
-            console.log(err);
           },
         });
     }

@@ -15,11 +15,13 @@ export class SearchNameComponent implements OnInit {
   }
   private currentRoute = '';
   protected valorInput: string = '';
-
+  public showInput: boolean = false;
 
   ngOnInit() {
+      //pega o valor da rota
         this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
        this.currentRoute = this.router.url;
+       this.showInput = !this.currentRoute.includes('/register'); // Mostra o input se a rota não incluir "/register"
     });
   }
 
