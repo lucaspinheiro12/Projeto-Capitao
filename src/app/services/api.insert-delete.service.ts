@@ -18,8 +18,8 @@ export class ApiInsertDeleteService {
   constructor( private http:HttpClient) { 
     this.baseSaleUrl = `${environment.apiUrl}/sales`;
     this.baseOrderUrl = `${environment.apiUrl}/order`;
-    this.baseClientUrl = `${environment.apiUrl}cliente`;
-    this.baseCommandUrl = `${environment.apiUrl}commands`;
+    this.baseClientUrl = `${environment.apiUrl}/cliente`;
+    this.baseCommandUrl = `${environment.apiUrl}/commands`;
   }
 
   deletSale(id:number):Observable<Sale>{

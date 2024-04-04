@@ -61,7 +61,7 @@ export class ApiService {
   constructor(private http:HttpClient ) {
     this.baseUrlProdutos = `${environment.apiUrl}/produtos`;
 
-    this.baseUrlClient =`${environment.apiUrl}cliente`;
+    this.baseUrlClient =`${environment.apiUrl}/cliente`;
 
     this.baseUrlCommand = `${environment.apiUrl}/commands`;
 
