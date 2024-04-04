@@ -40,15 +40,17 @@
             <li class="container-client__attributes"> CPF:</li>
             <li class="container-client__attributes"> Contato:</li>
             <li class="container-client__attributes"> Entrada:</li>
+            <li class="container-client__attributes"> Taxa:</li>
             <li class="container-client__attributes"> Valor total:</li>
         </ul>
         <ul class="container-client-date">
             <li class="container-client__attributes">{{resultDetalhado[0].commands.id}}</li>
-            <li class="container-client__attributes">{{resultDetalhado[0].commands.client.name}}</li>
+            <li class="container-client__attributes">{{exchangBarForSspace(resultDetalhado[0].commands.client.name)}}</li>
             <li class="container-client__attributes">{{resultDetalhado[0].commands.client.cpf}}</li>
             <li class="container-client__attributes">{{resultDetalhado[0].commands.client.contact}}</li>
             <li class="container-client__attributes">{{resultDetalhado[0].commands.entry}}</li>
-            <li class="container-client__attributes">{{resultadoResumido.fullValue}}</li>
+            <li class="container-client__attributes">{{resultadoResumido.fullValueRate}}</li>
+            <li class="container-client__attributes">{{resultadoResumido.fullValue + resultadoResumido.fullValueRate}}</li>
         </ul>
     </div>
     

@@ -2,8 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, tap } from 'rxjs';
 import {  Sale,Cliente, Command, Product } from '../models/modelos';
+<<<<<<< HEAD
 import { api } from './api.service';
 import {  alertFail } from '../models/alerts';
+=======
+import {  alertFail } from '../models/alerts';
+import { environment } from 'src/environments/environments.prod';
+
+
+>>>>>>> develop
 @Injectable({
   providedIn: 'root'
 })
@@ -14,10 +21,10 @@ export class ApiInsertDeleteService {
   private baseCommandUrl:string = '';
 
   constructor( private http:HttpClient) { 
-    this.baseSaleUrl = api.vendas;
-    this.baseOrderUrl = api.order;
-    this.baseClientUrl = api.clients;
-    this.baseCommandUrl = api.command;
+    this.baseSaleUrl = `${environment.apiUrl}/sales`;
+    this.baseOrderUrl = `${environment.apiUrl}/order`;
+    this.baseClientUrl = `${environment.apiUrl}cliente`;
+    this.baseCommandUrl = `${environment.apiUrl}commands`;
   }
 
   deletSale(id:number):Observable<Sale>{
@@ -26,7 +33,11 @@ export class ApiInsertDeleteService {
   deleteOrderFromSale(saleId: number, orderId: number): Observable<Sale> {
     return this.http.put<Sale>(`${this.baseSaleUrl}/${saleId}/${orderId}`, {});
   }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> develop
   addSale(newSale: Sale| any): Observable<Sale > {
     return this.http.post<Sale| any>(`${this.baseSaleUrl}`, newSale).pipe(
        catchError(error => {
@@ -44,12 +55,12 @@ export class ApiInsertDeleteService {
     }
     return this.http.post<Cliente>(`${this.baseClientUrl}`,client).pipe(
       catchError( error => {
-        console.error('Cliente não encontrado: ', error);
+        alertFail('Erro!', error.error)
       throw error;
       })
     )
   }
-  
+
   addCommand(newClientCommand:Command | any){
    const cliente:Cliente = {
     cpf:newClientCommand.cpf,

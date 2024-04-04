@@ -20,8 +20,18 @@ export class DetailedComponent {
       if (result.order.length > 1) {
         // Executa o endpoint para remover o pedido da venda
         this.serviceInsertDelete.deleteOrderFromSale(result.id, orderId).subscribe(
+<<<<<<< HEAD
           _res => {
             alertSuccess('venda excluido com socesso!',' ')
+=======
+          
+          response => {
+            result.order.forEach(order => {
+              if(order.id === orderId){
+                alertSuccess('venda ' +order.product.name ,' excluido com socesso!')
+              }
+            })
+>>>>>>> develop
               },
               error => {
                 alertFail('Erro ao buscar a venda atualizada:', error)
@@ -30,7 +40,11 @@ export class DetailedComponent {
       } else {
         // Executa o endpoint para excluir a venda
         this.serviceInsertDelete.deletSale(result.id).subscribe(
+<<<<<<< HEAD
           _response => {
+=======
+          response => {
+>>>>>>> develop
             alertSuccess('venda excluido com socesso!',' ')
             // Aqui você pode lidar com o redirecionamento ou qualquer outra lógica necessária após excluir a venda
           },

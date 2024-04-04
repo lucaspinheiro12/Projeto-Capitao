@@ -1,19 +1,19 @@
 <div class="container">
     <div class="container-register-client">
         <label class="container-register-client__label">Contato:</label>
-        <input type="text" [(ngModel)]="contact" class="container-register-client__input number" placeholder="(xx)xxxxx-xxxx">
+        <input type="text" [(ngModel)]="contact" mask="(00)00000-0000" class="container-register-client__input number" placeholder="(xx)xxxxx-xxxx">
 
         <label class="container-register-client__label">CPF:</label>
-        <input type="text" [(ngModel)]="CPF" class="container-register-client__input CPF" placeholder="xxx.xxx.xxx-xx">
+        <input type="text" [(ngModel)]="CPF" mask="000.000.000-00" class="container-register-client__input CPF" placeholder="xxx.xxx.xxx-xx">
         
         <label class="container-register-client__label">Nome</label>
         <input type="text" [(ngModel)]="name" class="container-register-client__input name" placeholder="Nome">
 
         <label class="container-register-client__label">Valor Entrada $:</label>
-        <input type="text" [(ngModel)]="entry" class="container-register-client__input entry" placeholder="xx.xx">
+        <input type="number" [(ngModel)]="entry" class="container-register-client__input entry" placeholder="xx.xx">
 
         <label class="container-register-client__label">Numero Comanda</label>
-        <input type="text" [(ngModel)]="idCommand" class="container-register-client__input idCommand" placeholder="xxx" >
+        <input type="number" [(ngModel)]="idCommand" class="container-register-client__input idCommand" placeholder="xxx" >
 
    
         <button  class="container-register-button__button" 

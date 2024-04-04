@@ -1,8 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Command, Product,Cliente, Sale, SaleSummedUp, Employee} from '../models/modelos';
+<<<<<<< HEAD
 import { api } from 'src/app/services/api.service'
+=======
+>>>>>>> develop
 import { BehaviorSubject, Observable, catchError, map, of, take, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environments.prod';
+import { alertWarning } from '../models/alerts';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,11 +28,15 @@ export class ApiService {
    
   //busta pela categoria
    private termoBuscaSubjectCategoia = new BehaviorSubject<number>(1);
+<<<<<<< HEAD
    termoBuscaCategoia$ = this.termoBuscaSubject.asObservable();
+=======
+   termoBuscaCategoia$ = this.termoBuscaSubjectCategoia.asObservable();
+>>>>>>> develop
 
    //define o type da busca
    private termoBuscaSubjectType = new BehaviorSubject<string>('');
-   termoBuscaType$ = this.termoBuscaSubject.asObservable();
+   termoBuscaType$ = this.termoBuscaSubjectType.asObservable();
 
   //atualiza o input e buscas da comanda
    private commandSelecionadoSubject = new BehaviorSubject<Command| any>([]);
@@ -55,15 +66,27 @@ export class ApiService {
   private employeeLog: Employee | any;
   private isAuthenticated: boolean = false;
 
+  private baseUrlEmployee: string = '';
+  private employeeLog: Employee | any;
+  private isAuthenticated: boolean = false;
+
   constructor(private http:HttpClient ) {
-    this.baseUrlProdutos = api.produtos;
+    this.baseUrlProdutos = `${environment.apiUrl}/produtos`;
 
-    this.baseUrlClient =api.clients;
+    this.baseUrlClient =`${environment.apiUrl}cliente`;
 
-    this.baseUrlCommand = api.command;
+    this.baseUrlCommand = `${environment.apiUrl}/commands`;
 
+    this.baseUrlSale = `${environment.apiUrl}/sales`;
+    this.termoBuscaSubjectCategoia.next(1);
+
+    this.baseUrlEmployee = `${environment.apiUrl}/user`;
+
+<<<<<<< HEAD
     this.baseUrlSale = api.vendas
     //this.termoBuscaSubjectCategoia.next('Pratos');
+=======
+>>>>>>> develop
   }
 
   /**
@@ -100,7 +123,6 @@ getSales():Observable<Sale[]|any> {
       // Certifique-se de que this.productData é um array
       if (Array.isArray(data)) {
         this.SaleData = data;
-        console.log(this.SaleData)
       } else {
         // Se não for um array, você pode querer lidar com isso de outra forma
         console.error('Os dados obtidos não são um array:', data);
@@ -160,6 +182,53 @@ getSales():Observable<Sale[]|any> {
   }
 
   /**
+   * Obtém os funcionarios.
+   * @returns Observable<Employee>
+   */
+  getEmployee():Observable<Employee[]> {
+    return this.http.get<Employee[]>(this.baseUrlEmployee).pipe(
+      tap(data => {
+        // Certifique-se de que this.productData é um array
+        if (Array.isArray(data)) {
+          this.employeeLog = data;
+        } else {
+          // Se não for um array, você pode querer lidar com isso de outra forma
+          console.error('Os dados obtidos não são um array:', data);
+        }
+      }),
+      catchError(error => {
+        console.error('Erro ao obter produtos:', error);
+        // Trate o erro conforme necessário
+        throw error;
+      })
+    );
+  }
+
+  /**
+   * Obtém um cliente sem vendas pelo cpf e pelo nome.
+   * @param result - cpf ou nome do cliente
+   * @param type - criterio da busca
+   * @returns Observable<any>
+   */
+  getClientSemVendasCPFName(type: string, value:any):Observable<any>{
+    return this.http.get<Command | any>(`${this.baseUrlCommand}/${type}/${value}`).pipe(
+      tap(data => {
+        this.clientData = data;
+      }),
+      catchError(error =>{
+        if(type === 'name'){
+          type = 'nome';
+          alertWarning('O ' + type +': ' + value + ' não encontrado.', ' verifique se o valor está correto.')
+          throw error;
+      }
+      alertWarning('O ' + type + ' não encontrado.', ' verifique se o valor está correto.')
+        throw error;
+      })
+    )
+
+  }
+  
+  /**
    * Obtém um cliente sem vendas pelo ID.
    * @param result - ID do cliente
    * @returns Observable<any>
@@ -170,30 +239,10 @@ getSales():Observable<Sale[]|any> {
         this.clientData = data;
       }),
       catchError(error =>{
-        console.log('error ao obter o cliente', error)
+        alertWarning('Id não encontrado.', ' verifique se o valor esta correto.')
         throw error
       })
     )
-  }
-
-
-  /**
-   * Obtém um cliente sem vendas pelo cpf e pelo nome.
-   * @param result - cpf ou nome do cliente
-   * @param type - criterio da busca
-   * @returns Observable<any>
-   */
-  getClientSemVendasCPFName(type: string, result:any):Observable<any>{
-    return this.http.get<Command | any>(`${this.baseUrlCommand}/${type}/${result}`).pipe(
-      tap(data => {
-        this.clientData = data;
-      }),
-      catchError(error =>{
-        console.log('error ao obter o cliente', error)
-        throw error
-      })
-    )
-
   }
   
   /** 
@@ -206,10 +255,15 @@ getSales():Observable<Sale[]|any> {
     const endpoint = `${this.baseUrlSale}/client/${type}/${value}`;
     return this.http.get<Sale>(endpoint).pipe(
       tap(data => {
-        this.clientBuscaResumido = data;
+        this.clientBuscaDetalhado = data;
       }),
       catchError(error => {
-        console.log('Erro ao obter o cliente com as vendas', error);
+        if(type === 'name'){
+          type = 'nome';
+          alertWarning('O ' + type +': ' + value + ' não encontrado.', ' verifique se o valor está correto.')
+          throw error;
+      }
+      alertWarning('O ' + type + ' não encontrado.', ' verifique se o valor está correto.')
         throw error;
       })
     );
@@ -222,14 +276,19 @@ getSales():Observable<Sale[]|any> {
    * @param value - valor do cliente a ser buscado
    * @returns Observable<any>
    */
-  getClientSalesResumida(type: string, value: string): Observable<any> {
+  getClientSalesResumida(type: string, value: string): Observable<SaleSummedUp> {
     const endpoint = `${this.baseUrlSale}/client/summedUp/${type}/${value}`;
-    return this.http.get<Sale>(endpoint).pipe(
+    return this.http.get<SaleSummedUp>(endpoint).pipe(
       tap(data => {
         this.clientBuscaResumido = data;
       }),
       catchError(error => {
-        console.log('Erro ao obter o cliente com as vendas', error);
+        if(type === 'name'){
+          type = 'nome';
+          alertWarning('O ' + type +': ' + value + ' não encontrado.', ' verifique se o valor está correto.')
+          throw error;
+      }
+      alertWarning('O ' + type + ' não encontrado.', ' verifique se o valor está correto.')
         throw error;
       })
     );
@@ -248,7 +307,6 @@ getSales():Observable<Sale[]|any> {
           this.commandSelecionadoSubject.next(res)
           return res;   
         } else {
-          console.log("Comanda não encontrada");
           return null;
         }
       }),
@@ -327,7 +385,7 @@ getSales():Observable<Sale[]|any> {
   *atualiza o input de busca de client na aba buscar no component <app-search-product >
   * @param valor cliente
   */
-atualizarValorInputBuscar(valor: any) {
+atualizarValorInputBuscar(valor: string) {
   this.termoBuscaClientSubject.next(valor)  
 }
 
@@ -386,6 +444,7 @@ atualizarValorInputBuscar(valor: any) {
 /**
  * funçoes de validação de login
  */
+<<<<<<< HEAD
   private usuarios: { username: string, password: string }[] = [
     { username: 'lucas', password: 'lucas' },
     { username: 'lucas2', password: 'lucas2' },
@@ -409,6 +468,41 @@ atualizarValorInputBuscar(valor: any) {
    getLoggedInEmployee(): Employee  {
     return this.employeeLog;
   }
+=======
+  
+  // Método para fazer login
+  loginService(username: string, password: string): Observable<boolean> {
+    return this.getEmployee().pipe(
+      map((employees: Employee[]) => {
+        const loggedInEmployee = employees.find(employee => employee.userName === username && employee.password === password);
+
+        if (loggedInEmployee) {
+          this.employeeLog = loggedInEmployee;
+          this.isAuthenticated = true;
+          return true;
+        } else {
+          return false;
+        }
+      })
+    );
+  }
+
+   // Obtém os funcionários e verifica se está autenticado
+   getEmployeeAndCheckAuthentication(): Observable<boolean> {
+    return this.getEmployee().pipe(
+      map((employees: Employee[]) => {
+        const loggedInEmployee = employees.find(employee => employee === this.employeeLog);
+        this.isAuthenticated = !!loggedInEmployee;
+        return this.isAuthenticated;
+      })
+    );
+  }
+  
+   // Adicione a função para obter o funcionário logado
+   getLoggedInEmployee(): Employee  {
+    return this.employeeLog;
+  }
+>>>>>>> develop
   logout(): void {
     this.isAuthenticated = false;
   }

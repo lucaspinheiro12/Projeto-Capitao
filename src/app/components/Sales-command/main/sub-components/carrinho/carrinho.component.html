@@ -7,7 +7,7 @@
     </div>
      <div class="container-result">
         <ng-container *ngIf="commandEncontrado; else semResultado">
-          <p class="container-result__nameCommand">✧ {{ commandEncontrado.client.name }}</p>
+          <p class="container-result__nameCommand">✧ {{formatarNomeCliente(commandEncontrado.client.name) }}</p>
           <p class="container-result__codCommand">✧ {{ commandEncontrado.id }}</p>
         </ng-container>
         <ng-template #semResultado>
@@ -22,11 +22,15 @@
       </div>
     </div>
     <div class="container-price">
+<<<<<<< HEAD
         <div class="container-price__taxa">
             <p>taxa: </p>
             <p>$ {{calcularTaxa()}}</p>
         </div>
         <button class="container-price__final" (click)="finalizarPedido()">TOTAL $ 954,00{{calcularTotal()}} </button>
+=======
+        <button class="container-price__final" (click)="finalizarPedido()">TOTAL $ {{calcularTotal()}} </button>
+>>>>>>> develop
     </div>  
 </div>
 

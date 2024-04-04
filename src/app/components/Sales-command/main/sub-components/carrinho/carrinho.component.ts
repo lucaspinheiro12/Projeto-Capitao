@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { alertFail, alertSuccess } from 'src/app/models/alerts';
+=======
+import { alertFail, alertSuccess, aletTimerErro } from 'src/app/models/alerts';
+>>>>>>> develop
 import { Command, Order, Sale } from 'src/app/models/modelos';
 import { ApiInsertDeleteService } from 'src/app/services/api.insert-delete.service';
 import { ApiService } from 'src/app/services/api.serviceComands';
@@ -56,6 +60,9 @@ export class CarrinhoComponent implements OnInit{
   command:Command |any;
   private sale!:Sale;
 
+  valorInput: number|any;
+   commandEncontrado: Command | any; // Adicione essa propriedade para armazenar o cliente encontrado
+
   ngOnInit() {
     this.apiService.commandSelecionado$.subscribe(command => {
       this.command = command;
@@ -69,7 +76,7 @@ export class CarrinhoComponent implements OnInit{
     this.apiService.produtosSelecionados$.subscribe(produtos => {
       this.orders = produtos;
     });
-    this.apiService.getSales().subscribe(sale => {sale})
+    //this.apiService.getSales().subscribe(sale => {sale})
 
     
   }
@@ -77,21 +84,13 @@ export class CarrinhoComponent implements OnInit{
   //recebe o valor do <app-order> de qual produto está sendo clicado e faz um novo array sem o produto clicaco
   removeOrderCarrinho(produto: Order) {
     const updatedOrders = this.orders.filter(order => order.product.id !== produto.product.id);
-    console.log(updatedOrders)
     this.orders = updatedOrders;
     this.apiService.atualizarProdutos([...updatedOrders]);
   }
 
   calcularTotal(): number {
-    const result = this.orders.reduce((total, order) => total + order.price * order.quantity, 0) + this.calcularTaxa();
+    const result = this.orders.reduce((total, order) => total + order.price * order.quantity, 0);
     return +result.toFixed(2) ;
-  }
-  calcularTaxa(): number {
-    const taxa = this.orders.reduce(
-      (total, order) => total + order.price * 0.1 * order.quantity,
-      0
-    );
-    return +taxa.toFixed(2);
   }
 
   finalizarPedido(): void {
@@ -112,17 +111,21 @@ export class CarrinhoComponent implements OnInit{
     }
  }
 
-//Parte comanda devo ajutar e refatorar.
-valorInput: number|any;
- commandEncontrado: Command | any; // Adicione essa propriedade para armazenar o cliente encontrado
-
   
  async pegaCommand(id:number) {
-   console.log(id)
    try {
      this.commandEncontrado = await this.apiService.getCommandById(id).toPromise();
    } catch (error) {
+    aletTimerErro('Comanda: '+ id + ' Não encontrada', 1500)
      console.error('Erro ao buscar comanda:', error);
    }
  }
+<<<<<<< HEAD
 }
+=======
+ formatarNomeCliente(nome: string): string {
+  return nome.replace(/\./g, ' ');
+  }
+}
+
+>>>>>>> develop

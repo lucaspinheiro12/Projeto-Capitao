@@ -51,12 +51,18 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
-             
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace":"src/environments/environments.ts",
+                  "with":"src/environments/environments.prod.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
         },
+        
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
@@ -75,6 +81,7 @@
             "browserTarget": "CommandFrontEnd-Angular:build"
           }
         },
+        
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
@@ -94,7 +101,7 @@
           }
         }
       }
-    }
+    }    
   },
   "cli": {
     "analytics": false

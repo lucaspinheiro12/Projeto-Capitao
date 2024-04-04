@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.serviceComands';
-import { Cliente, Sale, SaleSummedUp } from 'src/app/models/modelos';
+import { Sale, SaleSummedUp } from 'src/app/models/modelos';
 import { Observable } from 'rxjs';
 import { alertWarning } from 'src/app/models/alerts';
 
@@ -14,7 +14,7 @@ export class SearchComponent implements OnInit{
   constructor(private apiService: ApiService){}
     ngOnInit(): void {
       this.apiService.termoClientBusca$.subscribe(novoValor => {
-        this.valorInput = novoValor;
+        this.valorInput = this.exchangeSpaceForBar(novoValor).toLowerCase();
       });    
     }
     
@@ -24,10 +24,9 @@ export class SearchComponent implements OnInit{
   selectedItem: string = 'resumido';
   mostrarPedidoResumido: boolean = true;
   mostrarPedidoDetalhado: boolean = false;
-  valorInput:number |any;
+  valorInput: any;
   resultDetalhado: Sale | any;
   resultadoResumido:SaleSummedUp | any;
-  teste: Cliente| any;
 
   updateCheckboxes(checkboxNumber: number): void {
     this.checkboxCPF = checkboxNumber === 1;
@@ -93,9 +92,8 @@ export class SearchComponent implements OnInit{
         resumidoObservable = this.apiService.getClientSalesResumida('name', this.valorInput);
         ClientSemVenda = this.apiService.getClientSemVendasCPFName('name', this.valorInput);
       }
-    
-      // Realizar as chamadas apenas se o observable detalhado estiver definido
-      if (detalhadoObservable) {
+      // Realizar as chamadas apenas se o observable estiver definido
+      if (detalhadoObservable ) {
         detalhadoObservable.subscribe({
           next: (result) => {
             //se o cliente não tem venda ele entra nesse if
@@ -118,28 +116,40 @@ export class SearchComponent implements OnInit{
                 },
               });
             }else{
+<<<<<<< HEAD
+=======
+              //retorna o detalhado se tiver vendas
+>>>>>>> develop
               this.resultDetalhado = result;
             }
            
           },
           error: (err) => {
-            console.log(err);
           },
         });
-      }
-    //retorna os valores se o cliente tiver vendas 
+    }
+    //retorna os valores resumidos se o cliente tiver vendas 
       if (resumidoObservable) {
         resumidoObservable.subscribe({
           next: (result) => {
             this.resultadoResumido = result;
           },
-          error: (err) => {
-            console.log(err);
-          },
         });
       } 
     }
     
+    private exchangeSpaceForBar(texto: string): string {
+      // Substitui todos os espaços por '/'
+      let textoComBarras = texto.replace(/ /g, '.');
+      return textoComBarras;
+  }
+
+   exchangBarForSspace(texto: string): string{
+    // Substitui todas as barras por espaços
+    let textoComBarras = texto.replace(/\./g, ' ');
+    return textoComBarras;
+  }
+
      
 }
 

@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
 import { alertFail, alertSuccess } from 'src/app/models/alerts';
 import { ApiInsertDeleteService } from 'src/app/services/api.insert-delete.service';
+<<<<<<< HEAD
 
 
+=======
+import { NgxMaskDirective} from 'ngx-mask' 
+>>>>>>> develop
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
 
@@ -15,12 +19,14 @@ export class RegisterComponent {
   protected contact:number | any;
   protected name:string | any;
   protected CPF:string | any;
-  protected entry:number | any;
+  protected entry: number | any;
   protected idCommand:number | any;
 
   
   addClientCommand(contact: number, name: string, CPF: string, entry: number, idCommand: number) {
+    //verifica se o CPF é valido
     if (this.isValidCPF(CPF)) {
+<<<<<<< HEAD
       const clientCommand: any = {
         cpf: CPF,
         name: name,
@@ -42,6 +48,32 @@ export class RegisterComponent {
         );
       });
     } else {
+=======
+      //verifica se type dos valores são numeros
+      if(this.onlyOumbers(entry) && this.onlyOumbers(idCommand)){
+        const clientCommand: any = {
+          cpf: CPF,
+          name: this.exchangeSpaceForBar(name),
+          contact: contact,
+          entry: entry,
+          idCommand: idCommand
+        };
+    
+        this.apiInsert.addClient(clientCommand).subscribe(result => {
+          this.apiInsert.addCommand(clientCommand).subscribe(
+            successResult => {
+              this.contact = '';
+              this.name = '';
+              this.CPF = '';
+              this.entry  = null;
+              this.idCommand = null;
+              alertSuccess('Sucesso!', 'Cliente cadastrado' )
+            },
+          );
+        });
+      }
+    }else {
+>>>>>>> develop
       alertFail('Erro!', 'CPF inválido' )
     }
   }
@@ -80,4 +112,15 @@ export class RegisterComponent {
     if (resto != parseInt(cpf.substring(10, 11) ) ) return false
     return true
   }
+
+  //altera os espaos por barras para ter um padrão na hora de fazer buscas.
+  private exchangeSpaceForBar(texto: string): string {
+    // Substitui todos os espaços por '.'
+    let textoComBarras = texto.replace(/ /g, '.');
+    return textoComBarras.toLowerCase();
+  }
+  
+  private onlyOumbers(value: any): boolean{
+    return !isNaN(Number(value));
+    }
 }
