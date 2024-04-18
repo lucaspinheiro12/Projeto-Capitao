@@ -59,11 +59,11 @@ export class ApiService {
   private isAuthenticated: boolean = false;
 
   constructor(private http:HttpClient ) {
-    this.baseUrlProdutos = `${environment.apiUrl}/produtos`;
+    this.baseUrlProdutos = `${environment.apiUrl}/product`;
 
-    this.baseUrlClient =`${environment.apiUrl}cliente`;
+    this.baseUrlClient =`${environment.apiUrl}/client`;
 
-    this.baseUrlCommand = `${environment.apiUrl}/commands`;
+    this.baseUrlCommand = `${environment.apiUrl}/command`;
 
     this.baseUrlSale = `${environment.apiUrl}/sales`;
     this.termoBuscaSubjectCategoia.next(1);
