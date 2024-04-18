@@ -16,10 +16,10 @@ export class ApiInsertDeleteService {
   private baseCommandUrl:string = '';
 
   constructor( private http:HttpClient) { 
-    this.baseSaleUrl = `${environment.apiUrl}/sales`;
-    this.baseOrderUrl = `${environment.apiUrl}/order`;
-    this.baseClientUrl = `${environment.apiUrl}cliente`;
-    this.baseCommandUrl = `${environment.apiUrl}commands`;
+    this.baseSaleUrl = `http://localhost:8080/sales`;
+    this.baseOrderUrl = `http://localhost:8080/order`;
+    this.baseClientUrl = `http://localhost:8080/client`;
+    this.baseCommandUrl = `http://localhost:8080/command`;
   }
 
   deletSale(id:number):Observable<Sale>{
